@@ -1,0 +1,23 @@
+# Archivos de compilación de NetBeans
+build/
+dist/
+nbproject/private/
+
+# Archivos temporales
+*.class
+*.jar
+*.war
+*.ear
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Configuración del IDE
+.idea/
+*.iml
+nbproject/private/
+
+# Archivos de datos que NO queremos versionar (opcional)
+# data/*.txt

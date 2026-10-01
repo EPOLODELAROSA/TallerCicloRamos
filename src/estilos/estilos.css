@@ -1,0 +1,87 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 1/10/2026, 12:41:56 PM
+    Author     : efren
+*/
+
+@font-face {
+    font-family: "Poppins Regular";
+    src: url("../fonts/Poppins-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Poppins Medium";
+    src: url("../fonts/Poppins-Medium.ttf");
+}
+
+@font-face {
+    font-family: "Poppins SemiBold";
+    src: url("../fonts/Poppins-SemiBold.ttf");
+}
+
+@font-face {
+    font-family: "Poppins Bold";
+    src: url("../fonts/Poppins-Bold.ttf");
+}
+
+#rootPane {
+    -fx-background-color: #F7F5F5;
+}
+
+#mainBox {
+    -fx-background-color: transparent;
+}
+
+#imgLogo {
+    
+}
+
+#lblTitulo {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 30px;
+    -fx-text-fill: #000000;
+}
+
+#imgBienvenida {
+    
+}
+
+#lblEslogan {
+    -fx-font-family: "Poppins Medium";
+    -fx-font-size: 22px;
+    -fx-text-fill: #000000;
+}
+
+#lblSubtitulo {
+    -fx-font-family: "Poppins Regular";
+    -fx-font-size: 15px;
+    -fx-text-fill: #888888;
+}
+
+#lblSubtitulo2 {
+    -fx-font-family: "Poppins Regular";
+    -fx-font-size: 15px;
+    -fx-text-fill: #888888;
+}
+
+#btnComenzar {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 20px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #E30613;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+#btnComenzar:hover {
+    -fx-background-color: #B30510;
+}
+
+#btnComenzar:pressed {
+    -fx-background-color: #8C040D;
+}
+
