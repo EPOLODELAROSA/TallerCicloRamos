@@ -6,8 +6,10 @@
 package controlador;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
@@ -20,6 +22,9 @@ public class BienvenidaController implements Initializable {
     
     @FXML
     private ImageView imgBienvenida;
+    
+    @FXML
+    private Button btnComenzar;
 
     /**
      * Initializes the controller class.
@@ -40,5 +45,11 @@ public class BienvenidaController implements Initializable {
         clip.setArcWidth(60);   
         clip.setArcHeight(60);  
         imgBienvenida.setClip(clip);
+    }
+    
+    @FXML
+    private void onComenzar(ActionEvent event) {
+        util.Navegador.cambiar("IniciarSesion", btnComenzar);
+        
     }
 }

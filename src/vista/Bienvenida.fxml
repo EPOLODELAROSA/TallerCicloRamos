@@ -8,20 +8,20 @@
 
 <AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="844.0" prefWidth="390.0" stylesheets="@../estilos/estilos.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.BienvenidaController">
    <children>
-      <Label fx:id="lblTitulo" layoutX="47.0" layoutY="204.0" text="TALLER CICLO RAMOS" />
-      <Label fx:id="lblEslogan" layoutX="91.0" layoutY="546.0" text="Todo para tu camino" />
-      <Label fx:id="lblSubtitulo" layoutX="119.0" layoutY="595.0" text="Repuestos y accesorios" wrapText="true" />
-      <Label fx:id="lblSubtitulo2" layoutX="120.0" layoutY="616.0" text="para moto y bicicletas" />
-      <Button fx:id="btnComenzar" layoutX="78.0" layoutY="675.0" mnemonicParsing="false" prefHeight="68.0" prefWidth="228.0" text="COMENZAR" />
-      <ImageView fx:id="imgLogo" fitHeight="68.0" fitWidth="96.0" layoutX="148.0" layoutY="127.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgLogo" fitHeight="68.0" fitWidth="96.0" layoutX="160.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/logo.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgBienvenida" fitHeight="270.0" fitWidth="292.0" layoutX="61.0" layoutY="262.0" pickOnBounds="true" preserveRatio="false">
+      <Label fx:id="lblSubtitulo2" layoutX="108.0" layoutY="633.0" text="para moto y bicicletas" />
+      <Label fx:id="lblTitulo" layoutX="47.0" layoutY="204.0" text="TALLER CICLO RAMOS" />
+      <Label fx:id="lblEslogan" layoutX="78.0" layoutY="568.0" text="Todo para tu camino" />
+      <Label fx:id="lblSubtitulo" layoutX="104.0" layoutY="610.0" text="Repuestos y accesorios" wrapText="true" />
+      <ImageView fx:id="imgBienvenida" fitHeight="270.0" fitWidth="258.0" layoutX="64.0" layoutY="269.0" nodeOrientation="INHERIT" opacity="0.84" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/bienvenida.jpg" />
          </image>
       </ImageView>
+      <Button fx:id="btnComenzar" layoutX="81.0" layoutY="687.0" mnemonicParsing="false" onAction="#onComenzar" prefHeight="68.0" prefWidth="228.0" text="COMENZAR" />
    </children>
 </AnchorPane>

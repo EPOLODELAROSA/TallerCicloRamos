@@ -85,3 +85,96 @@ and open the template in the editor.
     -fx-background-color: #8C040D;
 }
 
+#lblTituloLogin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 26px;
+    -fx-text-fill: #000000;
+}
+
+#lblSubtituloLogin {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 15px;
+    -fx-text-fill: #888888;
+}
+
+#lblCorreo,
+#lblContrasena {
+    -fx-font-family: "Poppins SemiBold";
+    -fx-font-size: 15px;
+    -fx-text-fill: #000000;
+}
+
+#txtCorreo,
+#txtContrasena {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 14px;
+    -fx-background-color: #EEEEEE;
+    -fx-background-radius: 10px;
+    -fx-border-color: transparent;
+    -fx-padding: 0 15 0 15;
+    -fx-text-fill: #333333;
+    -fx-prompt-text-fill: #AAAAAA;
+}
+
+#txtCorreo:focused,
+#txtContrasena:focused {
+    -fx-background-color: #E5E5E5;
+}
+
+#btnMostrar {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 12px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #E30613;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+    -fx-padding: 0;
+}
+
+#btnMostrar:hover {
+    -fx-background-color: #B30510;
+}
+
+#btnIniciarSesion {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #E30613;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+#btnIniciarSesion:hover {
+    -fx-background-color: #B30510;
+}
+
+#btnIniciarSesion:pressed {
+    -fx-background-color: #8C040D;
+}
+
+#lblSinCuenta {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 14px;
+    -fx-text-fill: #888888;
+}
+
+#btnCrearCuenta {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #E30613;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E30613;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+#btnCrearCuenta:hover {
+    -fx-background-color: #FEEAEA;
+}
+
+#btnCrearCuenta:pressed {
+    -fx-background-color: #FCCFCF;
+}
+
