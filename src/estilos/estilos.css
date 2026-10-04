@@ -105,7 +105,8 @@ and open the template in the editor.
 }
 
 #txtCorreo,
-#txtContrasena {
+#txtContrasena,
+#txtContrasenaVisible {
     -fx-font-family: "Poppins";
     -fx-font-size: 14px;
     -fx-background-color: #EEEEEE;
@@ -117,7 +118,8 @@ and open the template in the editor.
 }
 
 #txtCorreo:focused,
-#txtContrasena:focused {
+#txtContrasena:focused,
+#txtContrasenaVisible:focused {
     -fx-background-color: #E5E5E5;
 }
 
@@ -178,3 +180,239 @@ and open the template in the editor.
     -fx-background-color: #FCCFCF;
 }
 
+#lblTituloCrearCuenta {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 26px;
+    -fx-text-fill: #000000;
+}
+
+#lblSubtituloCrearCuenta {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 14px;
+    -fx-text-fill: #888888;
+}
+
+#lblNombre,
+#lblCorreoRegistro,
+#lblTelefono,
+#lblContrasenaRegistro,
+#lblConfirmar {
+    -fx-font-family: "Poppins SemiBold";
+    -fx-font-size: 15px;
+    -fx-text-fill: #000000;
+}
+
+#txtNombre,
+#txtCorreoRegistro,
+#txtTelefono,
+#txtContrasenaRegistro,
+#txtConfirmar {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 14px;
+    -fx-background-color: #EEEEEE;
+    -fx-background-radius: 10px;
+    -fx-border-color: transparent;
+    -fx-padding: 0 15 0 15;
+    -fx-text-fill: #333333;
+    -fx-prompt-text-fill: #AAAAAA;
+}
+
+#txtNombre:focused,
+#txtCorreoRegistro:focused,
+#txtTelefono:focused,
+#txtContrasenaRegistro:focused,
+#txtConfirmar:focused {
+    -fx-background-color: #E5E5E5;
+}
+
+#btnRegistrar {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #E30613;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+#btnRegistrar:hover {
+    -fx-background-color: #B30510;
+}
+
+#btnYaTengoCuenta {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #E30613;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E30613;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+#btnYaTengoCuenta:hover {
+    -fx-background-color: #FEEAEA;
+}
+
+#lblSaludo {
+    -fx-font-family: "Poppins SemiBold";
+    -fx-font-size: 18px;
+    -fx-text-fill: #000000;
+}
+
+#txtBuscar {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 14px;
+    -fx-background-color: #EEEEEE;
+    -fx-background-radius: 10px;
+    -fx-border-color: transparent;
+    -fx-padding: 0 15 0 15;
+    -fx-text-fill: #333333;
+    -fx-prompt-text-fill: #AAAAAA;
+}
+
+#btnBuscar {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 13px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #E30613;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+#btnBuscar:hover {
+    -fx-background-color: #B30510;
+}
+
+#scrollContenido {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+#scrollContenido > .viewport {
+    -fx-background-color: transparent;
+}
+
+#lblTextoBanner {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 22px;
+    -fx-text-fill: #FFFFFF;
+}
+
+#lblTextoBanner2 {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 22px;
+    -fx-text-fill: #FFFFFF;
+}
+
+#btnVerCatalogo {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 12px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #E30613;
+    -fx-background-radius: 20px;
+    -fx-cursor: hand;
+}
+
+#btnVerCatalogo:hover {
+    -fx-background-color: #B30510;
+}
+
+#lblCategoriasTitulo,
+#lblProductosTitulo {
+    -fx-font-family: "Poppins SemiBold";
+    -fx-font-size: 18px;
+    -fx-text-fill: #000000;
+}
+
+#btnCatMotos,
+#btnCatBicicletas,
+#btnCatAccesorios,
+#btnCatRepuestos {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 15px;
+    -fx-text-fill: #E30613;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E30613;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+#btnCatMotos:hover,
+#btnCatBicicletas:hover,
+#btnCatAccesorios:hover,
+#btnCatRepuestos:hover {
+    -fx-background-color: #FEEAEA;
+}
+
+#cardProducto1 {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #DDDDDD;
+    -fx-border-width: 1px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+#lblNombreProducto1 {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 13px;
+    -fx-text-fill: #000000;
+}
+
+#lblCategoriaProducto1 {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 10px;
+    -fx-text-fill: #888888;
+}
+
+#lblPrecioProducto1 {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #E30613;
+}
+
+#lblStockTexto1 {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 10px;
+    -fx-text-fill: #2E7D32;
+}
+
+#lblStockValor1 {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 10px;
+    -fx-text-fill: #888888;
+}
+
+#btnDeseo1,
+#btnCarrito1,
+#btnVer1 {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 12px;
+    -fx-text-fill: #000000;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #CCCCCC;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-padding: 0;
+}
+
+#btnDeseo1:hover,
+#btnCarrito1:hover,
+#btnVer1:hover {
+    -fx-background-color: #F0F0F0;
+}
+
+#lblNavInicio,
+#lblNavCategorias,
+#lblNavDeseos,
+#lblNavCarrito,
+#lblNavPerfil {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 10px;
+    -fx-text-fill: #888888;
+}

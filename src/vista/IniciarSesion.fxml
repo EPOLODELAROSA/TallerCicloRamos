@@ -8,8 +8,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="844.0" prefWidth="390.0" stylesheets="@../estilos/estilos.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controlador.IniciarSesionController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="844.0" prefWidth="390.0" stylesheets="@../estilos/estilos.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.IniciarSesionController">
    <children>
       <ImageView fx:id="imgFlechaAtras" fitHeight="55.0" fitWidth="44.0" layoutX="41.0" layoutY="68.0" onMouseClicked="#onFlechaAtras" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -29,7 +28,8 @@
       <Label fx:id="lblSinCuenta" layoutX="118.0" layoutY="652.0" text="¿No tienes una cuenta?" />
       <Button fx:id="btnCrearCuenta" layoutX="47.0" layoutY="691.0" mnemonicParsing="false" onAction="#onCrearCuenta" prefHeight="55.0" prefWidth="296.0" text="CREAR CUENTA" />
       <TextField fx:id="txtCorreo" layoutX="41.0" layoutY="361.0" prefHeight="55.0" prefWidth="325.0" />
-      <PasswordField fx:id="txtContrasena" layoutX="41.0" layoutY="473.0" prefHeight="55.0" prefWidth="231.0" />
-      <Button fx:id="btnMostrar" layoutX="277.0" layoutY="473.0" mnemonicParsing="false" onAction="#onMostrar" prefHeight="55.0" prefWidth="89.0" text="MOSTRAR" />
+      <PasswordField fx:id="txtContrasena" layoutX="43.0" layoutY="473.0" prefHeight="55.0" prefWidth="231.0" />
+      <Button fx:id="btnMostrar" layoutX="274.0" layoutY="473.0" mnemonicParsing="false" onAction="#onMostrar" prefHeight="55.0" prefWidth="89.0" text="MOSTRAR" />
+      <TextField fx:id="txtContrasenaVisible" layoutX="43.0" layoutY="473.0" prefHeight="55.0" prefWidth="231.0" visible="false" />
    </children>
 </AnchorPane>

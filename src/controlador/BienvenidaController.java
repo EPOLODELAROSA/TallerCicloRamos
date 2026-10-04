@@ -43,7 +43,7 @@ public class BienvenidaController implements Initializable {
 
         Rectangle clip = new Rectangle(ancho, alto);
         clip.setArcWidth(60);   
-        clip.setArcHeight(60);  
+        clip.setArcHeight(70);  
         imgBienvenida.setClip(clip);
     }
     

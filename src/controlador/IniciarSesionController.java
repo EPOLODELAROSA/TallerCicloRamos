@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -29,6 +30,9 @@ public class IniciarSesionController implements Initializable {
 
     @FXML
     private PasswordField txtContrasena;
+    
+    @FXML
+    private TextField txtContrasenaVisible;
 
     @FXML
     private Button btnMostrar;
@@ -38,6 +42,8 @@ public class IniciarSesionController implements Initializable {
 
     @FXML
     private Button btnCrearCuenta;
+    
+     private boolean contrasenaVisible = false;
 
     /**
      * Initializes the controller class.
@@ -45,6 +51,16 @@ public class IniciarSesionController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        txtContrasena.textProperty().addListener((obs, viejo, nuevo) -> {
+            if (!contrasenaVisible) {
+                txtContrasenaVisible.setText(nuevo);
+            }
+        });
+        txtContrasenaVisible.textProperty().addListener((obs, viejo, nuevo) -> {
+            if (contrasenaVisible) {
+                txtContrasena.setText(nuevo);
+            }
+        });
     } 
     
     @FXML
@@ -54,7 +70,25 @@ public class IniciarSesionController implements Initializable {
     
     @FXML
     private void onMostrar(ActionEvent event) {
-        System.out.println("Clic en MOSTRAR");
+        contrasenaVisible = !contrasenaVisible;
+
+        if (contrasenaVisible) {
+            // Copiamos el texto al TextField visible y lo mostramos.
+            txtContrasenaVisible.setText(txtContrasena.getText());
+            txtContrasenaVisible.setVisible(true);
+            txtContrasenaVisible.setManaged(true);
+            txtContrasena.setVisible(false);
+            txtContrasena.setManaged(false);
+            btnMostrar.setText("OCULTAR");
+        } else {
+            // Copiamos el texto al PasswordField y lo mostramos.
+            txtContrasena.setText(txtContrasenaVisible.getText());
+            txtContrasena.setVisible(true);
+            txtContrasena.setManaged(true);
+            txtContrasenaVisible.setVisible(false);
+            txtContrasenaVisible.setManaged(false);
+            btnMostrar.setText("MOSTRAR");
+        }
 
     }
     
@@ -63,15 +97,13 @@ public class IniciarSesionController implements Initializable {
         String correo = txtCorreo.getText();
         String contrasena = txtContrasena.getText();
 
-        System.out.println("Clic en INICIAR SESIÓN");
-        System.out.println("Correo: " + correo);
-        System.out.println("Contraseña: " + contrasena);
+        util.Navegador.cambiar("Inicio", btnIniciarSesion);
 
     }
     
     @FXML
     private void onCrearCuenta(ActionEvent event) {
-        System.out.println("Clic en CREAR CUENTA");
+        util.Navegador.cambiar("CrearCuenta", btnCrearCuenta);
     }
     
 }

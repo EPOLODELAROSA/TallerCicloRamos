@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="844.0" prefWidth="390.0" stylesheets="@../estilos/estilos.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controlador.InicioController">
+   <children>
+      <Label fx:id="lblSaludo" layoutX="106.0" layoutY="69.0" prefHeight="45.0" prefWidth="174.0" />
+      <ImageView fx:id="imgLogoInicio" fitHeight="75.0" fitWidth="67.0" layoutX="26.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/logo.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgIconoCarrito" fitHeight="52.0" fitWidth="50.0" layoutX="312.0" layoutY="63.0" onMouseClicked="#onCarritoHeader" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/car-shopping.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="txtBuscar" layoutX="26.0" layoutY="128.0" prefHeight="45.0" prefWidth="257.0" />
+      <Button fx:id="btnBuscar" layoutX="287.0" layoutY="128.0" mnemonicParsing="false" onAction="#onBuscar" prefHeight="45.0" prefWidth="75.0" text="BUSCAR" />
+      <ScrollPane fx:id="scrollContenido" layoutX="26.0" layoutY="181.0" prefHeight="557.0" prefWidth="363.0">
+        <content>
+          <AnchorPane fx:id="anchorContenido" minHeight="0.0" minWidth="0.0" prefHeight="576.0" prefWidth="336.0">
+               <children>
+                  <ImageView fx:id="imgBanner" fitHeight="172.0" fitWidth="333.0" layoutX="2.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/banner_inicio.jpg" />
+                     </image>
+                  </ImageView>
+                  <Rectangle fx:id="rectSombra" arcHeight="5.0" arcWidth="5.0" height="167.0" stroke="BLACK" strokeType="INSIDE" width="336.0">
+                     <fill>
+                        <LinearGradient endX="1.0" endY="0.7135922330097088" startX="0.2961165048543689" startY="1.0">
+                           <stops>
+                              <Stop color="#000000bf" />
+                              <Stop color="TRANSPARENT" offset="1.0" />
+                           </stops>
+                        </LinearGradient>
+                     </fill>
+                  </Rectangle>
+                  <Label fx:id="lblTextoBanner" layoutX="37.0" layoutY="32.0" text="Todo para " />
+                  <Label fx:id="lblTextoBanner2" layoutX="37.0" layoutY="62.0" text="tu camino" />
+                  <Button fx:id="btnVerCatalogo" layoutX="29.0" layoutY="99.0" mnemonicParsing="false" onAction="#onVerCatalogo" prefHeight="45.0" prefWidth="131.0" text="VER CATÁLOGO" />
+                  <Label fx:id="lblCategoriasTitulo" layoutX="8.0" layoutY="186.0" text="Categorías" />
+                  <Button fx:id="btnCatMotos" layoutX="8.0" layoutY="216.0" mnemonicParsing="false" onAction="#onCatMotos" prefHeight="45.0" prefWidth="149.0" text="Motos" />
+                  <Button fx:id="btnCatBicicletas" layoutX="169.0" layoutY="217.0" mnemonicParsing="false" onAction="#onCatBicicletas" prefHeight="45.0" prefWidth="152.0" text="Bicicleta" />
+                  <Button fx:id="btnCatAccesorios" layoutX="9.0" layoutY="274.0" mnemonicParsing="false" onAction="#onCatAccesorios" prefHeight="45.0" prefWidth="149.0" text="Accesorios" />
+                  <Button fx:id="btnCatRepuestos" layoutX="171.0" layoutY="275.0" mnemonicParsing="false" onAction="#onCatRepuestos" prefHeight="45.0" prefWidth="148.0" text="Repuestos" />
+                  <Label fx:id="lblProductosTitulo" layoutX="8.0" layoutY="323.0" text="Productos destacados" />
+                  <AnchorPane fx:id="cardProducto1" layoutX="-1.0" layoutY="350.0" prefHeight="173.0" prefWidth="324.0">
+                     <children>
+                        <ImageView fx:id="imgProducto1" fitHeight="78.0" fitWidth="98.0" layoutX="4.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../img/imgProducto1.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="lblNombreProducto1" layoutX="102.0" layoutY="27.0" text="Pastillas de Freno Pulsar " />
+                        <Label fx:id="lblCategoriaProducto1" layoutX="102.0" layoutY="48.0" text="Repuestos" />
+                        <Label fx:id="lblPrecioProducto1" layoutX="102.0" layoutY="71.0" text="\$ 22.000" />
+                        <Label fx:id="lblStockTexto1" layoutX="189.0" layoutY="71.0" text="Stock:" />
+                        <Label fx:id="lblStockValor1" layoutX="234.0" layoutY="71.0" text="20 Unidades" />
+                        <Button fx:id="btnCarrito1" layoutX="198.0" layoutY="104.0" mnemonicParsing="false" onAction="#onCarrito1" prefHeight="36.0" prefWidth="56.0" text="Carrito" />
+                        <Button fx:id="btnVer1" layoutX="260.0" layoutY="104.0" mnemonicParsing="false" onAction="#onVer1" prefHeight="37.0" prefWidth="50.0" text="Ver" />
+                        <Button fx:id="btnDeseo1" layoutX="134.0" layoutY="105.0" mnemonicParsing="false" onAction="#onDeseo1" prefHeight="35.0" prefWidth="56.0" text="Deseo" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
+      <ImageView fx:id="imgNavInicio" fitHeight="45.0" fitWidth="93.0" layoutX="26.0" layoutY="758.0" onMouseClicked="#onNavInicio" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/home.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgNavCategorias" fitHeight="45.0" fitWidth="93.0" layoutX="106.0" layoutY="760.0" onMouseClicked="#onNavCategorias" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/category.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgNavDeseos" fitHeight="45.0" fitWidth="93.0" layoutX="180.0" layoutY="758.0" onMouseClicked="#onNavDeseos" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/heart.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgNavCarrito" fitHeight="45.0" fitWidth="93.0" layoutX="259.0" layoutY="758.0" onMouseClicked="#onNavCarrito" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/car-shopping.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgNavPerfil" fitHeight="45.0" fitWidth="93.0" layoutX="325.0" layoutY="758.0" onMouseClicked="#onNavPerfil" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/user.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblNavInicio" layoutX="31.0" layoutY="803.0" text="Inicio" />
+      <Label fx:id="lblNavCategorias" layoutX="93.0" layoutY="804.0" text="Categorias" />
+      <Label fx:id="lblNavDeseos" layoutX="181.0" layoutY="803.0" text="Deseos" />
+      <Label fx:id="lblNavCarrito" layoutX="260.0" layoutY="803.0" text="Carrito" />
+      <Label fx:id="lblNavPerfil" layoutX="330.0" layoutY="804.0" text="Perfil" />
+      <Separator layoutY="740.0" prefHeight="15.0" prefWidth="392.0" />
+   </children>
+</AnchorPane>
