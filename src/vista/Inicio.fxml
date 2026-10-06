@@ -12,8 +12,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Rectangle?>
 
-
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="844.0" prefWidth="390.0" stylesheets="@../estilos/estilos.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controlador.InicioController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="844.0" prefWidth="390.0" stylesheets="@../estilos/estilos.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.InicioController">
    <children>
       <Label fx:id="lblSaludo" layoutX="106.0" layoutY="69.0" prefHeight="45.0" prefWidth="174.0" />
       <ImageView fx:id="imgLogoInicio" fitHeight="75.0" fitWidth="67.0" layoutX="26.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
@@ -52,7 +51,7 @@
                   <Button fx:id="btnVerCatalogo" layoutX="29.0" layoutY="99.0" mnemonicParsing="false" onAction="#onVerCatalogo" prefHeight="45.0" prefWidth="131.0" text="VER CATÁLOGO" />
                   <Label fx:id="lblCategoriasTitulo" layoutX="8.0" layoutY="186.0" text="Categorías" />
                   <Button fx:id="btnCatMotos" layoutX="8.0" layoutY="216.0" mnemonicParsing="false" onAction="#onCatMotos" prefHeight="45.0" prefWidth="149.0" text="Motos" />
-                  <Button fx:id="btnCatBicicletas" layoutX="169.0" layoutY="217.0" mnemonicParsing="false" onAction="#onCatBicicletas" prefHeight="45.0" prefWidth="152.0" text="Bicicleta" />
+                  <Button fx:id="btnCatBicicletas" layoutX="169.0" layoutY="217.0" mnemonicParsing="false" onAction="#onCatBicicletas" prefHeight="45.0" prefWidth="152.0" text="Bicicletas" />
                   <Button fx:id="btnCatAccesorios" layoutX="9.0" layoutY="274.0" mnemonicParsing="false" onAction="#onCatAccesorios" prefHeight="45.0" prefWidth="149.0" text="Accesorios" />
                   <Button fx:id="btnCatRepuestos" layoutX="171.0" layoutY="275.0" mnemonicParsing="false" onAction="#onCatRepuestos" prefHeight="45.0" prefWidth="148.0" text="Repuestos" />
                   <Label fx:id="lblProductosTitulo" layoutX="8.0" layoutY="323.0" text="Productos destacados" />
@@ -106,7 +105,7 @@
       <Label fx:id="lblNavCategorias" layoutX="93.0" layoutY="804.0" text="Categorias" />
       <Label fx:id="lblNavDeseos" layoutX="181.0" layoutY="803.0" text="Deseos" />
       <Label fx:id="lblNavCarrito" layoutX="260.0" layoutY="803.0" text="Carrito" />
-      <Label fx:id="lblNavPerfil" layoutX="330.0" layoutY="804.0" text="Perfil" />
+      <Label fx:id="lblNavPerfil" layoutX="334.0" layoutY="804.0" text="Perfil" />
       <Separator layoutY="740.0" prefHeight="15.0" prefWidth="392.0" />
    </children>
 </AnchorPane>

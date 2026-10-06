@@ -12,7 +12,7 @@
    <children>
       <ImageView fx:id="imgFlechaAtras" fitHeight="55.0" fitWidth="44.0" layoutX="41.0" layoutY="68.0" onMouseClicked="#onFlechaAtras" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/arrow-narrow-left.png" />
+            <Image url="@../img/arrow-left.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="90.0" fitWidth="147.0" layoutX="128.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="844.0" prefWidth="390.0" stylesheets="@../estilos/estilos.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controlador.CategoriasController">
+   <children>
+      <Label fx:id="lblTituloCategorias" layoutX="160.0" layoutY="77.0" text="Categorías" />
+      <ImageView fx:id="imgFlechaAtrasCat" fitHeight="55.0" fitWidth="44.0" layoutX="41.0" layoutY="68.0" onMouseClicked="#onFlechaAtras" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/arrow-left.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="52.0" fitWidth="50.0" layoutX="312.0" layoutY="63.0" onMouseClicked="#onCarritoHeader" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/car-shopping.png" />
+         </image>
+      </ImageView>
+      <AnchorPane fx:id="cardMotos" layoutX="36.0" layoutY="143.0" prefHeight="212.0" prefWidth="163.0">
+         <children>
+            <ImageView fx:id="imgMotos" fitHeight="161.0" fitWidth="248.0" layoutX="-1.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/cat_motos.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="lblNombreMotos" layoutX="52.0" layoutY="142.0" text="MOTOS" />
+            <Button fx:id="btnVerMotos" layoutX="14.0" layoutY="166.0" mnemonicParsing="false" onAction="#onVerMotos" prefHeight="28.0" prefWidth="136.0" text="VER PRODUCTOS" />
+         </children>
+      </AnchorPane>
+      <Label fx:id="lblExplora" layoutX="36.0" layoutY="605.0" text="Explora nuestros productos" />
+      <Button fx:id="btnVerTodos" layoutX="50.0" layoutY="641.0" mnemonicParsing="false" onAction="#onVerTodos" prefHeight="50.0" prefWidth="307.0" text="VER TODOS LOS PRODUCTOS" />
+      <Separator layoutY="740.0" prefHeight="15.0" prefWidth="392.0" />
+      <ImageView fx:id="imgNavInicio" fitHeight="45.0" fitWidth="93.0" layoutX="26.0" layoutY="758.0" onMouseClicked="#onNavInicio" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/home.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgNavCategorias" fitHeight="45.0" fitWidth="93.0" layoutX="106.0" layoutY="760.0" onMouseClicked="#onNavCategorias" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/category.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgNavDeseos" fitHeight="45.0" fitWidth="93.0" layoutX="180.0" layoutY="758.0" onMouseClicked="#onNavDeseos" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/heart.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgNavCarrito" fitHeight="45.0" fitWidth="93.0" layoutX="259.0" layoutY="758.0" onMouseClicked="#onNavCarrito" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/car-shopping.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgNavPerfil" fitHeight="45.0" fitWidth="93.0" layoutX="325.0" layoutY="758.0" onMouseClicked="#onNavPerfil" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/user.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblNavInicio" layoutX="31.0" layoutY="803.0" text="Inicio" />
+      <Label fx:id="lblNavCategorias" layoutX="93.0" layoutY="804.0" text="Categorías" />
+      <Label fx:id="lblNavDeseos" layoutX="181.0" layoutY="803.0" text="Deseos" />
+      <Label fx:id="lblNavCarrito" layoutX="260.0" layoutY="803.0" text="Carrito" />
+      <Label fx:id="lblNavPerfil" layoutX="334.0" layoutY="804.0" text="Perfil" />
+      <AnchorPane fx:id="cardBicicletas" layoutX="214.0" layoutY="143.0" prefHeight="212.0" prefWidth="163.0">
+         <children>
+            <ImageView fx:id="imgBicicletas" fitHeight="130.0" fitWidth="135.0" layoutX="17.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/cat_bicicletas.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="lblNombreBicicletas" layoutX="36.0" layoutY="142.0" text="BICICLETAS" />
+            <Button fx:id="btnVerBicicletas" layoutX="14.0" layoutY="166.0" mnemonicParsing="false" onAction="#onVerBicicletas" prefHeight="28.0" prefWidth="136.0" text="VER PRODUCTOS" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="cardRepuestos" layoutX="36.0" layoutY="368.0" prefHeight="212.0" prefWidth="163.0">
+         <children>
+            <ImageView fx:id="imgMotos11" fitHeight="145.0" fitWidth="150.0" layoutX="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/cat_repuestos.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="lblNombreRepuestos" layoutX="37.0" layoutY="145.0" text="REPUESTOS" />
+            <Button fx:id="btnVerRepuestos" layoutX="14.0" layoutY="167.0" mnemonicParsing="false" onAction="#onVerRepuestos" prefHeight="28.0" prefWidth="136.0" text="VER PRODUCTOS" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="cardAccesorios" layoutX="214.0" layoutY="368.0" prefHeight="212.0" prefWidth="163.0">
+         <children>
+            <ImageView fx:id="imgAccesorios" fitHeight="94.0" fitWidth="145.0" layoutX="-2.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/cat_accesorios.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="lblNombreAccesorios" layoutX="30.0" layoutY="142.0" text="ACCESORIOS" />
+            <Button fx:id="btnVerAccesorios" layoutX="14.0" layoutY="167.0" mnemonicParsing="false" onAction="#onVerAccesorios" prefHeight="28.0" prefWidth="136.0" text="VER PRODUCTOS" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

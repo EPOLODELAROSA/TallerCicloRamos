@@ -12,7 +12,7 @@
    <children>
       <ImageView fx:id="imgFlechaAtras" fitHeight="55.0" fitWidth="44.0" layoutX="41.0" layoutY="68.0" onMouseClicked="#onFlechaAtras" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/arrow-narrow-left.png" />
+            <Image url="@../img/arrow-left.png" />
          </image>
       </ImageView>
       <Label fx:id="lblTituloCrearCuenta" layoutX="97.0" layoutY="96.0" text="Crear cuenta" />

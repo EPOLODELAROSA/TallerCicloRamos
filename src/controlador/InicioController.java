@@ -118,22 +118,22 @@ public class InicioController implements Initializable {
 
     @FXML
     private void onVerCatalogo(ActionEvent event) {
-        System.out.println("Clic en VER CATALOGO");
+        util.Navegador.cambiar("Categorias", btnVerCatalogo);
     }
 
     @FXML
     private void onCatMotos(ActionEvent event) {
-        System.out.println("Categoria: Motos");
+        util.Navegador.cambiar("Categorias", btnVerCatalogo);
     }
 
     @FXML
     private void onCatBicicletas(ActionEvent event) {
-        System.out.println("Categoria: Bicicletas");
+        util.Navegador.cambiar("Categorias", btnVerCatalogo);
     }
 
     @FXML
     private void onCatAccesorios(ActionEvent event) {
-        System.out.println("Categoria: Accesorios");
+        util.Navegador.cambiar("Categorias", btnVerCatalogo);
     }
 
     @FXML
@@ -163,7 +163,7 @@ public class InicioController implements Initializable {
 
     @FXML
     private void onNavCategorias(MouseEvent event) {
-        System.out.println("Nav: Categorias");
+        util.Navegador.cambiar("Categorias", imgNavCategorias);
     }
 
     @FXML
