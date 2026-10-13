@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="844.0" prefWidth="390.0" stylesheets="@../estilos/estilos.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controlador.ConfirmarCompraController">
+   <children>
+      <ImageView fx:id="imgFlechaAtrasConf" fitHeight="50.0" fitWidth="71.0" layoutX="19.0" layoutY="36.0" onMouseClicked="#onFlechaAtras" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/chevron-left.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblTituloConfirmar" layoutX="103.0" layoutY="48.0" text="Confirmar compra" />
+      <Button fx:id="btnConfirmarCompra" layoutX="44.0" layoutY="775.0" mnemonicParsing="false" onAction="#onConfirmarCompra" prefHeight="50.0" prefWidth="307.0" text="CONFIRMAR COMPRA" />
+      <Label fx:id="lblDatosEntrega" layoutX="37.0" layoutY="102.0" text="Datos de entrega " />
+      <Label fx:id="lblNombreConf" layoutX="38.0" layoutY="131.0" text="Nombre completo" />
+      <Label fx:id="lblTelefonoConf" layoutX="37.0" layoutY="195.0" text="Télefono" />
+      <Label fx:id="lblDireccionConf" layoutX="38.0" layoutY="253.0" text="Dirección" />
+      <TextField fx:id="txtNombreConf" layoutX="36.0" layoutY="160.0" prefHeight="31.0" prefWidth="307.0" />
+      <TextField fx:id="txtTelefonoConf" layoutX="36.0" layoutY="220.0" prefHeight="31.0" prefWidth="307.0" />
+      <TextField fx:id="txtDireccionConf" layoutX="36.0" layoutY="276.0" prefHeight="31.0" prefWidth="307.0" />
+      <TextField fx:id="txtCiudadConf" layoutX="36.0" layoutY="335.0" prefHeight="31.0" prefWidth="307.0" />
+      <TextField fx:id="txtReferenciaConf" layoutX="36.0" layoutY="397.0" prefHeight="40.0" prefWidth="307.0" />
+      <Label fx:id="lblCiudadConf" layoutX="38.0" layoutY="311.0" text="Ciudad" />
+      <Label fx:id="lblReferenciaConf" layoutX="40.0" layoutY="372.0" text="Referencia (opcional)" />
+      <Label fx:id="lblMetodoPago" layoutX="36.0" layoutY="447.0" text="Método de pago" />
+      <RadioButton fx:id="rbContraEntrega" layoutX="40.0" layoutY="479.0" mnemonicParsing="false" text="Pago contra entrega" />
+      <RadioButton fx:id="rbTransferencia" layoutX="40.0" layoutY="509.0" mnemonicParsing="false" text="Transferencia bancaria " />
+      <Label fx:id="lblResumenPedido" layoutX="44.0" layoutY="547.0" text="Resumen del pedido" />
+      <AnchorPane fx:id="cardResumenPedido" layoutX="40.0" layoutY="575.0" prefHeight="101.0" prefWidth="307.0">
+         <children>
+            <Label fx:id="lblDetallePedido" layoutX="14.0" layoutY="14.0" text="1 x Kit de Arrastre NS 200" />
+         </children>
+      </AnchorPane>
+      <Label fx:id="lblSubtotalTituloConf" layoutX="44.0" layoutY="685.0" text="Subtotal " />
+      <Label fx:id="lblEnvioTituloConf" layoutX="44.0" layoutY="711.0" text="Envio" />
+      <Label fx:id="lblTotalTituloConf" layoutX="44.0" layoutY="741.0" text="Total" />
+      <Label fx:id="lblSubtotalValorConf" layoutX="287.0" layoutY="685.0" text="\$ 204.000" />
+      <Label fx:id="lblEnvioValorConf" layoutX="287.0" layoutY="711.0" text="\$ 8.000" />
+      <Label fx:id="lblTotalValorConf" layoutX="287.0" layoutY="741.0" text="\$ 212.000" />
+   </children>
+</AnchorPane>

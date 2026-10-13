@@ -630,3 +630,451 @@ and open the template in the editor.
 #btnVerProd1:hover {
     -fx-background-color: #FEEAEA;
 }
+
+#lblTituloDetalle {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 18px;
+    -fx-text-fill: #000000;
+}
+
+#cardImagenDet {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #CCCCCC;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+#imgProductoDet {
+}
+
+#lblCategoriaDet {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 12px;
+    -fx-text-fill: #888888;
+}
+
+#lblNombreDet {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 20px;
+    -fx-text-fill: #000000;
+}
+
+#lblPrecioDet {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 26px;
+    -fx-text-fill: #E30613;
+}
+
+#lblStockTextoDet {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 12px;
+    -fx-text-fill: #2E7D32;
+}
+
+#lblStockValorDet {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 12px;
+    -fx-text-fill: #888888;
+}
+
+#lblDescripcionTitulo {
+    -fx-font-family: "Poppins SemiBold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #000000;
+}
+
+#lblDescripcionDet {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 12px;
+    -fx-text-fill: #555555;
+}
+
+#lblCantidadTitulo {
+    -fx-font-family: "Poppins SemiBold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #000000;
+}
+
+#btnMenosCant,
+#btnMasCant {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #000000;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #CCCCCC;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+    -fx-padding: 0;
+}
+
+#btnMenosCant:hover,
+#btnMasCant:hover {
+    -fx-background-color: #F0F0F0;
+}
+
+#lblCantidadValor {
+    -fx-font-family: "Poppins SemiBold";
+    -fx-font-size: 18px;
+    -fx-text-fill: #000000;
+}
+
+
+#btnAgregarDeseos {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #E30613;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E30613;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+#btnAgregarDeseos:hover {
+    -fx-background-color: #FEEAEA;
+}
+
+#btnAgregarCarrito {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #E30613;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+#btnAgregarCarrito:hover {
+    -fx-background-color: #B30510;
+}
+
+#lblTituloCarrito {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 20px;
+    -fx-text-fill: #000000;
+}
+
+#cardCarrito1 {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #DDDDDD;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+#lblNombreCarrito1 {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 13px;
+    -fx-text-fill: #000000;
+}
+
+#lblPrecioCarrito1 {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 11px;
+    -fx-text-fill: #E30613;
+}
+
+#lblSubtotalTextoCarrito1 {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #E30613;
+}
+
+#lblSubtotalValorCarrito1 {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #E30613;
+}
+
+#btnMenosCarrito1,
+#btnMasCarrito1 {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #000000;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #CCCCCC;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+    -fx-padding: 0;
+}
+
+#btnMenosCarrito1:hover,
+#btnMasCarrito1:hover {
+    -fx-background-color: #F0F0F0;
+}
+
+#lblCantidadCarrito1 {
+    -fx-font-family: "Poppins SemiBold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #000000;
+}
+
+#btnEliminarCarrito1 {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 11px;
+    -fx-text-fill: #E30613;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E30613;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+#btnEliminarCarrito1:hover {
+    -fx-background-color: #FEEAEA;
+}
+
+#lblResumenTitulo {
+    -fx-font-family: "Poppins SemiBold";
+    -fx-font-size: 15px;
+    -fx-text-fill: #000000;
+}
+
+#cardResumen {
+    -fx-background-color: #EEEEEE;
+    -fx-background-radius: 10px;
+}
+
+#lblSubtotalTitulo,
+#lblEnvioTitulo {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 13px;
+    -fx-text-fill: #555555;
+}
+
+#lblSubtotalValor,
+#lblEnvioValor {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 13px;
+    -fx-text-fill: #555555;
+}
+
+#lblTotalTitulo {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 15px;
+    -fx-text-fill: #000000;
+}
+
+#lblTotalValor {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 15px;
+    -fx-text-fill: #E30613;
+}
+
+#btnVaciarCarrito {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #E30613;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E30613;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+#btnVaciarCarrito:hover {
+    -fx-background-color: #FEEAEA;
+}
+
+#btnContinuarCompra {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #E30613;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+#btnContinuarCompra:hover {
+    -fx-background-color: #B30510;
+}
+
+#lblTituloConfirmar {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 18px;
+    -fx-text-fill: #000000;
+}
+
+#lblDatosEntrega,
+#lblMetodoPago,
+#lblResumenPedido {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 15px;
+    -fx-text-fill: #000000;
+}
+
+#lblNombreConf,
+#lblTelefonoConf,
+#lblDireccionConf,
+#lblCiudadConf,
+#lblReferenciaConf {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 12px;
+    -fx-text-fill: #333333;
+}
+
+#txtNombreConf,
+#txtTelefonoConf,
+#txtDireccionConf,
+#txtCiudadConf,
+#txtReferenciaConf {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 12px;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #CCCCCC;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: 0 10 0 10;
+    -fx-text-fill: #333333;
+}
+
+#txtNombreConf:focused,
+#txtTelefonoConf:focused,
+#txtDireccionConf:focused,
+#txtCiudadConf:focused,
+#txtReferenciaConf:focused {
+    -fx-border-color: #E30613;
+}
+
+#rbContraEntrega,
+#rbTransferencia {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 13px;
+    -fx-text-fill: #000000;
+}
+
+#cardResumenPedido {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #CCCCCC;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+#lblDetallePedido {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 13px;
+    -fx-text-fill: #333333;
+}
+
+#lblSubtotalTituloConf,
+#lblEnvioTituloConf {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 12px;
+    -fx-text-fill: #888888;
+}
+
+#lblSubtotalValorConf,
+#lblEnvioValorConf {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 12px;
+    -fx-text-fill: #888888;
+}
+
+#lblTotalTituloConf {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #000000;
+}
+
+#lblTotalValorConf {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #E30613;
+}
+
+#btnConfirmarCompra {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 15px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #E30613;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+#btnConfirmarCompra:hover {
+    -fx-background-color: #B30510;
+}
+
+#lblTituloCompra {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 26px;
+    -fx-text-fill: #000000;
+}
+
+#lblSubtituloCompra {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 15px;
+    -fx-text-fill: #888888;
+}
+
+#lblSubtituloCompra1 {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 15px;
+    -fx-text-fill: #888888;
+}
+
+#cardInfoCompra {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #CCCCCC;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+#lblNumPedidoTitulo,
+#lblFechaTitulo,
+#lblMetodoTitulo,
+#lblEstadoTitulo,
+#lblTotalTituloCompra {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 12px;
+    -fx-text-fill: #888888;
+}
+
+#lblNumPedidoValor,
+#lblFechaValor,
+#lblMetodoValor,
+#lblEstadoValor,
+#lblTotalValorCompra {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 13px;
+    -fx-text-fill: #000000;
+}
+
+#btnSeguirComprando {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #E30613;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E30613;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+#btnSeguirComprando:hover {
+    -fx-background-color: #FEEAEA;
+}
+
+#btnVerMisCompras {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #E30613;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+#btnVerMisCompras:hover {
+    -fx-background-color: #B30510;
+}
