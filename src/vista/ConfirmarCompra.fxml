@@ -8,15 +8,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="844.0" prefWidth="390.0" stylesheets="@../estilos/estilos.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controlador.ConfirmarCompraController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="844.0" prefWidth="390.0" stylesheets="@../estilos/estilos.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ConfirmarCompraController">
    <children>
-      <ImageView fx:id="imgFlechaAtrasConf" fitHeight="50.0" fitWidth="71.0" layoutX="19.0" layoutY="36.0" onMouseClicked="#onFlechaAtras" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgFlechaAtrasConf" fitHeight="69.0" fitWidth="69.0" layoutX="4.0" layoutY="30.0" onMouseClicked="#onFlechaAtras" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/chevron-left.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblTituloConfirmar" layoutX="103.0" layoutY="48.0" text="Confirmar compra" />
+      <Label fx:id="lblTituloConfirmar" layoutX="114.0" layoutY="51.0" text="Confirmar compra" />
       <Button fx:id="btnConfirmarCompra" layoutX="44.0" layoutY="775.0" mnemonicParsing="false" onAction="#onConfirmarCompra" prefHeight="50.0" prefWidth="307.0" text="CONFIRMAR COMPRA" />
       <Label fx:id="lblDatosEntrega" layoutX="37.0" layoutY="102.0" text="Datos de entrega " />
       <Label fx:id="lblNombreConf" layoutX="38.0" layoutY="131.0" text="Nombre completo" />

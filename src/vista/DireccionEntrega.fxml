@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="844.0" prefWidth="390.0" stylesheets="@../estilos/estilos.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.DireccionEntregaController">
+   <children>
+      <ImageView fx:id="imgFlechaAtrasDir" fitHeight="69.0" fitWidth="69.0" layoutX="4.0" layoutY="30.0" onMouseClicked="#onFlechaAtras" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/chevron-left.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblTituloDirEntrega" layoutX="90.0" layoutY="51.0" text="Dirección de entrega" />
+      <Label fx:id="lblDatosEntregaDir" layoutX="61.0" layoutY="126.0" text="DATOS DE ENTREGA" />
+      <Label fx:id="lblDireccionTituloDir" layoutX="61.0" layoutY="164.0" text="Dirección" />
+      <Label fx:id="lblCiudadTituloDir" layoutX="57.0" layoutY="261.0" text="Ciudad" />
+      <Label fx:id="lblReferenciaTituloDir" layoutX="57.0" layoutY="363.0" text="Referencia" />
+      <Button fx:id="btnGuardarDir" layoutX="83.0" layoutY="473.0" mnemonicParsing="false" onAction="#onGuardarDireccion" prefHeight="49.0" prefWidth="223.0" text="GUARDAR DIRECCIÓN" />
+      <Button fx:id="btnCancelarDir" layoutX="82.0" layoutY="533.0" mnemonicParsing="false" onAction="#onCancelar" prefHeight="49.0" prefWidth="223.0" text="CANCELAR" />
+      <ImageView fx:id="imgNavInicio" fitHeight="69.0" fitWidth="69.0" layoutX="18.0" layoutY="757.0" onMouseClicked="#onNavInicio" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/home.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgNavCategorias" fitHeight="69.0" fitWidth="69.0" layoutX="95.0" layoutY="757.0" onMouseClicked="#onNavCategorias" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/category.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgNavDeseos" fitHeight="69.0" fitWidth="69.0" layoutX="162.0" layoutY="757.0" onMouseClicked="#onNavDeseos" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/heart.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgNavCarrito" fitHeight="69.0" fitWidth="69.0" layoutX="239.0" layoutY="757.0" onMouseClicked="#onNavCarrito" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/car-shopping.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgNavPerfil" fitHeight="69.0" fitWidth="69.0" layoutX="308.0" layoutY="757.0" onMouseClicked="#onNavPerfil" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/user.png" />
+         </image>
+      </ImageView>
+      <Separator layoutX="12.0" layoutY="742.0" prefHeight="4.0" prefWidth="369.0" />
+      <TextField fx:id="txtDireccionDir" layoutX="60.0" layoutY="197.0" prefHeight="49.0" prefWidth="270.0" promptText="Manzana 170 lote 12" />
+      <TextField fx:id="txtCiudadDir" layoutX="60.0" layoutY="294.0" prefHeight="49.0" prefWidth="270.0" promptText="Montería" />
+      <TextField fx:id="txtReferenciaDir" layoutX="58.0" layoutY="389.0" prefHeight="49.0" prefWidth="270.0" promptText="Casa azul con rejas negras" />
+   </children>
+</AnchorPane>

@@ -7,15 +7,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="844.0" prefWidth="390.0" stylesheets="@../estilos/estilos.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controlador.CarritoController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="844.0" prefWidth="390.0" stylesheets="@../estilos/estilos.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.CarritoController">
    <children>
-      <ImageView fx:id="imgFlechaAtrasCar" fitHeight="55.0" fitWidth="44.0" layoutX="41.0" layoutY="68.0" onMouseClicked="#onFlechaAtras" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgFlechaAtrasCar" fitHeight="69.0" fitWidth="69.0" layoutX="4.0" layoutY="30.0" onMouseClicked="#onFlechaAtras" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/arrow-left.png" />
+            <Image url="@../img/chevron-left.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblTituloCarrito" layoutX="160.0" layoutY="77.0" text="Mi carrito" />
+      <Label fx:id="lblTituloCarrito" layoutX="153.0" layoutY="51.0" text="Mi carrito" />
       <AnchorPane fx:id="cardCarrito1" layoutX="24.0" layoutY="121.0" prefHeight="120.0" prefWidth="346.0">
          <children>
             <ImageView fx:id="imgProdCarrito1" fitHeight="120.0" fitWidth="89.0" layoutX="6.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
@@ -33,36 +32,36 @@
             <Button fx:id="btnEliminarCarrito1" layoutX="267.0" layoutY="76.0" mnemonicParsing="false" onAction="#onEliminarCarrito1" prefHeight="39.0" prefWidth="65.0" text="Eliminar" />
          </children>
       </AnchorPane>
-      <Label fx:id="lblResumenTitulo" layoutX="33.0" layoutY="496.0" text="Resumen de compra " />
-      <Button fx:id="btnVaciarCarrito" layoutX="32.0" layoutY="654.0" mnemonicParsing="false" onAction="#onVaciarCarrito" prefHeight="39.0" prefWidth="308.0" text="VACIAR CARRITO" />
-      <Button fx:id="btnContinuarCompra" layoutX="32.0" layoutY="699.0" mnemonicParsing="false" onAction="#onContinuarCompra" prefHeight="39.0" prefWidth="308.0" text="CONTINUAR COMPRA" />
-      <Separator layoutY="740.0" prefHeight="15.0" prefWidth="392.0" />
-      <ImageView fx:id="imgNavInicio" fitHeight="45.0" fitWidth="93.0" layoutX="26.0" layoutY="758.0" onMouseClicked="#onNavInicio" pickOnBounds="true" preserveRatio="true">
+      <Label fx:id="lblResumenTitulo" layoutX="33.0" layoutY="493.0" text="Resumen de compra " />
+      <Button fx:id="btnVaciarCarrito" layoutX="35.0" layoutY="651.0" mnemonicParsing="false" onAction="#onVaciarCarrito" prefHeight="39.0" prefWidth="308.0" text="VACIAR CARRITO" />
+      <Button fx:id="btnContinuarCompra" layoutX="38.0" layoutY="696.0" mnemonicParsing="false" onAction="#onContinuarCompra" prefHeight="39.0" prefWidth="308.0" text="CONTINUAR COMPRA" />
+      <Separator layoutX="12.0" layoutY="742.0" prefHeight="4.0" prefWidth="369.0" />
+      <ImageView fx:id="imgNavInicio" fitHeight="69.0" fitWidth="69.0" layoutX="18.0" layoutY="757.0" onMouseClicked="#onNavInicio" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/home.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgNavCategorias" fitHeight="45.0" fitWidth="93.0" layoutX="106.0" layoutY="760.0" onMouseClicked="#onNavCategorias" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgNavCategorias" fitHeight="69.0" fitWidth="69.0" layoutX="95.0" layoutY="757.0" onMouseClicked="#onNavCategorias" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/category.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgNavDeseos" fitHeight="45.0" fitWidth="93.0" layoutX="180.0" layoutY="758.0" onMouseClicked="#onNavDeseos" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgNavDeseos" fitHeight="69.0" fitWidth="69.0" layoutX="162.0" layoutY="757.0" onMouseClicked="#onNavDeseos" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/heart.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgNavCarrito" fitHeight="45.0" fitWidth="93.0" layoutX="259.0" layoutY="758.0" onMouseClicked="#onNavCarrito" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgNavCarrito" fitHeight="69.0" fitWidth="69.0" layoutX="239.0" layoutY="757.0" onMouseClicked="#onNavCarrito" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/car-shopping.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgNavPerfil" fitHeight="45.0" fitWidth="93.0" layoutX="325.0" layoutY="758.0" onMouseClicked="#onNavPerfil" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgNavPerfil" fitHeight="69.0" fitWidth="69.0" layoutX="308.0" layoutY="757.0" onMouseClicked="#onNavPerfil" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/user.png" />
          </image>
       </ImageView>
-      <AnchorPane fx:id="cardResumen" layoutX="27.0" layoutY="530.0" prefHeight="120.0" prefWidth="336.0">
+      <AnchorPane fx:id="cardResumen" layoutX="27.0" layoutY="524.0" prefHeight="120.0" prefWidth="336.0">
          <children>
             <Label fx:id="lblSubtotalTitulo" layoutX="28.0" layoutY="14.0" text="Subtotal " />
             <Label fx:id="lblEnvioTitulo" layoutX="28.0" layoutY="35.0" text="Envio" />
@@ -72,10 +71,5 @@
             <Label fx:id="lblTotalValor" layoutX="260.0" layoutY="78.0" text="\$ 212.000" />
          </children>
       </AnchorPane>
-      <Label fx:id="lblNavInicio" layoutX="31.0" layoutY="803.0" text="Inicio" />
-      <Label fx:id="lblNavCategorias" layoutX="93.0" layoutY="804.0" text="Categorías" />
-      <Label fx:id="lblNavDeseos" layoutX="181.0" layoutY="803.0" text="Deseos" />
-      <Label fx:id="lblNavCarrito" layoutX="260.0" layoutY="803.0" text="Carrito" />
-      <Label fx:id="lblNavPerfil" layoutX="334.0" layoutY="804.0" text="Perfil" />
    </children>
 </AnchorPane>

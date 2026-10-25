@@ -10,9 +10,9 @@
 
 <AnchorPane id="AnchorPane" fx:id="rootPane" minHeight="844.0" minWidth="390.0" prefHeight="844.0" prefWidth="390.0" stylesheets="@../estilos/estilos.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.CrearCuentaController">
    <children>
-      <ImageView fx:id="imgFlechaAtras" fitHeight="55.0" fitWidth="44.0" layoutX="41.0" layoutY="68.0" onMouseClicked="#onFlechaAtras" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgFlechaAtras" fitHeight="69.0" fitWidth="69.0" layoutX="4.0" layoutY="31.0" onMouseClicked="#onFlechaAtras" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/arrow-left.png" />
+            <Image url="@../img/chevron-left.png" />
          </image>
       </ImageView>
       <Label fx:id="lblTituloCrearCuenta" layoutX="97.0" layoutY="96.0" text="Crear cuenta" />
@@ -24,10 +24,10 @@
       <Label fx:id="lblConfirmar" layoutX="61.0" layoutY="547.0" text="Confirma tu contraseña" />
       <Button fx:id="btnRegistrar" layoutX="47.0" layoutY="667.0" mnemonicParsing="false" onAction="#onRegistrar" prefHeight="55.0" prefWidth="296.0" text="CREAR CUENTA" />
       <Button fx:id="btnYaTengoCuenta" layoutX="47.0" layoutY="731.0" mnemonicParsing="false" onAction="#onYaTengoCuenta" prefHeight="55.0" prefWidth="296.0" text="YA TENGO UNA CUENTA" />
-      <TextField fx:id="txtNombre" layoutX="41.0" layoutY="193.0" prefHeight="55.0" prefWidth="325.0" />
-      <TextField fx:id="txtCorreoRegistro" layoutX="41.0" layoutY="285.0" prefHeight="55.0" prefWidth="325.0" />
-      <TextField fx:id="txtTelefono" layoutX="47.0" layoutY="378.0" prefHeight="55.0" prefWidth="325.0" />
-      <PasswordField fx:id="txtContrasenaRegistro" layoutX="41.0" layoutY="468.0" prefHeight="55.0" prefWidth="325.0" />
-      <PasswordField fx:id="txtConfirmar" layoutX="41.0" layoutY="582.0" prefHeight="55.0" prefWidth="325.0" />
+      <TextField fx:id="txtNombre" layoutX="41.0" layoutY="193.0" prefHeight="55.0" prefWidth="325.0" promptText="Ingresa tu nombre completo" />
+      <TextField fx:id="txtCorreoRegistro" layoutX="41.0" layoutY="285.0" prefHeight="55.0" prefWidth="325.0" promptText="Ingresa tu correo electrónico" />
+      <TextField fx:id="txtTelefono" layoutX="47.0" layoutY="378.0" prefHeight="55.0" prefWidth="325.0" promptText="Ingresa tu número de teléfono" />
+      <PasswordField fx:id="txtContrasenaRegistro" layoutX="41.0" layoutY="468.0" prefHeight="55.0" prefWidth="325.0" promptText="Crea una contraseña" />
+      <PasswordField fx:id="txtConfirmar" layoutX="41.0" layoutY="582.0" prefHeight="55.0" prefWidth="325.0" promptText="Confirma tu contraseña" />
    </children>
 </AnchorPane>

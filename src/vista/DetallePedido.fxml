@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="844.0" prefWidth="390.0" stylesheets="@../estilos/estilos.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.DetallePedidoController">
+   <children>
+      <ImageView fx:id="imgFlechaAtrasDet" fitHeight="69.0" fitWidth="69.0" layoutX="4.0" layoutY="30.0" onMouseClicked="#onFlechaAtras" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/chevron-left.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblTituloDetallePedido" layoutX="105.0" layoutY="51.0" text="Detalle del pedido" />
+      <Label fx:id="lblPedidoTituloDet" layoutX="41.0" layoutY="132.0" text="Pedido:" />
+      <Label fx:id="lblFechaTituloDet" layoutX="41.0" layoutY="153.0" text="Fecha: " />
+      <Label fx:id="lblFechaValorDet" layoutX="88.0" layoutY="153.0" text="26/08/2026" />
+      <Label fx:id="lblMetodoTituloDet" layoutX="41.0" layoutY="174.0" text="Método de pago: " />
+      <Label fx:id="lblMetodoValorDet" layoutX="153.0" layoutY="175.0" text="Pago contra entrega" />
+      <Label fx:id="lblProductosTituloDet" layoutX="41.0" layoutY="215.0" text="Productos" />
+      <Label fx:id="lblEstadoDet" layoutX="288.0" layoutY="132.0" prefHeight="28.0" prefWidth="86.0" styleClass="estadoPendiente" text="Pendiente" />
+      <AnchorPane layoutX="41.0" layoutY="245.0" prefHeight="196.0" prefWidth="325.0">
+         <children>
+            <ScrollPane prefHeight="209.0" prefWidth="315.0">
+              <content>
+                <AnchorPane fx:id="scrollProductosDet" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="297.0">
+                     <children>
+                        <Label fx:id="lblPrecioProd1Det" layoutX="45.0" layoutY="49.0" text="Precio: $204.000 Subtotal: $ 204.000" />
+                        <Label fx:id="lblProducto1Det" layoutX="18.0" layoutY="23.0" text="1 x Kit de Arrastre NS 200" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+      <Label fx:id="lblSubtotalTituloDet" layoutX="41.0" layoutY="461.0" text="Subtotal: " />
+      <Label fx:id="lblSubtotalValorDet" layoutX="109.0" layoutY="461.0" text="\$ 204.000" />
+      <Label fx:id="lblEnvioTituloDet" layoutX="41.0" layoutY="482.0" text="Envio: " />
+      <Label fx:id="lblEnvioValorDet" layoutX="88.0" layoutY="482.0" text="\$ 8.000" />
+      <Label fx:id="lblTotalTituloDet" layoutX="41.0" layoutY="511.0" text="Total: " />
+      <Label fx:id="lblTotalValorDet" layoutX="91.0" layoutY="511.0" text="\$ 212.000" />
+      <Label fx:id="lblDatosEntregaDet" layoutX="44.0" layoutY="539.0" text="Datos de entrega" />
+      <Label fx:id="lblNombreTituloDet" layoutX="41.0" layoutY="568.0" text="Nombre: " />
+      <Label fx:id="lblTelefonoTituloDet" layoutX="41.0" layoutY="588.0" text="Teléfono:" />
+      <Label fx:id="lblDireccionTituloDet" layoutX="44.0" layoutY="609.0" text="Dirección:" />
+      <Label fx:id="lblCiudadTituloDet" layoutX="41.0" layoutY="630.0" text="Ciudad:" />
+      <Label fx:id="lblReferenciaTituloDet" layoutX="44.0" layoutY="651.0" text="Referencia:" />
+      <Label fx:id="lblNombreValorDet" layoutX="102.0" layoutY="568.0" text="Juan Pérez" />
+      <Label fx:id="lblTelefonoValorDet" layoutX="106.0" layoutY="590.0" text="300 691 5640" />
+      <Label fx:id="lblDireccionValorDet" layoutX="108.0" layoutY="609.0" text="Manzana 170 lote 12" />
+      <Label fx:id="lblCiudadValorDet" layoutX="92.0" layoutY="630.0" text="Montería" />
+      <Label fx:id="lblReferenciaValorDet" layoutX="116.0" layoutY="652.0" text="Casa azul con rejas negras" />
+      <Button fx:id="btnCancelarPedido" layoutX="56.0" layoutY="683.0" mnemonicParsing="false" onAction="#onCancelarPedido" prefHeight="43.0" prefWidth="300.0" text="CANCELAR PEDIDO" />
+      <ImageView fx:id="imgNavInicio" fitHeight="69.0" fitWidth="69.0" layoutX="18.0" layoutY="757.0" onMouseClicked="#onNavInicio" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/home.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgNavCategorias" fitHeight="69.0" fitWidth="69.0" layoutX="95.0" layoutY="757.0" onMouseClicked="#onNavCategorias" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/category.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgNavDeseos" fitHeight="69.0" fitWidth="69.0" layoutX="162.0" layoutY="757.0" onMouseClicked="#onNavDeseos" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/heart.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgNavCarrito" fitHeight="69.0" fitWidth="69.0" layoutX="239.0" layoutY="757.0" onMouseClicked="#onNavCarrito" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/car-shopping.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imgNavPerfil" fitHeight="69.0" fitWidth="69.0" layoutX="308.0" layoutY="757.0" onMouseClicked="#onNavPerfil" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/user.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblPedidoValorDet" layoutX="104.0" layoutY="131.0" text=" #00001" />
+      <Separator layoutX="12.0" layoutY="742.0" prefHeight="4.0" prefWidth="369.0" />
+   </children>
+</AnchorPane>

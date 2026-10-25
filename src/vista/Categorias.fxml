@@ -7,16 +7,15 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="844.0" prefWidth="390.0" stylesheets="@../estilos/estilos.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controlador.CategoriasController">
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="844.0" prefWidth="390.0" stylesheets="@../estilos/estilos.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.CategoriasController">
    <children>
-      <Label fx:id="lblTituloCategorias" layoutX="160.0" layoutY="77.0" text="Categorías" />
-      <ImageView fx:id="imgFlechaAtrasCat" fitHeight="55.0" fitWidth="44.0" layoutX="41.0" layoutY="68.0" onMouseClicked="#onFlechaAtras" pickOnBounds="true" preserveRatio="true">
+      <Label fx:id="lblTituloCategorias" layoutX="122.0" layoutY="51.0" text="Categorías" />
+      <ImageView fx:id="imgFlechaAtrasCat" fitHeight="69.0" fitWidth="69.0" layoutX="4.0" layoutY="30.0" onMouseClicked="#onFlechaAtras" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/arrow-left.png" />
+            <Image url="@../img/chevron-left.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="52.0" fitWidth="50.0" layoutX="312.0" layoutY="63.0" onMouseClicked="#onCarritoHeader" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="69.0" fitWidth="69.0" layoutX="294.0" layoutY="30.0" onMouseClicked="#onCarritoHeader" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/car-shopping.png" />
          </image>
@@ -34,37 +33,32 @@
       </AnchorPane>
       <Label fx:id="lblExplora" layoutX="36.0" layoutY="605.0" text="Explora nuestros productos" />
       <Button fx:id="btnVerTodos" layoutX="50.0" layoutY="641.0" mnemonicParsing="false" onAction="#onVerTodos" prefHeight="50.0" prefWidth="307.0" text="VER TODOS LOS PRODUCTOS" />
-      <Separator layoutY="740.0" prefHeight="15.0" prefWidth="392.0" />
-      <ImageView fx:id="imgNavInicio" fitHeight="45.0" fitWidth="93.0" layoutX="26.0" layoutY="758.0" onMouseClicked="#onNavInicio" pickOnBounds="true" preserveRatio="true">
+      <Separator layoutX="12.0" layoutY="742.0" prefHeight="4.0" prefWidth="369.0" />
+      <ImageView fx:id="imgNavInicio" fitHeight="69.0" fitWidth="69.0" layoutX="18.0" layoutY="757.0" onMouseClicked="#onNavInicio" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/home.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgNavCategorias" fitHeight="45.0" fitWidth="93.0" layoutX="106.0" layoutY="760.0" onMouseClicked="#onNavCategorias" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgNavCategorias" fitHeight="69.0" fitWidth="69.0" layoutX="95.0" layoutY="757.0" onMouseClicked="#onNavCategorias" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/category.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgNavDeseos" fitHeight="45.0" fitWidth="93.0" layoutX="180.0" layoutY="758.0" onMouseClicked="#onNavDeseos" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgNavDeseos" fitHeight="69.0" fitWidth="69.0" layoutX="162.0" layoutY="757.0" onMouseClicked="#onNavDeseos" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/heart.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgNavCarrito" fitHeight="45.0" fitWidth="93.0" layoutX="259.0" layoutY="758.0" onMouseClicked="#onNavCarrito" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgNavCarrito" fitHeight="69.0" fitWidth="69.0" layoutX="239.0" layoutY="757.0" onMouseClicked="#onNavCarrito" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/car-shopping.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgNavPerfil" fitHeight="45.0" fitWidth="93.0" layoutX="325.0" layoutY="758.0" onMouseClicked="#onNavPerfil" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgNavPerfil" fitHeight="69.0" fitWidth="69.0" layoutX="308.0" layoutY="757.0" onMouseClicked="#onNavPerfil" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/user.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblNavInicio" layoutX="31.0" layoutY="803.0" text="Inicio" />
-      <Label fx:id="lblNavCategorias" layoutX="93.0" layoutY="804.0" text="Categorías" />
-      <Label fx:id="lblNavDeseos" layoutX="181.0" layoutY="803.0" text="Deseos" />
-      <Label fx:id="lblNavCarrito" layoutX="260.0" layoutY="803.0" text="Carrito" />
-      <Label fx:id="lblNavPerfil" layoutX="334.0" layoutY="804.0" text="Perfil" />
       <AnchorPane fx:id="cardBicicletas" layoutX="214.0" layoutY="143.0" prefHeight="212.0" prefWidth="163.0">
          <children>
             <ImageView fx:id="imgBicicletas" fitHeight="130.0" fitWidth="135.0" layoutX="17.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">

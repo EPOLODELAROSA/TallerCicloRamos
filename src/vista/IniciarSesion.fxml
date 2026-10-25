@@ -10,9 +10,9 @@
 
 <AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="844.0" prefWidth="390.0" stylesheets="@../estilos/estilos.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.IniciarSesionController">
    <children>
-      <ImageView fx:id="imgFlechaAtras" fitHeight="55.0" fitWidth="44.0" layoutX="41.0" layoutY="68.0" onMouseClicked="#onFlechaAtras" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgFlechaAtras" fitHeight="69.0" fitWidth="69.0" layoutX="4.0" layoutY="30.0" onMouseClicked="#onFlechaAtras" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/arrow-left.png" />
+            <Image url="@../img/chevron-left.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="90.0" fitWidth="147.0" layoutX="128.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
@@ -25,10 +25,10 @@
       <Label fx:id="lblCorreo" layoutX="41.0" layoutY="330.0" text="Correo electrónico" />
       <Label fx:id="lblContrasena" layoutX="41.0" layoutY="439.0" text="Contraseña" />
       <Button fx:id="btnIniciarSesion" layoutX="50.0" layoutY="583.0" mnemonicParsing="false" onAction="#onIniciarSesion" prefHeight="55.0" prefWidth="296.0" text="INICIAR SESIÓN" />
-      <Label fx:id="lblSinCuenta" layoutX="118.0" layoutY="652.0" text="¿No tienes una cuenta?" />
+      <Label fx:id="lblSinCuenta" layoutX="113.0" layoutY="651.0" text="¿No tienes una cuenta?" />
       <Button fx:id="btnCrearCuenta" layoutX="47.0" layoutY="691.0" mnemonicParsing="false" onAction="#onCrearCuenta" prefHeight="55.0" prefWidth="296.0" text="CREAR CUENTA" />
-      <TextField fx:id="txtCorreo" layoutX="41.0" layoutY="361.0" prefHeight="55.0" prefWidth="325.0" />
-      <PasswordField fx:id="txtContrasena" layoutX="43.0" layoutY="473.0" prefHeight="55.0" prefWidth="231.0" />
+      <TextField fx:id="txtCorreo" layoutX="41.0" layoutY="361.0" prefHeight="55.0" prefWidth="325.0" promptText="Ingresa tu correo electrónico" />
+      <PasswordField fx:id="txtContrasena" layoutX="43.0" layoutY="473.0" prefHeight="55.0" prefWidth="222.0" promptText="Ingresa tu contraseña" />
       <Button fx:id="btnMostrar" layoutX="274.0" layoutY="473.0" mnemonicParsing="false" onAction="#onMostrar" prefHeight="55.0" prefWidth="89.0" text="MOSTRAR" />
       <TextField fx:id="txtContrasenaVisible" layoutX="43.0" layoutY="473.0" prefHeight="55.0" prefWidth="231.0" visible="false" />
    </children>

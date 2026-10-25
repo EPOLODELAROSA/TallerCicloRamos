@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package controlador;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -11,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.Rectangle;
 
 /**
  * FXML Controller class
@@ -32,21 +32,8 @@ public class BienvenidaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
-        aplicarEsquinasRedondeadas();
     }    
-    
-    private void aplicarEsquinasRedondeadas() {
-        
-        double ancho = imgBienvenida.getFitWidth();
-        double alto = imgBienvenida.getFitHeight();
-
-        Rectangle clip = new Rectangle(ancho, alto);
-        clip.setArcWidth(60);   
-        clip.setArcHeight(70);  
-        imgBienvenida.setClip(clip);
-    }
-    
+  
     @FXML
     private void onComenzar(ActionEvent event) {
         util.Navegador.cambiar("IniciarSesion", btnComenzar);

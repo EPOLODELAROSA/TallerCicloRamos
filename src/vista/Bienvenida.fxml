@@ -13,15 +13,15 @@
             <Image url="@../img/logo.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblSubtitulo2" layoutX="108.0" layoutY="633.0" text="para moto y bicicletas" />
+      <Label fx:id="lblSubtitulo2" layoutX="108.0" layoutY="654.0" text="para moto y bicicletas" />
       <Label fx:id="lblTitulo" layoutX="47.0" layoutY="204.0" text="TALLER CICLO RAMOS" />
-      <Label fx:id="lblEslogan" layoutX="78.0" layoutY="568.0" text="Todo para tu camino" />
-      <Label fx:id="lblSubtitulo" layoutX="104.0" layoutY="610.0" text="Repuestos y accesorios" wrapText="true" />
-      <ImageView fx:id="imgBienvenida" fitHeight="270.0" fitWidth="258.0" layoutX="64.0" layoutY="269.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+      <Label fx:id="lblEslogan" layoutX="76.0" layoutY="599.0" text="Todo para tu camino" />
+      <Label fx:id="lblSubtitulo" layoutX="104.0" layoutY="631.0" text="Repuestos y accesorios" wrapText="true" />
+      <Button fx:id="btnComenzar" layoutX="84.0" layoutY="699.0" mnemonicParsing="false" onAction="#onComenzar" prefHeight="68.0" prefWidth="228.0" text="COMENZAR" />
+      <ImageView fx:id="imgBienvenida" fitHeight="379.0" fitWidth="311.0" layoutX="50.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/bienvenida.jpg" />
+            <Image url="@../img/bienvenida.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnComenzar" layoutX="81.0" layoutY="687.0" mnemonicParsing="false" onAction="#onComenzar" prefHeight="68.0" prefWidth="228.0" text="COMENZAR" />
    </children>
 </AnchorPane>
