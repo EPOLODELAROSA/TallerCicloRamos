@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="844.0" prefWidth="390.0" stylesheets="@../estilos/estilos.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controlador.DetallePedidoAdminController">
+   <children>
+      <ImageView fx:id="imgFlechaAtrasDetAdmin" fitHeight="69.0" fitWidth="69.0" layoutX="4.0" layoutY="30.0" onMouseClicked="#onFlechaAtras" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/chevron-left.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblTituloDetalleAdmin" layoutX="105.0" layoutY="57.0" text="Detalles del pedido" />
+      <Label fx:id="lblPedidoTituloAdmin" layoutX="39.0" layoutY="109.0" text="Pedido:" />
+      <Label fx:id="lblPedidoValorAdmin" layoutX="104.0" layoutY="109.0" text="#00001" />
+      <Label fx:id="lblEstadoAdmin" layoutX="290.0" layoutY="109.0" styleClass="estadoPendiente" text="Pendiente" />
+      <Label fx:id="lblFechaTituloAdmin" layoutX="41.0" layoutY="137.0" text="Fecha:" />
+      <Label fx:id="lblFechaValorAdmin" layoutX="89.0" layoutY="136.0" text="28/09/2026" />
+      <Label fx:id="lblDatosClienteTitulo" layoutX="39.0" layoutY="162.0" text="Datos del cliente" />
+      <Label fx:id="lblClienteNombreTitulo" layoutX="36.0" layoutY="192.0" text="Cliente:" />
+      <Label fx:id="lblClienteEmailTitulo" layoutX="35.0" layoutY="208.0" text="Email:" />
+      <Label fx:id="lblClienteNombreValor" layoutX="82.0" layoutY="192.0" text="Juan Pérez" />
+      <Label fx:id="lblClienteEmailValor" layoutX="80.0" layoutY="208.0" text="juanperez08@gmail.com" />
+      <Label fx:id="lblClienteTelTitulo" layoutX="34.0" layoutY="224.0" text="Teléfono:" />
+      <Label fx:id="lblClienteTelValor" layoutX="93.0" layoutY="224.0" text="300 691 5640" />
+      <Label fx:id="lblProductosTituloAdmin" layoutX="37.0" layoutY="255.0" text="Productos" />
+      <AnchorPane fx:id="cardDetalleProductos" layoutX="34.0" layoutY="284.0" prefHeight="144.0" prefWidth="315.0">
+         <children>
+            <ScrollPane fx:id="scrollProductosAdmin" prefHeight="167.0" prefWidth="315.0">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="157.0" prefWidth="305.0">
+                     <children>
+                        <VBox fx:id="vboxListaProductosAdmin" layoutX="2.0" layoutY="3.0" prefHeight="152.0" prefWidth="301.0" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
+      <Label fx:id="lblSubtotalTituloAdmin" layoutX="37.0" layoutY="490.0" text="Subtotal:" />
+      <Label fx:id="lblSubtotalValorAdmin" layoutX="99.0" layoutY="490.0" text="\$ 23.000" />
+      <Label fx:id="lblEnvioTituloAdmin" layoutX="36.0" layoutY="507.0" text="Envío:" />
+      <Label fx:id="lblEnvioValorAdmin" layoutX="82.0" layoutY="507.0" text="\$ 8.000" />
+      <Label fx:id="lblTotalTituloAdmin" layoutX="36.0" layoutY="531.0" text="Total:" />
+      <Label fx:id="lblTotalValorAdmin" layoutX="85.0" layoutY="531.0" text="\$ 31.000" />
+      <Label fx:id="lblEntregaTituloAdmin" layoutX="39.0" layoutY="563.0" text="Entrega y pago" />
+      <Label fx:id="lblDireccionTituloAdmin" layoutX="39.0" layoutY="593.0" text="Dirección:" />
+      <Label fx:id="lblCiudadTituloAdmin" layoutX="39.0" layoutY="614.0" text="Ciudad:" />
+      <Label fx:id="lblReferenciaTituloAdmin" layoutX="39.0" layoutY="635.0" text="Referencia:" />
+      <Label fx:id="lblMetodoTituloAdmin" layoutX="40.0" layoutY="656.0" text="Método de pago:" />
+      <Label fx:id="lblDireccionValorAdmin" layoutX="110.0" layoutY="593.0" text="Manzana 170 lote 12" />
+      <Label fx:id="lblCiudadValorAdmin" layoutX="105.0" layoutY="614.0" text="Montería" />
+      <Label fx:id="lblReferenciaValorAdmin" layoutX="116.0" layoutY="635.0" text="Casa azul..." />
+      <Label fx:id="lblMetodoValorAdmin" layoutX="162.0" layoutY="656.0" text="Pago contra entrega" />
+      <Button fx:id="btnActualizarEstado" layoutX="83.0" layoutY="706.0" mnemonicParsing="false" onAction="#onActualizarEstado" prefHeight="41.0" prefWidth="226.0" text="ACTUALIZAR ESTADO" />
+      <Button fx:id="btnRechazarPedido" layoutX="82.0" layoutY="766.0" mnemonicParsing="false" onAction="#onRechazarPedido" prefHeight="41.0" prefWidth="226.0" text="RECHAZAR PEDIDO" />
+   </children>
+</AnchorPane>

@@ -1680,3 +1680,771 @@ and open the template in the editor.
 #btnCancelarPass:hover {
     -fx-background-color: #FEEAEA;
 }
+
+#lblTituloPanelAdmin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 24px;
+    -fx-text-fill: #000000;
+}
+
+#lblSaludoAdmin {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 14px;
+    -fx-text-fill: #888888;
+}
+
+#lblResumenTitulo, #lblGestionTitulo {
+    -fx-font-family: "Poppins SemiBold";
+    -fx-font-size: 15px;
+    -fx-text-fill: #000000;
+}
+
+#lblPedidosEnCola {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 13px;
+    -fx-text-fill: #888888;
+}
+
+.cardResumenAdmin {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #DDDDDD;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+#lblValorProductos, #lblValorPedidos, #lblValorStockBajo {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 22px;
+    -fx-text-fill: #000000;
+}
+
+#lblTextoProductos, #lblTextoPedidos, #lblTextoStockBajo, #lblValorProductos2 {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 11px;
+    -fx-text-fill: #555555;
+}
+
+#btnGestionarProducto, #btnRegistrarProducto, 
+#btnGestionarPedidos, #btnGestionarUsuarios {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #E30613;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E30613;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+#btnGestionarProducto:hover, #btnRegistrarProducto:hover, 
+#btnGestionarPedidos:hover, #btnGestionarUsuarios:hover {
+    -fx-background-color: #FEEAEA;
+}
+
+#btnCerrarSesionAdmin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 15px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #E30613;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+#btnCerrarSesionAdmin:hover {
+    -fx-background-color: #B30510;
+}
+
+#lblTituloRegistrarProd {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 20px;
+    -fx-text-fill: #000000;
+}
+
+#imgPreviewProducto {
+    -fx-background-color: #C0C0C0; 
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+}
+
+#lblSinImagen {
+    -fx-font-family: "Poppins SemiBold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}
+
+#btnSeleccionarImagen {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 13px;
+    -fx-text-fill: #E30613;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E30613;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+#btnSeleccionarImagen:hover {
+    -fx-background-color: #FEEAEA;
+}
+
+#lblInfoProductoTitulo {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 15px;
+    -fx-text-fill: #000000;
+}
+
+#lblNombreProdTitulo, #lblPrecioProdTitulo, #lblStockProdTitulo, 
+#lblCategoriaProdTitulo, #lblDescripcionProdTitulo {
+    -fx-font-family: "Poppins SemiBold";
+    -fx-font-size: 12px;
+    -fx-text-fill: #333333;
+}
+
+#txtNombreProd, #txtPrecioProd, #txtStockProd, #cmbCategoriaProd {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 13px;
+    -fx-background-color: #EEEEEE;
+    -fx-border-color: #CCCCCC;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 0 15 0 15;
+    -fx-text-fill: #333333;
+    -fx-prompt-text-fill: #AAAAAA;
+}
+
+#txtDescripcionProd {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 13px;
+    -fx-background-color: #EEEEEE;
+    -fx-border-color: #CCCCCC;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 10 15 10 15;
+    -fx-text-fill: #333333;
+    -fx-prompt-text-fill: #AAAAAA;
+}
+
+#txtNombreProd:focused, #txtPrecioProd:focused, #txtStockProd:focused, 
+#cmbCategoriaProd:focused, #txtDescripcionProd:focused {
+    -fx-border-color: #E30613;
+}
+
+#btnRegistrarProductoAdmin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 15px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #E30613;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+#btnRegistrarProductoAdmin:hover {
+    -fx-background-color: #B30510;
+}
+
+#btnCancelarRegProd {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 15px;
+    -fx-text-fill: #E30613;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E30613;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+#btnCancelarRegProd:hover {
+    -fx-background-color: #FEEAEA;
+}
+
+
+/* ================================================
+   PANTALLA: GESTIONAR PRODUCTOS (ADMIN)
+   ================================================ */
+
+#lblTituloGestionarProd {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 20px;
+    -fx-text-fill: #000000;
+}
+
+/* Barra de búsqueda */
+#txtBuscarGestProd {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 13px;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #DDDDDD;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 0 15 0 15;
+    -fx-text-fill: #333333;
+    -fx-prompt-text-fill: #AAAAAA;
+}
+
+#btnBuscarGestProd {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 13px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #E30613;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+#btnBuscarGestProd:hover {
+    -fx-background-color: #B30510;
+}
+
+/* ComboBox de filtro */
+#cmbFiltroGestProd {
+    -fx-font-family: "Poppins SemiBold";
+    -fx-font-size: 14px;
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 8px;
+    -fx-border-color: #DDDDDD;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 8px;
+    -fx-padding: 0 15 0 10;
+    -fx-text-fill: #000000;
+}
+
+/* ScrollPane transparente */
+#scrollListaProductos {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+#scrollListaProductos > .viewport {
+    -fx-background-color: transparent;
+}
+
+#btnRegistrarProdDesdeGest {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 15px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #E30613;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+#btnRegistrarProdDesdeGest:hover {
+    -fx-background-color: #B30510;
+}
+
+.cardProductoAdmin {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #DDDDDD;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.lblNombreProdAdmin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #000000;
+}
+
+.lblCategoriaProdAdmin {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 11px;
+    -fx-text-fill: #888888;
+}
+
+.lblPrecioProdAdmin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 15px;
+    -fx-text-fill: #E30613;
+}
+
+.lblStockProdAdmin {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 11px;
+    -fx-text-fill: #2E7D32;
+}
+
+.btnEliminarProdAdmin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 11px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #E30613;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.btnEditarProdAdmin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 11px;
+    -fx-text-fill: #E30613;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E30613;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+}
+
+/* ================================================
+   PANTALLA: EDITAR PRODUCTO
+   ================================================ */
+
+#lblTituloEditarProd {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 20px;
+    -fx-text-fill: #000000;
+}
+
+/* Botón Cambiar Imagen */
+#btnCambiarImagenEdit {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 13px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #E30613;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+#btnCambiarImagenEdit:hover {
+    -fx-background-color: #B30510;
+}
+
+#lblInfoEditarTitulo {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 15px;
+    -fx-text-fill: #000000;
+}
+
+#lblNombreEditTitulo, #lblPrecioEditTitulo, #lblStockEditTitulo, 
+#lblCatEditTitulo, #lblDescEditTitulo {
+    -fx-font-family: "Poppins SemiBold";
+    -fx-font-size: 12px;
+    -fx-text-fill: #333333;
+}
+
+/* Campos de texto */
+#txtNombreEdit, #txtPrecioEdit, #txtStockEdit, #cmbCatEdit {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 13px;
+    -fx-background-color: #EEEEEE;
+    -fx-border-color: #CCCCCC;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 0 15 0 15;
+    -fx-text-fill: #333333;
+}
+
+#txtDescEdit {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 13px;
+    -fx-background-color: #EEEEEE;
+    -fx-border-color: #CCCCCC;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 10 15 10 15;
+    -fx-text-fill: #333333;
+}
+
+#txtNombreEdit:focused, #txtPrecioEdit:focused, #txtStockEdit:focused, 
+#cmbCatEdit:focused, #txtDescEdit:focused {
+    -fx-border-color: #E30613;
+}
+
+/* Botones inferiores */
+#btnCancelarEditProd {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #E30613;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E30613;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+#btnCancelarEditProd:hover {
+    -fx-background-color: #FEEAEA;
+}
+
+#btnGuardarEditProd {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #E30613;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+#btnGuardarEditProd:hover {
+    -fx-background-color: #B30510;
+}
+
+/* ================================================
+   PANTALLA: GESTIONAR PEDIDOS (ADMIN)
+   ================================================ */
+
+#lblTituloGestionarPedidos {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 20px;
+    -fx-text-fill: #000000;
+}
+
+#txtBuscarPedido {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 13px;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #DDDDDD;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 0 15 0 15;
+    -fx-text-fill: #333333;
+}
+
+#btnBuscarPedido {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 13px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #E30613;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+#cmbFiltroEstadoPed, #cmbOrdenPed {
+    -fx-font-family: "Poppins SemiBold";
+    -fx-font-size: 13px;
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 8px;
+    -fx-border-color: #DDDDDD;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 8px;
+    -fx-padding: 0 15 0 10;
+    -fx-text-fill: #000000;
+}
+
+/* Resúmenes (Textos pequeños) */
+#lblTextoTotalPedidos {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 13px;
+    -fx-text-fill: #000000;
+}
+
+#lblTextoPendientes, #lblTextoEnProceso, #lblTextoEnviados, 
+#lblTextoEntregados, #lblTextoCancelados, #lblTextoRechazados {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 11px;
+    -fx-text-fill: #555555;
+}
+
+/* Números de los resúmenes */
+#lblNumPendientes, #lblNumEnProceso, #lblNumEnviados, 
+#lblNumEntregados, #lblNumCancelados, #lblNumRechazados {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 11px;
+    -fx-text-fill: #333333; /* Gris oscuro */
+}
+
+/* Botón de Atender Cola */
+#btnAtenderCola {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 12px;
+    -fx-text-fill: #E30613;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E30613;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+#btnAtenderCola:hover {
+    -fx-background-color: #FEEAEA;
+}
+
+/* ScrollPane transparente */
+#scrollListaPedidos {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+#scrollListaPedidos > .viewport {
+    -fx-background-color: transparent;
+}
+
+/* ================================================
+   ESTILOS DE LA TARJETA DE PEDIDO (POR CÓDIGO)
+   ================================================ */
+.cardPedidoAdmin {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #DDDDDD;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.lblPedidoNumAdmin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #000000;
+}
+
+.lblPedidoInfoAdmin {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 11px;
+    -fx-text-fill: #555555;
+}
+
+.lblPedidoTotalAdmin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 15px;
+    -fx-text-fill: #E30613;
+}
+
+.btnVerDetalleAdmin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 11px;
+    -fx-text-fill: #E30613;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E30613;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-cursor: hand;
+}
+
+.btnActualizarEstadoAdmin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 11px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #E30613;
+    -fx-background-radius: 6px;
+    -fx-cursor: hand;
+}
+
+/* ================================================
+   PANTALLA: DETALLE PEDIDO ADMINISTRADOR
+   ================================================ */
+
+#lblTituloDetalleAdmin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 20px;
+    -fx-text-fill: #000000;
+}
+
+#lblPedidoTituloAdmin, #lblPedidoValorAdmin {
+    -fx-font-family: "Poppins SemiBold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #000000;
+}
+
+#lblFechaTituloAdmin, #lblSubtotalTituloAdmin, #lblEnvioTituloAdmin {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 12px;
+    -fx-text-fill: #555555;
+}
+
+#lblFechaValorAdmin, #lblSubtotalValorAdmin, #lblEnvioValorAdmin {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 12px;
+    -fx-text-fill: #333333;
+}
+
+#lblTotalTituloAdmin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 15px;
+    -fx-text-fill: #000000;
+}
+
+#lblTotalValorAdmin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #E30613;
+}
+
+#lblDatosClienteTitulo, #lblProductosTituloAdmin, #lblEntregaTituloAdmin {
+    -fx-font-family: "Poppins SemiBold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #000000;
+}
+
+/* Textos del cliente y entrega */
+#lblClienteNombreTitulo, #lblClienteEmailTitulo, #lblClienteTelTitulo,
+#lblDireccionTituloAdmin, #lblCiudadTituloAdmin, #lblReferenciaTituloAdmin, #lblMetodoTituloAdmin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 11px;
+    -fx-text-fill: #000000;
+}
+
+#lblClienteNombreValor, #lblClienteEmailValor, #lblClienteTelValor,
+#lblDireccionValorAdmin, #lblCiudadValorAdmin, #lblReferenciaValorAdmin, #lblMetodoValorAdmin {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 11px;
+    -fx-text-fill: #555555;
+}
+
+#lblProducto1Admin {
+    -fx-font-family: "Poppins SemiBold";
+    -fx-font-size: 12px;
+    -fx-text-fill: #000000;
+}
+
+#lblPrecioProd1Admin {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 12px;
+    -fx-text-fill: #555555;
+}
+
+/* Botones inferiores */
+#btnActualizarEstado {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #E30613;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+#btnActualizarEstado:hover {
+    -fx-background-color: #B30510;
+}
+
+#btnRechazarPedido {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #E30613;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E30613;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+#btnRechazarPedido:hover {
+    -fx-background-color: #FEEAEA;
+}
+
+/* Recuadro gris que contiene los productos en el detalle admin */
+#cardDetalleProductos {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #CCCCCC;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px; /* Un poco de espacio interno */
+}
+
+/* ScrollPane transparente para que no salgan bordes dobles */
+#scrollProductosAdmin {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+#scrollProductosAdmin > .viewport {
+    -fx-background-color: transparent;
+}
+
+/* Estilos para los textos que inyectaremos por código */
+.lblProductoDetalle {
+    -fx-font-family: "Poppins SemiBold";
+    -fx-font-size: 12px;
+    -fx-text-fill: #000000;
+}
+
+.lblPrecioProductoDetalle {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 12px;
+    -fx-text-fill: #555555;
+}
+
+/* ================================================
+   PANTALLA: GESTIONAR USUARIOS (ADMIN)
+   ================================================ */
+
+#lblTituloGestionarUsuarios {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 20px;
+    -fx-text-fill: #000000;
+}
+
+#txtBuscarUsuario {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 13px;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #DDDDDD;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 0 15 0 15;
+    -fx-text-fill: #333333;
+}
+
+#btnBuscarUsuario {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 13px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #E30613;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+#btnBuscarUsuario:hover {
+    -fx-background-color: #B30510;
+}
+
+#scrollListaUsuarios {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+#scrollListaUsuarios > .viewport {
+    -fx-background-color: transparent;
+}
+
+/* Estilos para la tarjeta generada por código */
+.cardUsuarioAdmin {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #DDDDDD;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.lblNombreUsrAdmin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #000000;
+}
+
+.lblInfoUsrAdmin {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 11px;
+    -fx-text-fill: #555555;
+}
+
+.btnEliminarUsrAdmin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 11px;
+    -fx-text-fill: #E30613;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E30613;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-cursor: hand;
+}
+
+.btnEliminarUsrAdmin:hover {
+    -fx-background-color: #FEEAEA;
+}

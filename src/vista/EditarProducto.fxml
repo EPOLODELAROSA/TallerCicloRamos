@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="844.0" prefWidth="390.0" stylesheets="@../estilos/estilos.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="controlador.EditarProductoController">
+   <children>
+      <ImageView fx:id="imgFlechaAtrasEdit" fitHeight="69.0" fitWidth="69.0" layoutX="4.0" layoutY="30.0" onMouseClicked="#onFlechaAtras" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/chevron-left.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lblTituloEditarProd" layoutX="108.0" layoutY="51.0" text="Editar producto" />
+      <ImageView fx:id="imgPreviewEditarProd" fitHeight="94.0" fitWidth="128.0" layoutX="131.0" layoutY="99.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="btnCambiarImagenEdit" layoutX="68.0" layoutY="201.0" mnemonicParsing="false" onAction="#onCambiarImagen" prefHeight="37.0" prefWidth="250.0" text="CAMBIAR IMAGEN" />
+      <Label fx:id="lblInfoEditarTitulo" layoutX="39.0" layoutY="246.0" text="Información del producto" />
+      <Label fx:id="lblNombreEditTitulo" layoutX="39.0" layoutY="267.0" text="Nombre del producto" />
+      <TextField fx:id="txtNombreEdit" layoutX="38.0" layoutY="298.0" prefHeight="37.0" prefWidth="322.0" />
+      <TextField fx:id="txtPrecioEdit" layoutX="38.0" layoutY="359.0" prefHeight="37.0" prefWidth="322.0" />
+      <TextField fx:id="txtStockEdit" layoutX="38.0" layoutY="426.0" prefHeight="37.0" prefWidth="322.0" />
+      <TextArea fx:id="txtDescEdit" layoutX="38.0" layoutY="570.0" prefHeight="129.0" prefWidth="322.0" wrapText="true" />
+      <Label fx:id="lblPrecioEditTitulo" layoutX="43.0" layoutY="337.0" text="Precio" />
+      <Label fx:id="lblStockEditTitulo" layoutX="43.0" layoutY="401.0" text="Stock" />
+      <Label fx:id="lblCatEditTitulo" layoutX="41.0" layoutY="468.0" text="Categoría" />
+      <ComboBox fx:id="cmbCatEdit" layoutX="37.0" layoutY="488.0" prefHeight="37.0" prefWidth="322.0" />
+      <Label fx:id="lblDescEditTitulo" layoutX="41.0" layoutY="546.0" text="Descripción" />
+      <Button fx:id="btnCancelarEditProd" layoutX="36.0" layoutY="752.0" mnemonicParsing="false" onAction="#onCancelar" prefHeight="53.0" prefWidth="131.0" text="CANCELAR" />
+      <Button fx:id="btnGuardarEditProd" layoutX="177.0" layoutY="752.0" mnemonicParsing="false" onAction="#onGuardarCambios" prefHeight="53.0" prefWidth="183.0" text="GUARDAR CAMBIOS" />
+   </children>
+</AnchorPane>

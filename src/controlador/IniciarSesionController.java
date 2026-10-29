@@ -94,11 +94,14 @@ public class IniciarSesionController implements Initializable {
     
     @FXML
     private void onIniciarSesion(ActionEvent event) {
-        String correo = txtCorreo.getText();
-        String contrasena = txtContrasena.getText();
+        String usuario = txtCorreo.getText();
+        String pass = txtContrasena.getText();
 
-        util.Navegador.cambiar("Inicio", btnIniciarSesion);
-
+        if (usuario.equals("admin") && pass.equals("admin")) {
+            util.Navegador.cambiar("PanelAdministrador", btnIniciarSesion);
+        } else {
+            util.Navegador.cambiar("Inicio", btnIniciarSesion);
+        }
     }
     
     @FXML
