@@ -4,16 +4,19 @@
  * and open the template in the editor.
  */
 package controlador;
+
+import datos.UsuarioDAO;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
+import modelo.Usuario;
 
 /**
  * FXML Controller class
@@ -43,7 +46,7 @@ public class IniciarSesionController implements Initializable {
     @FXML
     private Button btnCrearCuenta;
     
-     private boolean contrasenaVisible = false;
+    private boolean contrasenaVisible = false;
 
     /**
      * Initializes the controller class.
@@ -52,14 +55,10 @@ public class IniciarSesionController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         txtContrasena.textProperty().addListener((obs, viejo, nuevo) -> {
-            if (!contrasenaVisible) {
-                txtContrasenaVisible.setText(nuevo);
-            }
+            if (!contrasenaVisible) txtContrasenaVisible.setText(nuevo);
         });
         txtContrasenaVisible.textProperty().addListener((obs, viejo, nuevo) -> {
-            if (contrasenaVisible) {
-                txtContrasena.setText(nuevo);
-            }
+            if (contrasenaVisible) txtContrasena.setText(nuevo);
         });
     } 
     
@@ -73,7 +72,6 @@ public class IniciarSesionController implements Initializable {
         contrasenaVisible = !contrasenaVisible;
 
         if (contrasenaVisible) {
-            // Copiamos el texto al TextField visible y lo mostramos.
             txtContrasenaVisible.setText(txtContrasena.getText());
             txtContrasenaVisible.setVisible(true);
             txtContrasenaVisible.setManaged(true);
@@ -81,7 +79,6 @@ public class IniciarSesionController implements Initializable {
             txtContrasena.setManaged(false);
             btnMostrar.setText("OCULTAR");
         } else {
-            // Copiamos el texto al PasswordField y lo mostramos.
             txtContrasena.setText(txtContrasenaVisible.getText());
             txtContrasena.setVisible(true);
             txtContrasena.setManaged(true);
@@ -89,19 +86,39 @@ public class IniciarSesionController implements Initializable {
             txtContrasenaVisible.setManaged(false);
             btnMostrar.setText("MOSTRAR");
         }
-
     }
     
     @FXML
     private void onIniciarSesion(ActionEvent event) {
         String usuario = txtCorreo.getText();
-        String pass = txtContrasena.getText();
+        // Si la contraseña está visible, la tomamos del campo visible
+        String pass = contrasenaVisible ? txtContrasenaVisible.getText() : txtContrasena.getText();
+
+        if (usuario.isEmpty() || pass.isEmpty()) {
+            mostrarAlerta("Campos vacíos", "Por favor, ingrese sus credenciales.", Alert.AlertType.WARNING);
+            return;
+        }
 
         if (usuario.equals("admin") && pass.equals("admin")) {
             util.Navegador.cambiar("PanelAdministrador", btnIniciarSesion);
-        } else {
-            util.Navegador.cambiar("Inicio", btnIniciarSesion);
+            return;
         }
+
+        Usuario cliente = UsuarioDAO.buscarPorCorreo(usuario);
+
+        if (cliente != null && cliente.getContrasena().equals(pass)) {
+            util.Navegador.cambiar("Inicio", btnIniciarSesion);
+        } else {
+            mostrarAlerta("Error", "Correo o contraseña incorrectos.", Alert.AlertType.ERROR);
+        }
+    }
+
+    private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
+        Alert alerta = new Alert(tipo);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
     }
     
     @FXML

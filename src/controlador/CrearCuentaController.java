@@ -4,16 +4,19 @@
  * and open the template in the editor.
  */
 package controlador;
+import datos.UsuarioDAO;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import modelo.Usuario;
 
 
 /**
@@ -68,12 +71,33 @@ public class CrearCuentaController implements Initializable {
         String contrasena = txtContrasenaRegistro.getText();
         String confirmar = txtConfirmar.getText();
 
-        System.out.println("Clic en CREAR CUENTA");
-        System.out.println("Nombre: " + nombre);
-        System.out.println("Correo: " + correo);
-        System.out.println("Telefono: " + telefono);
-        System.out.println("Contrasena: " + contrasena);
-        System.out.println("Confirmar: " + confirmar);
+        if (nombre.isEmpty() || correo.isEmpty() || telefono.isEmpty() || contrasena.isEmpty() || confirmar.isEmpty()) {
+            mostrarAlerta("Campos vacíos", "Por favor, llene todos los campos.", Alert.AlertType.WARNING);
+            return;
+        }
+
+        if (!contrasena.equals(confirmar)) {
+            mostrarAlerta("Error", "Las contraseñas no coinciden.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        Usuario nuevoUsuario = new Usuario(nombre, correo, telefono, contrasena);
+        boolean guardadoExitoso = UsuarioDAO.guardar(nuevoUsuario);
+
+        if (guardadoExitoso) {
+            mostrarAlerta("Éxito", "Cuenta creada correctamente. Ahora puedes iniciar sesión.", Alert.AlertType.INFORMATION);
+            util.Navegador.cambiar("IniciarSesion", btnRegistrar);
+        } else {
+            mostrarAlerta("Error", "El correo electrónico ya está registrado.", Alert.AlertType.ERROR);
+        }
+    }
+    
+    private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
+        Alert alerta = new Alert(tipo);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
     }
 
     @FXML

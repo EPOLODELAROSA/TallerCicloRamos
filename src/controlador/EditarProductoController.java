@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import datos.ProductoDAO;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,6 +22,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
+import modelo.Producto;
 
 /**
  * FXML Controller class
@@ -29,63 +31,71 @@ import javafx.stage.FileChooser;
  */
 public class EditarProductoController implements Initializable {
 
-    // --- HEADER ---
     @FXML
     private ImageView imgFlechaAtrasEdit;
+    
     @FXML
     private Label lblTituloEditarProd;
 
-    // --- IMAGEN ---
     @FXML
     private ImageView imgPreviewEditarProd;
+    
     @FXML
     private Button btnCambiarImagenEdit;
 
-    // --- CAMPOS ---
     @FXML
     private TextField txtNombreEdit;
+    
     @FXML
     private TextField txtPrecioEdit;
+    
     @FXML
     private TextField txtStockEdit;
+    
     @FXML
     private ComboBox<String> cmbCatEdit;
+    
     @FXML
     private TextArea txtDescEdit;
 
-    // --- BOTONES ---
     @FXML
     private Button btnCancelarEditProd;
+    
     @FXML
     private Button btnGuardarEditProd;
 
-    // Variable para guardar la ruta de la nueva imagen (si se cambia)
+
     private String rutaImagenNueva = "";
+    private int idProductoActual;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        
         cmbCatEdit.getItems().addAll("Motos", "Bicicletas", "Repuestos", "Accesorios");
-        cargarDatosSimulados();
+        
+        idProductoActual = util.Sesion.getIdProductoEditar();
+        cargarDatosReales();
     }
 
-    private void cargarDatosSimulados() {
-        txtNombreEdit.setText("Kit de Arrastre NS 200");
-        txtPrecioEdit.setText("204800");
-        txtStockEdit.setText("15");
-        cmbCatEdit.setValue("Repuestos");
-        txtDescEdit.setText("Con la referencia B35-JL00-09, este kit de arrastre ofrece una solución integral y confiable para la transmisión final de tu Bajaj Pulsar NS 200. Fabricado bajo estándares de calidad BAJAJ.");
-        
-        // Intentamos cargar una imagen de ejemplo
-        try {
-            Image img = new Image("img/prod_kit.png"); // Asegúrate de tener esta imagen o cámbiala
-            imgPreviewEditarProd.setImage(img);
-        } catch (Exception e) {
-            System.out.println("Imagen de ejemplo no encontrada.");
+    private void cargarDatosReales() {
+        // Buscamos el producto por su ID
+        for (Producto p : ProductoDAO.listar()) {
+            if (p.getId() == idProductoActual) {
+                txtNombreEdit.setText(p.getNombre());
+                txtPrecioEdit.setText(String.valueOf(p.getPrecio()));
+                txtStockEdit.setText(String.valueOf(p.getStock()));
+                cmbCatEdit.setValue(p.getCategoria());
+                txtDescEdit.setText(p.getDescripcion());
+                
+                try {
+                    if (p.getImagen() != null && !p.getImagen().isEmpty()) {
+                        imgPreviewEditarProd.setImage(new Image(p.getImagen()));
+                    }
+                } catch (Exception e) {}
+                break;
+            }
         }
     }
 
@@ -98,47 +108,56 @@ public class EditarProductoController implements Initializable {
     private void onCambiarImagen(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Seleccionar Nueva Imagen");
-        fileChooser.getExtensionFilters().addAll(
-            new FileChooser.ExtensionFilter("Archivos de Imagen", "*.png", "*.jpg", "*.jpeg")
-        );
-
+        fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("Imágenes", "*.png", "*.jpg", "*.jpeg"));
         File archivo = fileChooser.showOpenDialog(btnCambiarImagenEdit.getScene().getWindow());
 
         if (archivo != null) {
             rutaImagenNueva = archivo.toURI().toString();
-            Image imagen = new Image(rutaImagenNueva);
-            imgPreviewEditarProd.setImage(imagen);
+            imgPreviewEditarProd.setImage(new Image(rutaImagenNueva));
         }
     }
 
     @FXML
     private void onGuardarCambios(ActionEvent event) {
         String nombre = txtNombreEdit.getText();
-        String precio = txtPrecioEdit.getText();
-        String stock = txtStockEdit.getText();
+        String precioStr = txtPrecioEdit.getText();
+        String stockStr = txtStockEdit.getText();
         String categoria = cmbCatEdit.getValue();
         String descripcion = txtDescEdit.getText();
 
-        // Validaciones
-        if (nombre.isEmpty() || precio.isEmpty() || stock.isEmpty() || categoria == null || descripcion.isEmpty()) {
+        if (nombre.isEmpty() || precioStr.isEmpty() || stockStr.isEmpty() || categoria == null || descripcion.isEmpty()) {
             mostrarAlerta("Campos vacíos", "Por favor, llene todos los campos.", Alert.AlertType.WARNING);
             return;
         }
 
-        System.out.println("--- ACTUALIZANDO PRODUCTO ---");
-        System.out.println("Nombre: " + nombre);
-        System.out.println("Precio: " + precio);
-        System.out.println("Stock: " + stock);
-        System.out.println("Categoría: " + categoria);
-        if (!rutaImagenNueva.isEmpty()) {
-            System.out.println("Nueva Imagen: " + rutaImagenNueva);
-        } else {
-            System.out.println("Imagen: (Se mantiene la anterior)");
+        try {
+            double precio = Double.parseDouble(precioStr);
+            int stock = Integer.parseInt(stockStr);
+            
+            // Si no cambió la imagen, mantenemos la que tenía
+            String imagenFinal = rutaImagenNueva;
+            if (imagenFinal.isEmpty()) {
+                for (Producto p : ProductoDAO.listar()) {
+                    if (p.getId() == idProductoActual) {
+                        imagenFinal = p.getImagen();
+                        break;
+                    }
+                }
+            }
+
+            Producto pActualizado = new Producto(nombre, imagenFinal, precio, stock, categoria, descripcion);
+            pActualizado.setId(idProductoActual);
+
+            // Eliminamos el viejo y guardamos el nuevo (simulando edición)
+            ProductoDAO.eliminar(idProductoActual);
+            ProductoDAO.guardarConId(pActualizado);
+
+            mostrarAlerta("Éxito", "Producto actualizado correctamente.", Alert.AlertType.INFORMATION);
+            util.Navegador.cambiar("GestionarProductos", btnGuardarEditProd);
+            
+        } catch (NumberFormatException e) {
+            mostrarAlerta("Error", "Precio y stock deben ser números.", Alert.AlertType.ERROR);
         }
-
-        mostrarAlerta("Éxito", "Producto actualizado (Simulación).", Alert.AlertType.INFORMATION);
-
-        util.Navegador.cambiar("GestionarProductos", btnGuardarEditProd);
     }
 
     @FXML

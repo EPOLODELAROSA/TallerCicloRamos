@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import datos.ProductoDAO;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,6 +22,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
+import modelo.Producto;
 
 /**
  * FXML Controller class
@@ -31,32 +33,37 @@ public class RegistrarProductoController implements Initializable {
     
     @FXML
     private ImageView imgFlechaAtrasReg;
+    
     @FXML
     private Label lblTituloRegistrarProd;
 
-    // --- IMAGEN ---
     @FXML
     private ImageView imgPreviewProducto;
+    
     @FXML
     private Label lblSinImagen;
+    
     @FXML
     private Button btnSeleccionarImagen;
 
-    // --- CAMPOS ---
     @FXML
     private TextField txtNombreProd;
+    
     @FXML
     private TextField txtPrecioProd;
+    
     @FXML
     private TextField txtStockProd;
+    
     @FXML
     private ComboBox<String> cmbCategoriaProd;
+    
     @FXML
     private TextArea txtDescripcionProd;
 
-    // --- BOTONES ---
     @FXML
-    private Button btnRegistrarProductoAdmin; // Anotado el nombre real
+    private Button btnRegistrarProductoAdmin; 
+
     @FXML
     private Button btnCancelarRegProd;
 
@@ -68,65 +75,58 @@ public class RegistrarProductoController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Llenamos el ComboBox con las 4 categorías
         cmbCategoriaProd.getItems().addAll("Motos", "Bicicletas", "Repuestos", "Accesorios");
     }
 
-    // ----- EVENTOS: HEADER -----
     @FXML
     private void onFlechaAtras(MouseEvent event) {
         util.Navegador.cambiar("PanelAdministrador", imgFlechaAtrasReg);
     }
 
-    // ----- EVENTOS: IMAGEN -----
     @FXML
     private void onSeleccionarImagen(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Seleccionar Imagen del Producto");
-        
-        // Filtro para que solo muestre imágenes
         fileChooser.getExtensionFilters().addAll(
             new FileChooser.ExtensionFilter("Archivos de Imagen", "*.png", "*.jpg", "*.jpeg")
         );
 
-        // Abrir la ventana para seleccionar el archivo
         File archivo = fileChooser.showOpenDialog(btnSeleccionarImagen.getScene().getWindow());
 
         if (archivo != null) {
-            rutaImagen = archivo.toURI().toString(); // Guardamos la ruta para usarla luego
-            Image imagen = new Image(rutaImagen);    // Creamos la imagen
-            imgPreviewProducto.setImage(imagen);     // Mostramos la imagen en el recuadro
-            lblSinImagen.setVisible(false);          // Ocultamos el texto "Sin imagen"
+            rutaImagen = archivo.toURI().toString();
+            Image imagen = new Image(rutaImagen);
+            imgPreviewProducto.setImage(imagen);
+            lblSinImagen.setVisible(false);
         }
     }
 
-    // ----- EVENTOS: BOTONES -----
     @FXML
     private void onRegistrarProducto(ActionEvent event) {
         String nombre = txtNombreProd.getText();
-        String precio = txtPrecioProd.getText();
-        String stock = txtStockProd.getText();
+        String precioStr = txtPrecioProd.getText();
+        String stockStr = txtStockProd.getText();
         String categoria = cmbCategoriaProd.getValue();
         String descripcion = txtDescripcionProd.getText();
 
-        // Validaciones básicas
-        if (nombre.isEmpty() || precio.isEmpty() || stock.isEmpty() || categoria == null || descripcion.isEmpty()) {
+        if (nombre.isEmpty() || precioStr.isEmpty() || stockStr.isEmpty() || categoria == null || descripcion.isEmpty()) {
             mostrarAlerta("Campos vacíos", "Por favor, llene todos los campos.", Alert.AlertType.WARNING);
             return;
         }
 
-        // Aquí irá la lógica para guardar en el archivo .txt
-        System.out.println("--- GUARDANDO PRODUCTO ---");
-        System.out.println("Nombre: " + nombre);
-        System.out.println("Precio: " + precio);
-        System.out.println("Stock: " + stock);
-        System.out.println("Categoría: " + categoria);
-        System.out.println("Ruta Imagen: " + rutaImagen);
-        
-        mostrarAlerta("Éxito", "Producto registrado (Simulación).", Alert.AlertType.INFORMATION);
-        
-        // Limpiar los campos después de guardar (opcional)
-        limpiarCampos();
+        try {
+            double precio = Double.parseDouble(precioStr);
+            int stock = Integer.parseInt(stockStr);
+
+            Producto nuevoProducto = new Producto(nombre, rutaImagen, precio, stock, categoria, descripcion);
+            ProductoDAO.guardar(nuevoProducto);
+
+            mostrarAlerta("Éxito", "Producto registrado correctamente.", Alert.AlertType.INFORMATION);
+            limpiarCampos();
+            
+        } catch (NumberFormatException e) {
+            mostrarAlerta("Error de formato", "El precio y el stock deben ser números válidos.", Alert.AlertType.ERROR);
+        }
     }
 
     @FXML
@@ -134,7 +134,6 @@ public class RegistrarProductoController implements Initializable {
         util.Navegador.cambiar("PanelAdministrador", btnCancelarRegProd);
     }
 
-    // ----- MÉTODOS AUXILIARES -----
     private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
         Alert alerta = new Alert(tipo);
         alerta.setTitle(titulo);

@@ -5,8 +5,11 @@
  */
 package controlador;
 
+import datos.ProductoDAO;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,6 +27,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import modelo.Producto;
 
 /**
  * FXML Controller class
@@ -32,69 +36,90 @@ import javafx.scene.layout.VBox;
  */
 public class GestionarProductosController implements Initializable {
 
-    // --- HEADER ---
     @FXML
     private ImageView imgFlechaAtrasGestProd;
+    
     @FXML
     private Label lblTituloGestionarProd;
 
-    // --- FILTROS ---
     @FXML
     private TextField txtBuscarGestProd;
+    
     @FXML
     private Button btnBuscarGestProd;
+    
     @FXML
     private ComboBox<String> cmbFiltroGestProd;
 
-    // --- LISTA ---
     @FXML
     private ScrollPane scrollListaProductos;
+    
     @FXML
     private VBox vboxContenedorProductos;
 
-    // --- BOTÓN INFERIOR ---
     @FXML
     private Button btnRegistrarProdDesdeGest;
-
+    
+    private ArrayList<Producto> listaOriginal;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // 1. Llenar el ComboBox de filtros
         cmbFiltroGestProd.getItems().addAll("Todos", "Motos", "Bicicletas", "Repuestos", "Accesorios");
-        cmbFiltroGestProd.getSelectionModel().selectFirst(); // Selecciona "Todos" por defecto
+        cmbFiltroGestProd.getSelectionModel().selectFirst();
+        
+        // Cargamos todos los productos del archivo
+        listaOriginal = ProductoDAO.listar();
+        mostrarProductosEnPantalla(listaOriginal);
 
-        // 2. Cargar los productos (Por ahora vacío, luego leerá del .txt)
-        cargarProductos();
+        // Listener para el filtro en tiempo real
+        cmbFiltroGestProd.valueProperty().addListener((obs, oldVal, newVal) -> {
+            aplicarFiltros();
+        });
+        
+        // Listener para el buscador en tiempo real
+        txtBuscarGestProd.textProperty().addListener((obs, oldVal, newVal) -> {
+            aplicarFiltros();
+        });
     }
 
-    // ----- MÉTODO PARA CARGAR PRODUCTOS -----
-    private void cargarProductos() {
-        // Limpiamos el contenedor
+    private void aplicarFiltros() {
+        String categoriaSeleccionada = cmbFiltroGestProd.getValue();
+        String textoBusqueda = txtBuscarGestProd.getText().toLowerCase();
+
+        ArrayList<Producto> listaFiltrada = new ArrayList<>();
+
+        for (Producto p : listaOriginal) {
+            boolean coincideCategoria = categoriaSeleccionada.equals("Todos") || p.getCategoria().equals(categoriaSeleccionada);
+            boolean coincideBusqueda = p.getNombre().toLowerCase().contains(textoBusqueda);
+
+            if (coincideCategoria && coincideBusqueda) {
+                listaFiltrada.add(p);
+            }
+        }
+        mostrarProductosEnPantalla(listaFiltrada);
+    }
+
+    private void mostrarProductosEnPantalla(ArrayList<Producto> lista) {
         vboxContenedorProductos.getChildren().clear();
 
-        /* 
-         * AQUÍ IRÁ LA LÓGICA REAL:
-         * Cuando tengamos el ProductoDAO, haremos un ArrayList<Producto> lista = dao.listar();
-         * y recorreremos la lista para crear una tarjeta por cada producto.
-         */
-        
-        // --- SIMULACIÓN DE TARJETA (Para que veas cómo se verá) ---
-        // Esta tarjeta de ejemplo se borrará cuando conectemos la persistencia real.
-        crearTarjetaProducto("Pastillas de Freno Pulsar 200 NS", "Repuestos", "$ 22.100", "18 unidades", "img/prod_pastillas.png");
-        
-        // Si no hay productos, podríamos mostrar un Label que diga "No hay productos"
-        if (vboxContenedorProductos.getChildren().isEmpty()) {
-            Label lblVacio = new Label("No hay productos registrados.");
+        if (lista.isEmpty()) {
+            Label lblVacio = new Label("No se encontraron productos.");
             lblVacio.setStyle("-fx-font-family: 'Poppins'; -fx-text-fill: #888888; -fx-font-size: 14px;");
             vboxContenedorProductos.getChildren().add(lblVacio);
+            return;
+        }
+
+        for (Producto p : lista) {
+            String precioFormateado = "$ " + String.format("%,.0f", p.getPrecio());
+            crearTarjetaProducto(p.getId(), p.getNombre(), p.getCategoria(), 
+                    precioFormateado, p.getStock() + " unidades", p.getImagen());
         }
     }
 
-    // ----- MÉTODO AUXILIAR: CREAR UNA TARJETA VISUAL -----
-    private void crearTarjetaProducto(String nombre, String categoria, String precio, String stock, String rutaImagen) {
-        // 1. Contenedor principal de la tarjeta (HBox)
+    private void crearTarjetaProducto(int id, String nombre, String categoria, String precio, String stock, String rutaImagen) {
         HBox tarjeta = new HBox();
         tarjeta.getStyleClass().add("cardProductoAdmin");
         tarjeta.setPadding(new Insets(10));
@@ -103,29 +128,22 @@ public class GestionarProductosController implements Initializable {
         tarjeta.setMaxWidth(330);
         tarjeta.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
 
-        // 2. Imagen del producto
         ImageView img = new ImageView();
         img.setFitHeight(60);
         img.setFitWidth(60);
         img.setPreserveRatio(true);
-        
         try {
-            // Intentamos cargar la imagen. Si falla, no pasa nada, se queda vacía.
             if (rutaImagen != null && !rutaImagen.isEmpty()) {
-                Image imagen = new Image(rutaImagen);
-                img.setImage(imagen);
+                img.setImage(new Image(rutaImagen));
             }
-        } catch (Exception e) {
-            System.out.println("No se pudo cargar la imagen: " + rutaImagen);
-        }
+        } catch (Exception e) {}
 
-        // 3. VBox para los textos (Nombre, Categoría, Precio, Stock)
         VBox infoBox = new VBox(3);
-        infoBox.setPrefWidth(150); // Ancho fijo para que los textos no empujen los botones
+        infoBox.setPrefWidth(150); 
 
         Label lblNombre = new Label(nombre);
         lblNombre.getStyleClass().add("lblNombreProdAdmin");
-        lblNombre.setWrapText(true); // Para que el nombre baje de línea si es muy largo
+        lblNombre.setWrapText(true); 
 
         Label lblCat = new Label(categoria);
         lblCat.getStyleClass().add("lblCategoriaProdAdmin");
@@ -133,78 +151,67 @@ public class GestionarProductosController implements Initializable {
         Label lblPrecio = new Label(precio);
         lblPrecio.getStyleClass().add("lblPrecioProdAdmin");
 
-        HBox hboxStock = new HBox(5); // 5 es el espacio entre las palabras
-        
+        HBox hboxStock = new HBox(5); 
         Label lblStockTitulo = new Label("Stock:");
-        lblStockTitulo.setStyle("-fx-font-family: 'Poppins'; -fx-font-size: 11px; -fx-text-fill: #2E7D32;"); // Verde
-        
+        lblStockTitulo.setStyle("-fx-font-family: 'Poppins'; -fx-font-size: 11px; -fx-text-fill: #2E7D32;"); 
         Label lblStockValor = new Label(stock);
-        lblStockValor.setStyle("-fx-font-family: 'Poppins'; -fx-font-size: 11px; -fx-text-fill: #888888;"); // Gris
-        
+        lblStockValor.setStyle("-fx-font-family: 'Poppins'; -fx-font-size: 11px; -fx-text-fill: #888888;"); 
         hboxStock.getChildren().addAll(lblStockTitulo, lblStockValor);
         
-        // Lo agregamos al infoBox en lugar del lblStock anterior
         infoBox.getChildren().addAll(lblNombre, lblCat, lblPrecio, hboxStock);
 
-        // 4. VBox para los botones (Eliminar, Editar)
         VBox botonesBox = new VBox(5);
-        // Alineamos los botones arriba y a la derecha
         botonesBox.setAlignment(javafx.geometry.Pos.TOP_RIGHT); 
         botonesBox.setPrefWidth(80);
 
         Button btnEliminar = new Button("ELIMINAR");
         btnEliminar.getStyleClass().add("btnEliminarProdAdmin");
-        btnEliminar.setPrefWidth(80); // Ancho fijo para que no se corte el texto
+        btnEliminar.setPrefWidth(80); 
         btnEliminar.setOnAction(e -> {
-            mostrarAlerta("Eliminar", "Eliminando producto: " + nombre, Alert.AlertType.CONFIRMATION);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Eliminar Producto");
+            alert.setHeaderText(null);
+            alert.setContentText("¿Seguro que deseas eliminar " + nombre + "?");
+            
+            java.util.Optional<javafx.scene.control.ButtonType> res = alert.showAndWait();
+            if (res.isPresent() && res.get() == javafx.scene.control.ButtonType.OK) {
+                ProductoDAO.eliminar(id);
+                // Recargamos la lista
+                listaOriginal = ProductoDAO.listar();
+                aplicarFiltros();
+            }
         });
 
         Button btnEditar = new Button("EDITAR");
         btnEditar.getStyleClass().add("btnEditarProdAdmin");
-        btnEditar.setPrefWidth(80); // Ancho fijo
+        btnEditar.setPrefWidth(80); 
         btnEditar.setOnAction(e -> {
+            // Guardamos el ID en una variable estática temporal para que EditarProducto sepa cuál cargar
+            util.Sesion.setIdProductoEditar(id);
             util.Navegador.cambiar("EditarProducto", btnEditar);
         });
 
         botonesBox.getChildren().addAll(btnEliminar, btnEditar);
 
-        // 5. Un espaciador (Region) para empujar los botones a la derecha del todo
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
-        // 6. Ensamblar la tarjeta
         tarjeta.getChildren().addAll(img, infoBox, spacer, botonesBox);
-
-        // 7. Agregar la tarjeta al VBox principal
         vboxContenedorProductos.getChildren().add(tarjeta);
     }
 
-    // ----- EVENTOS: HEADER -----
     @FXML
     private void onFlechaAtras(MouseEvent event) {
         util.Navegador.cambiar("PanelAdministrador", imgFlechaAtrasGestProd);
     }
 
-    // ----- EVENTOS: FILTROS Y BOTONES -----
     @FXML
     private void onBuscar(ActionEvent event) {
-        String busqueda = txtBuscarGestProd.getText();
-        String categoria = cmbFiltroGestProd.getValue();
-        System.out.println("Buscando: " + busqueda + " | Categoría: " + categoria);
-        // Aquí irá la lógica para filtrar la lista real
+        aplicarFiltros(); // Llamamos al método que filtra
     }
 
     @FXML
     private void onRegistrarProducto(ActionEvent event) {
         util.Navegador.cambiar("RegistrarProducto", btnRegistrarProdDesdeGest);
-    }
-
-    // ----- MÉTODOS AUXILIARES -----
-    private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
-        Alert alerta = new Alert(tipo);
-        alerta.setTitle(titulo);
-        alerta.setHeaderText(null);
-        alerta.setContentText(mensaje);
-        alerta.showAndWait();
     }
 }
