@@ -21,7 +21,7 @@ import javafx.scene.input.MouseEvent;
  * @author efren
  */
 public class CategoriasController implements Initializable {
-    
+
     @FXML
     private ImageView imgFlechaAtrasCat;
     @FXML
@@ -65,23 +65,13 @@ public class CategoriasController implements Initializable {
     @FXML
     private ImageView imgNavInicio;
     @FXML
-    private Label lblNavInicio;
-    @FXML
     private ImageView imgNavCategorias;
-    @FXML
-    private Label lblNavCategorias;
     @FXML
     private ImageView imgNavDeseos;
     @FXML
-    private Label lblNavDeseos;
-    @FXML
     private ImageView imgNavCarrito;
     @FXML
-    private Label lblNavCarrito;
-    @FXML
     private ImageView imgNavPerfil;
-    @FXML
-    private Label lblNavPerfil;
 
     /**
      * Initializes the controller class.
@@ -89,8 +79,8 @@ public class CategoriasController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }   
-    
+    }
+
     @FXML
     private void onFlechaAtras(MouseEvent event) {
         util.Navegador.cambiar("Inicio", imgFlechaAtrasCat);
@@ -98,36 +88,38 @@ public class CategoriasController implements Initializable {
 
     @FXML
     private void onCarritoHeader(MouseEvent event) {
-        System.out.println("Clic en carrito del header (Categorias)");
+        util.Navegador.cambiar("Carrito", imgCarritoCat);
     }
-
 
     @FXML
     private void onVerMotos(ActionEvent event) {
-        System.out.println("Ver productos: Motos");
+        util.Sesion.setFiltroCategoria("Motos");
+        util.Navegador.cambiar("Catalogo", btnVerMotos);
     }
 
     @FXML
     private void onVerBicicletas(ActionEvent event) {
-        System.out.println("Ver productos: Bicicletas");
+        util.Sesion.setFiltroCategoria("Bicicletas");
+        util.Navegador.cambiar("Catalogo", btnVerBicicletas);
     }
 
     @FXML
     private void onVerRepuestos(ActionEvent event) {
-        System.out.println("Ver productos: Repuestos");
+        util.Sesion.setFiltroCategoria("Repuestos");
+        util.Navegador.cambiar("Catalogo", btnVerRepuestos);
     }
 
     @FXML
     private void onVerAccesorios(ActionEvent event) {
-        System.out.println("Ver productos: Accesorios");
+        util.Sesion.setFiltroCategoria("Accesorios");
+        util.Navegador.cambiar("Catalogo", btnVerAccesorios);
     }
-
 
     @FXML
     private void onVerTodos(ActionEvent event) {
-        System.out.println("Clic en VER TODOS LOS PRODUCTOS");
+        util.Sesion.setFiltroCategoria("Todos");
+        util.Navegador.cambiar("Catalogo", btnVerTodos);
     }
-
 
     @FXML
     private void onNavInicio(MouseEvent event) {
@@ -136,22 +128,21 @@ public class CategoriasController implements Initializable {
 
     @FXML
     private void onNavCategorias(MouseEvent event) {
-        System.out.println("Ya estamos en Categorias");
-    }
+        /* Ya estamos aquí */ }
 
     @FXML
     private void onNavDeseos(MouseEvent event) {
-        System.out.println("Nav: Deseos");
+        util.Navegador.cambiar("ListaDeseos", imgNavDeseos);
     }
 
     @FXML
     private void onNavCarrito(MouseEvent event) {
-        System.out.println("Nav: Carrito");
+        util.Navegador.cambiar("Carrito", imgNavCarrito);
     }
 
     @FXML
     private void onNavPerfil(MouseEvent event) {
-        System.out.println("Nav: Perfil");
+        util.Navegador.cambiar("Perfil", imgNavPerfil);
     }
-    
+
 }

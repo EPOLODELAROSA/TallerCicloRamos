@@ -2448,3 +2448,81 @@ and open the template in the editor.
 .btnEliminarUsrAdmin:hover {
     -fx-background-color: #FEEAEA;
 }
+
+/* ================================================
+   ESTILOS PARA TARJETAS DINÁMICAS DEL CATÁLOGO
+   ================================================ */
+
+.cardProdDinamica {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #DDDDDD;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.lblNombreProdDin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 13px;
+    -fx-text-fill: #000000;
+}
+
+.lblCategoriaProdDin {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 10px;
+    -fx-text-fill: #888888;
+}
+
+.lblPrecioProdDin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 16px;
+    -fx-text-fill: #E30613;
+}
+
+.lblStockTextoDin {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 10px;
+    -fx-text-fill: #2E7D32; /* Verde */
+}
+
+.lblStockValorDin {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 10px;
+    -fx-text-fill: #888888; /* Gris */
+}
+
+.btnDeseoDin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 10px;
+    -fx-text-fill: #000000;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #CCCCCC;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-padding: 0;
+}
+
+.btnCarritoDin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 10px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #E30613;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-padding: 0;
+}
+
+.btnVerDin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 10px;
+    -fx-text-fill: #E30613;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E30613;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-padding: 0;
+}

@@ -107,6 +107,7 @@ public class IniciarSesionController implements Initializable {
         Usuario cliente = UsuarioDAO.buscarPorCorreo(usuario);
 
         if (cliente != null && cliente.getContrasena().equals(pass)) {
+            util.Sesion.setUsuarioLogueado(cliente);
             util.Navegador.cambiar("Inicio", btnIniciarSesion);
         } else {
             mostrarAlerta("Error", "Correo o contraseña incorrectos.", Alert.AlertType.ERROR);

@@ -12,7 +12,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -23,8 +22,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import modelo.Producto;
 import util.CarritoManager;
 
@@ -37,40 +34,28 @@ public class CatalogoController implements Initializable {
 
     @FXML
     private ImageView imgFlechaAtrasCat2;
-   
     @FXML
     private Label lblTituloCatalogo;
-   
     @FXML
     private ImageView imgCarritoCat2;
-   
     @FXML
     private TextField txtBuscarCatalogo;
-  
-    @FXML
-    private Button btnBuscarCatalogo;
-  
+    
     @FXML
     private ComboBox<String> cmbFiltroCategoria;
-  
     @FXML
     private ScrollPane scrollCatalogo;
-  
     @FXML
     private AnchorPane anchorCatalogo;
-   
+
     @FXML
     private ImageView imgNavInicio;
-  
     @FXML
     private ImageView imgNavCategorias;
-   
     @FXML
     private ImageView imgNavDeseos;
-  
     @FXML
     private ImageView imgNavCarrito;
-  
     @FXML
     private ImageView imgNavPerfil;
 
@@ -83,27 +68,51 @@ public class CatalogoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         cmbFiltroCategoria.getItems().addAll("Todos", "Motos", "Bicicletas", "Repuestos", "Accesorios");
-        cmbFiltroCategoria.getSelectionModel().selectFirst();
 
-        // Cargar productos del archivo
+        // 1. Revisar si venimos de "Categorías" con un filtro guardado
+        String filtroGuardado = util.Sesion.getFiltroCategoria();
+        cmbFiltroCategoria.setValue(filtroGuardado);
+
+        // 2. Cargar los productos del archivo
         listaOriginal = ProductoDAO.listar();
-        mostrarProductos(listaOriginal);
 
-        // Listener para filtro en tiempo real
-        cmbFiltroCategoria.valueProperty().addListener((obs, oldVal, newVal) -> aplicarFiltros());
-        txtBuscarCatalogo.textProperty().addListener((obs, oldVal, newVal) -> aplicarFiltros());
+        // 3. Aplicar el filtro inicial (si lo hay)
+        aplicarFiltros();
+
+        // 4. Listener para que el ComboBox filtre al instante
+        cmbFiltroCategoria.valueProperty().addListener((obs, oldVal, newVal) -> {
+            aplicarFiltros();
+        });
+
+        // 5. Listener para el buscador
+        txtBuscarCatalogo.textProperty().addListener((obs, oldVal, newVal) -> {
+            aplicarFiltros();
+        });
+        
+        if (!util.Sesion.getTextoBusqueda().isEmpty()) {
+            txtBuscarCatalogo.setText(util.Sesion.getTextoBusqueda());
+            util.Sesion.limpiarBusqueda();
+        }
     }
 
     private void aplicarFiltros() {
         String cat = cmbFiltroCategoria.getValue();
-        String busq = txtBuscarCatalogo.getText().toLowerCase();
+        if (cat == null) {
+            cat = "Todos";
+        }
+
+        String busq = txtBuscarCatalogo.getText().toLowerCase().trim();
 
         ArrayList<Producto> filtrada = new ArrayList<>();
         for (Producto p : listaOriginal) {
+
             boolean coincideCat = cat.equals("Todos") || p.getCategoria().equals(cat);
             boolean coincideBusq = p.getNombre().toLowerCase().contains(busq);
-            if (coincideCat && coincideBusq) {
-                filtrada.add(p);
+
+            if (busq.isEmpty()) {
+                if (coincideCat) filtrada.add(p);
+            } else {
+                if (coincideBusq) filtrada.add(p);
             }
         }
         mostrarProductos(filtrada);
@@ -113,16 +122,23 @@ public class CatalogoController implements Initializable {
         anchorCatalogo.getChildren().clear();
         double y = 14.0;
 
+        if (lista.isEmpty()) {
+            Label lblVacio = new Label("No hay productos disponibles.");
+            lblVacio.setStyle("-fx-font-family: 'Poppins'; -fx-text-fill: #888888; -fx-font-size: 14px;");
+            lblVacio.setLayoutX(20);
+            lblVacio.setLayoutY(20);
+            anchorCatalogo.getChildren().add(lblVacio);
+            return;
+        }
+
         for (Producto p : lista) {
-            // Creamos una tarjeta visual para cada producto
             AnchorPane card = new AnchorPane();
             card.setLayoutX(15.0);
             card.setLayoutY(y);
             card.setPrefHeight(117.0);
             card.setPrefWidth(326.0);
-            card.getStyleClass().add("cardProd1");
+            card.getStyleClass().add("cardProdDinamica");
 
-            // Imagen
             ImageView img = new ImageView();
             img.setFitHeight(71.0);
             img.setFitWidth(95.0);
@@ -136,44 +152,39 @@ public class CatalogoController implements Initializable {
             } catch (Exception e) {
             }
 
-            // Nombre
             Label lblNom = new Label(p.getNombre());
             lblNom.setLayoutX(109.0);
             lblNom.setLayoutY(16.0);
-            lblNom.getStyleClass().add("lblNombreProd1");
+            lblNom.getStyleClass().add("lblNombreProdDin");
 
-            // Categoría
             Label lblCat = new Label(p.getCategoria());
             lblCat.setLayoutX(109.0);
             lblCat.setLayoutY(34.0);
-            lblCat.getStyleClass().add("lblCategoriaProd1");
+            lblCat.getStyleClass().add("lblCategoriaProdDin");
 
-            // Precio
             Label lblPre = new Label("$ " + String.format("%,.0f", p.getPrecio()));
             lblPre.setLayoutX(109.0);
             lblPre.setLayoutY(52.0);
-            lblPre.getStyleClass().add("lblPrecioProd1");
+            lblPre.getStyleClass().add("lblPrecioProdDin");
 
-            // Stock
             Label lblStockT = new Label("Stock:");
             lblStockT.setLayoutX(193.0);
             lblStockT.setLayoutY(58.0);
-            lblStockT.getStyleClass().add("lblStockTextoProd1");
+            lblStockT.getStyleClass().add("lblStockTextoDin");
 
             Label lblStockV = new Label(p.getStock() + " unidades");
             lblStockV.setLayoutX(230.0);
             lblStockV.setLayoutY(58.0);
-            lblStockV.getStyleClass().add("lblStockValorProd1");
+            lblStockV.getStyleClass().add("lblStockValorDin");
 
-            // Botones
             Button btnDeseo = new Button("Deseo");
             btnDeseo.setLayoutX(129.0);
             btnDeseo.setLayoutY(80.0);
             btnDeseo.setPrefHeight(28.0);
             btnDeseo.setPrefWidth(54.0);
-            btnDeseo.getStyleClass().add("btnDeseoProd1");
+            btnDeseo.getStyleClass().add("btnDeseoDin");
             btnDeseo.setOnAction(e -> {
-                mostrarAlerta("Favoritos", "Producto agregado a deseos (Simulación)", Alert.AlertType.INFORMATION);
+                mostrarAlerta("Favoritos", p.getNombre() + " agregado a deseos.", Alert.AlertType.INFORMATION);
             });
 
             Button btnCarrito = new Button("Carrito");
@@ -181,7 +192,7 @@ public class CatalogoController implements Initializable {
             btnCarrito.setLayoutY(79.0);
             btnCarrito.setPrefHeight(28.0);
             btnCarrito.setPrefWidth(54.0);
-            btnCarrito.getStyleClass().add("btnCarritoProd1");
+            btnCarrito.getStyleClass().add("btnCarritoDin");
             btnCarrito.setOnAction(e -> {
                 CarritoManager.agregarProducto(p);
                 mostrarAlerta("Éxito", "Producto agregado al carrito.", Alert.AlertType.INFORMATION);
@@ -192,32 +203,28 @@ public class CatalogoController implements Initializable {
             btnVer.setLayoutY(79.0);
             btnVer.setPrefHeight(28.0);
             btnVer.setPrefWidth(54.0);
-            btnVer.getStyleClass().add("btnVerProd1");
+            btnVer.getStyleClass().add("btnVerDin");
             btnVer.setOnAction(e -> {
-                // Guardamos el ID y navegamos al detalle (lo haremos luego)
-                mostrarAlerta("Detalle", "Ver producto: " + p.getNombre(), Alert.AlertType.INFORMATION);
+                // Guardamos el ID del producto y navegamos al detalle
+                util.Sesion.setIdProductoVer(p.getId());
+                util.Navegador.cambiar("DetalleProducto", btnVer);
             });
 
             card.getChildren().addAll(img, lblNom, lblCat, lblPre, lblStockT, lblStockV, btnDeseo, btnCarrito, btnVer);
             anchorCatalogo.getChildren().add(card);
 
-            y += 130.0; // Espaciado entre tarjetas
+            y += 130.0;
         }
     }
 
     @FXML
     private void onFlechaAtras(MouseEvent event) {
-        util.Navegador.cambiar("Inicio", imgFlechaAtrasCat2);
+        util.Navegador.cambiar("Categorias", imgFlechaAtrasCat2);
     }
 
     @FXML
     private void onCarritoHeader(MouseEvent event) {
         util.Navegador.cambiar("Carrito", imgCarritoCat2);
-    }
-
-    @FXML
-    private void onBuscar(ActionEvent event) {
-        aplicarFiltros();
     }
 
     @FXML
@@ -227,26 +234,31 @@ public class CatalogoController implements Initializable {
 
     @FXML
     private void onNavInicio(MouseEvent event) {
+        util.Sesion.setFiltroCategoria("Todos");
         util.Navegador.cambiar("Inicio", imgNavInicio);
     }
 
     @FXML
     private void onNavCategorias(MouseEvent event) {
+        util.Sesion.setFiltroCategoria("Todos");
         util.Navegador.cambiar("Categorias", imgNavCategorias);
     }
 
     @FXML
     private void onNavDeseos(MouseEvent event) {
+        util.Sesion.setFiltroCategoria("Todos");
         util.Navegador.cambiar("ListaDeseos", imgNavDeseos);
     }
 
     @FXML
     private void onNavCarrito(MouseEvent event) {
+        util.Sesion.setFiltroCategoria("Todos");
         util.Navegador.cambiar("Carrito", imgNavCarrito);
     }
 
     @FXML
     private void onNavPerfil(MouseEvent event) {
+        util.Sesion.setFiltroCategoria("Todos");
         util.Navegador.cambiar("Perfil", imgNavPerfil);
     }
 
