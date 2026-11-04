@@ -138,8 +138,8 @@ public class PerfilController implements Initializable {
    
     @FXML
     private void onCerrarSesion(ActionEvent event) {
-        // En el futuro, aquí limpiaremos la sesión del usuario (Sesion.cerrar()).
-        // Por ahora, volvemos al inicio de sesión.
+        util.CarritoManager.vaciar(); 
+        util.Sesion.cerrarSesion(); 
         util.Navegador.cambiar("IniciarSesion", btnCerrarSesion);
     }
 

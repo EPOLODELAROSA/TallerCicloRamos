@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import datos.CompraDAO;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import modelo.Compra;
 
 /**
  * FXML Controller class
@@ -20,14 +22,13 @@ import javafx.scene.image.ImageView;
  * @author efren
  */
 public class CompraRealizadaController implements Initializable {
-    
-     @FXML
+
+    @FXML
     private ImageView imgCheck;
     @FXML
     private Label lblTituloCompra;
     @FXML
     private Label lblSubtituloCompra;
-
     @FXML
     private Label lblNumPedidoTitulo;
     @FXML
@@ -48,7 +49,6 @@ public class CompraRealizadaController implements Initializable {
     private Label lblTotalTituloCompra;
     @FXML
     private Label lblTotalValorCompra;
-
     @FXML
     private Button btnSeguirComprando;
     @FXML
@@ -59,19 +59,33 @@ public class CompraRealizadaController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
+        // 1. Obtenemos el ID de la compra que guardamos en la Sesión
+        int idCompra = util.Sesion.getIdCompraRealizada();
+
+        // 2. Buscamos la compra en el archivo .txt
+        for (Compra c : CompraDAO.listarCompras()) {
+            if (c.getId() == idCompra) {
+                // 3. Llenamos los Labels con los datos reales
+                lblNumPedidoValor.setText(String.format("#%05d", c.getId())); // Formato #00001
+                lblFechaValor.setText(c.getFecha());
+                lblMetodoValor.setText(c.getMetodoPago());
+                lblEstadoValor.setText(c.getEstado());
+                lblTotalValorCompra.setText("$ " + String.format("%,.0f", c.getTotal()));
+                break;
+            }
+        }
+    }
+
     @FXML
     private void onSeguirComprando(ActionEvent event) {
+        // Limpiamos el filtro y volvemos al catálogo
+        util.Sesion.setFiltroCategoria("Todos");
         util.Navegador.cambiar("Catalogo", btnSeguirComprando);
     }
 
     @FXML
     private void onVerMisCompras(ActionEvent event) {
-        System.out.println("Ver mis compras");
-        // Cuando exista MisCompras.fxml, aqui navegamos.
-        // util.Navegador.cambiar("MisCompras", btnVerMisCompras);
+        util.Navegador.cambiar("MisCompras", btnVerMisCompras);
     }
-    
+
 }
