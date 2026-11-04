@@ -9,7 +9,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="844.0" prefWidth="390.0" stylesheets="@../estilos/estilos.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.DetalleProductoController">
    <children>
-      <ImageView fitHeight="69.0" fitWidth="69.0" layoutX="4.0" layoutY="30.0" onMouseClicked="#onFlechaAtras" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgFlechaAtrasDet" fitHeight="69.0" fitWidth="69.0" layoutX="4.0" layoutY="30.0" onMouseClicked="#onFlechaAtras" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/chevron-left.png" />
          </image>
@@ -35,7 +35,7 @@
       <Label fx:id="lblStockTextoDet" layoutX="42.0" layoutY="460.0" text="Stock:" />
       <Label fx:id="lblStockValorDet" layoutX="85.0" layoutY="460.0" text="50 unidades" />
       <Label fx:id="lblDescripcionTitulo" layoutX="38.0" layoutY="487.0" text="Descripción" />
-      <Label fx:id="lblDescripcionDet" layoutX="40.0" layoutY="510.0" text="Con la referencia B36-JL00-09..." />
+      <Label fx:id="lblDescripcionDet" layoutX="40.0" layoutY="510.0" maxHeight="320.0" maxWidth="300.0" text="Con la referencia B36-JL00-09..." wrapText="true" />
       <Label fx:id="lblCantidadTitulo" layoutX="40.0" layoutY="599.0" text="Cantidad" />
       <Button fx:id="btnMenosCant" layoutX="122.0" layoutY="592.0" mnemonicParsing="false" onAction="#onMenosCant" prefHeight="37.0" prefWidth="35.0" text="-" />
       <Button fx:id="btnMasCant" layoutX="200.0" layoutY="592.0" mnemonicParsing="false" onAction="#onMasCant" prefHeight="37.0" prefWidth="35.0" text="+" />

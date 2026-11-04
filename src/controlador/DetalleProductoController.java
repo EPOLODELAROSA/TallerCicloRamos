@@ -5,15 +5,21 @@
  */
 package controlador;
 
+import datos.ProductoDAO;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import modelo.Producto;
+import util.CarritoManager;
 
 /**
  * FXML Controller class
@@ -21,14 +27,13 @@ import javafx.scene.input.MouseEvent;
  * @author efren
  */
 public class DetalleProductoController implements Initializable {
-    
+
     @FXML
     private ImageView imgFlechaAtrasDet;
     @FXML
     private Label lblTituloDetalle;
     @FXML
     private ImageView imgCarritoDet;
-
     @FXML
     private ImageView imgProductoDet;
     @FXML
@@ -53,37 +58,23 @@ public class DetalleProductoController implements Initializable {
     private Label lblCantidadValor;
     @FXML
     private Button btnMasCant;
-
     @FXML
     private Button btnAgregarDeseos;
     @FXML
     private Button btnAgregarCarrito;
-
     @FXML
     private ImageView imgNavInicio;
     @FXML
-    private Label lblNavInicio;
-    @FXML
     private ImageView imgNavCategorias;
-    @FXML
-    private Label lblNavCategorias;
     @FXML
     private ImageView imgNavDeseos;
     @FXML
-    private Label lblNavDeseos;
-    @FXML
     private ImageView imgNavCarrito;
     @FXML
-    private Label lblNavCarrito;
-    @FXML
     private ImageView imgNavPerfil;
-    @FXML
-    private Label lblNavPerfil;
-    
-    
+
     private int cantidad = 1;
-    
-    
+    private Producto productoActual;
 
     /**
      * Initializes the controller class.
@@ -91,9 +82,40 @@ public class DetalleProductoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-         lblCantidadValor.setText(String.valueOf(cantidad));
-    }    
-    
+        lblCantidadValor.setText(String.valueOf(cantidad));
+
+        // 1. Obtenemos el ID que guardamos en la Sesión desde el Catálogo
+        int idProducto = util.Sesion.getIdProductoVer();
+
+        // 2. Buscamos el producto en el archivo .txt
+        for (Producto p : ProductoDAO.listar()) {
+            if (p.getId() == idProducto) {
+                productoActual = p;
+                break;
+            }
+        }
+
+        // 3. Si lo encontramos, llenamos la pantalla
+        if (productoActual != null) {
+            lblNombreDet.setText(productoActual.getNombre());
+            lblCategoriaDet.setText(productoActual.getCategoria());
+            lblPrecioDet.setText("$ " + String.format("%,.0f", productoActual.getPrecio()));
+            lblStockValorDet.setText(productoActual.getStock() + " unidades");
+            lblDescripcionDet.setText(productoActual.getDescripcion());
+            lblDescripcionDet.setWrapText(true); // Para que el texto largo baje de línea
+
+            try {
+                if (productoActual.getImagen() != null && !productoActual.getImagen().isEmpty()) {
+                    imgProductoDet.setImage(new Image(productoActual.getImagen()));
+                }
+            } catch (Exception e) {
+                System.out.println("No se pudo cargar la imagen.");
+            }
+        } else {
+            mostrarAlerta("Error", "Producto no encontrado.", Alert.AlertType.ERROR);
+        }
+    }
+
     @FXML
     private void onFlechaAtras(MouseEvent event) {
         util.Navegador.cambiar("Catalogo", imgFlechaAtrasDet);
@@ -101,12 +123,11 @@ public class DetalleProductoController implements Initializable {
 
     @FXML
     private void onCarritoHeader(MouseEvent event) {
-        System.out.println("Clic en carrito del header (Detalle Producto)");
+        util.Navegador.cambiar("Carrito", imgCarritoDet);
     }
 
     @FXML
     private void onMenosCant(ActionEvent event) {
-        // No permitimos bajar de 1.
         if (cantidad > 1) {
             cantidad--;
             lblCantidadValor.setText(String.valueOf(cantidad));
@@ -115,18 +136,28 @@ public class DetalleProductoController implements Initializable {
 
     @FXML
     private void onMasCant(ActionEvent event) {
-        cantidad++;
-        lblCantidadValor.setText(String.valueOf(cantidad));
+        if (productoActual != null && cantidad < productoActual.getStock()) {
+            cantidad++;
+            lblCantidadValor.setText(String.valueOf(cantidad));
+        } else {
+            mostrarAlerta("Stock límite", "No puedes agregar más unidades de las disponibles.", Alert.AlertType.WARNING);
+        }
     }
 
     @FXML
     private void onAgregarDeseos(ActionEvent event) {
-        System.out.println("Agregar a deseos (cantidad: " + cantidad + ")");
+        mostrarAlerta("Favoritos", productoActual.getNombre() + " agregado a tu lista de deseos (Simulación).", Alert.AlertType.INFORMATION);
     }
 
     @FXML
     private void onAgregarCarrito(ActionEvent event) {
-        System.out.println("Agregar al carrito (cantidad: " + cantidad + ")");
+        if (productoActual != null) {
+            // Agregamos el producto la cantidad de veces seleccionada
+            for (int i = 0; i < cantidad; i++) {
+                CarritoManager.agregarProducto(productoActual);
+            }
+            mostrarAlerta("Éxito", cantidad + " unidad(es) de " + productoActual.getNombre() + " agregada(s) al carrito.", Alert.AlertType.INFORMATION);
+        }
     }
 
     @FXML
@@ -141,17 +172,25 @@ public class DetalleProductoController implements Initializable {
 
     @FXML
     private void onNavDeseos(MouseEvent event) {
-        System.out.println("Nav: Deseos");
+        util.Navegador.cambiar("ListaDeseos", imgNavDeseos);
     }
 
     @FXML
     private void onNavCarrito(MouseEvent event) {
-        System.out.println("Nav: Carrito");
+        util.Navegador.cambiar("Carrito", imgNavCarrito);
     }
 
     @FXML
     private void onNavPerfil(MouseEvent event) {
-        System.out.println("Nav: Perfil");
+        util.Navegador.cambiar("Perfil", imgNavPerfil);
     }
-    
+
+    private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
+        Alert alerta = new Alert(tipo);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
+    }
+
 }
