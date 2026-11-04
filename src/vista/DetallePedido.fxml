@@ -27,12 +27,7 @@
          <children>
             <ScrollPane prefHeight="209.0" prefWidth="315.0">
               <content>
-                <AnchorPane fx:id="scrollProductosDet" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="297.0">
-                     <children>
-                        <Label fx:id="lblPrecioProd1Det" layoutX="45.0" layoutY="49.0" text="Precio: $204.000 Subtotal: $ 204.000" />
-                        <Label fx:id="lblProducto1Det" layoutX="18.0" layoutY="23.0" text="1 x Kit de Arrastre NS 200" />
-                     </children>
-                  </AnchorPane>
+                <AnchorPane fx:id="anchorProductos" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="297.0" />
               </content>
             </ScrollPane>
          </children>

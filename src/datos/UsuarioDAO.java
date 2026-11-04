@@ -48,7 +48,7 @@ public class UsuarioDAO {
         return lista;
     }
 
-    // Buscar un usuario por su correo (útil para el Login)
+ 
     public static Usuario buscarPorCorreo(String correo) {
         for (Usuario u : listar()) {
             if (u.getCorreo().equalsIgnoreCase(correo)) {
