@@ -12,7 +12,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,7 +19,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import modelo.ItemCarrito;
 import util.CarritoManager;
 
@@ -36,9 +34,6 @@ public class CarritoController implements Initializable {
 
     @FXML
     private Label lblTituloCarrito;
-
-    @FXML
-    private VBox vboxCarrito;
 
     @FXML
     private AnchorPane anchorCarrito;
@@ -95,12 +90,8 @@ public class CarritoController implements Initializable {
     }
 
     private void cargarCarrito() {
-        // Limpiamos el contenedor (asumiendo que usas un AnchorPane)
-        // Si usas un VBox, cambia 'anchorCarrito.getChildren()' por 'vboxCarrito.getChildren()'
         if (anchorCarrito != null) {
             anchorCarrito.getChildren().clear();
-        } else if (vboxCarrito != null) {
-            vboxCarrito.getChildren().clear();
         }
 
         double y = 10.0;
@@ -110,63 +101,61 @@ public class CarritoController implements Initializable {
             lblVacio.setStyle("-fx-font-family: 'Poppins'; -fx-font-size: 14px; -fx-text-fill: #888888;");
             if (anchorCarrito != null) {
                 anchorCarrito.getChildren().add(lblVacio);
-            } else {
-                vboxCarrito.getChildren().add(lblVacio);
             }
         } else {
             for (ItemCarrito item : CarritoManager.getItems()) {
-                // Creamos la tarjeta visual para cada producto
+                // 1. Tarjeta principal
                 AnchorPane card = new AnchorPane();
-                card.setPrefHeight(120.0);
-                card.setPrefWidth(346.0);
-                card.getStyleClass().add("cardCarrito1");
+                card.setPrefHeight(115.0);
+                card.setPrefWidth(335.0);
+                card.getStyleClass().add("cardCarritoDin");
                 card.setLayoutY(y);
-                card.setLayoutX(20);
+                card.setLayoutX(10);
 
-                // Imagen
+                // 2. Imagen
                 ImageView img = new ImageView();
-                img.setFitHeight(120.0);
-                img.setFitWidth(89.0);
-                img.setLayoutX(6.0);
-                img.setLayoutY(1.0);
+                img.setFitHeight(70.0);
+                img.setFitWidth(80.0);
+                img.setLayoutX(10.0);
+                img.setLayoutY(20.0);
                 img.setPreserveRatio(true);
                 try {
-                    if (item.getProducto().getImagen() != null) {
+                    if (item.getProducto().getImagen() != null && !item.getProducto().getImagen().isEmpty()) {
                         img.setImage(new Image(item.getProducto().getImagen()));
                     }
                 } catch (Exception e) {
                 }
 
-                // Nombre
+                // 3. Nombre
                 Label lblNom = new Label(item.getProducto().getNombre());
-                lblNom.setLayoutX(101.0);
-                lblNom.setLayoutY(5.0);
-                lblNom.getStyleClass().add("lblNombreCarrito1");
+                lblNom.setLayoutX(100.0);
+                lblNom.setLayoutY(10.0);
+                lblNom.getStyleClass().add("lblNombreProdDin");
 
-                // Precio
+                // 4. Precio
                 Label lblPre = new Label("$ " + formatearPrecio(item.getProducto().getPrecio()));
-                lblPre.setLayoutX(101.0);
-                lblPre.setLayoutY(24.0);
-                lblPre.getStyleClass().add("lblPrecioCarrito1");
+                lblPre.setLayoutX(100.0);
+                lblPre.setLayoutY(30.0);
+                lblPre.getStyleClass().add("lblPrecioProdDin");
 
-                // Subtotal
+                // 5. Subtotal
                 Label lblSubT = new Label("Subtotal:");
-                lblSubT.setLayoutX(101.0);
-                lblSubT.setLayoutY(48.0);
+                lblSubT.setLayoutX(100.0);
+                lblSubT.setLayoutY(55.0);
                 lblSubT.getStyleClass().add("lblSubtotalTextoCarrito1");
 
                 Label lblSubV = new Label("$ " + formatearPrecio(item.getSubtotal()));
-                lblSubV.setLayoutX(175.0);
-                lblSubV.setLayoutY(48.0);
+                lblSubV.setLayoutX(160.0);
+                lblSubV.setLayoutY(55.0);
                 lblSubV.getStyleClass().add("lblSubtotalValorCarrito1");
 
-                // Botones
+                // 6. Botón Menos (-)
                 Button btnMenos = new Button("-");
-                btnMenos.setLayoutX(95.0);
-                btnMenos.setLayoutY(76.0);
-                btnMenos.setPrefHeight(39.0);
-                btnMenos.setPrefWidth(39.0);
-                btnMenos.getStyleClass().add("btnMenosCarrito1");
+                btnMenos.setLayoutX(100.0);
+                btnMenos.setLayoutY(80.0);
+                btnMenos.setPrefHeight(28.0);
+                btnMenos.setPrefWidth(28.0);
+                btnMenos.getStyleClass().add("btnCantDin");
                 btnMenos.setOnAction(e -> {
                     if (item.getCantidad() > 1) {
                         item.setCantidad(item.getCantidad() - 1);
@@ -174,28 +163,31 @@ public class CarritoController implements Initializable {
                     }
                 });
 
+                // 7. Cantidad
                 Label lblCant = new Label(String.valueOf(item.getCantidad()));
-                lblCant.setLayoutX(143.0);
-                lblCant.setLayoutY(84.0);
+                lblCant.setLayoutX(140.0);
+                lblCant.setLayoutY(85.0);
                 lblCant.getStyleClass().add("lblCantidadCarrito1");
 
+                // 8. Botón Más (+)
                 Button btnMas = new Button("+");
-                btnMas.setLayoutX(175.0);
-                btnMas.setLayoutY(76.0);
-                btnMas.setPrefHeight(39.0);
-                btnMas.setPrefWidth(35.0);
-                btnMas.getStyleClass().add("btnMasCarrito1");
+                btnMas.setLayoutX(165.0);
+                btnMas.setLayoutY(80.0);
+                btnMas.setPrefHeight(28.0);
+                btnMas.setPrefWidth(28.0);
+                btnMas.getStyleClass().add("btnCantDin");
                 btnMas.setOnAction(e -> {
                     item.setCantidad(item.getCantidad() + 1);
                     cargarCarrito();
                 });
 
+                // 9. Botón Eliminar
                 Button btnElim = new Button("Eliminar");
-                btnElim.setLayoutX(267.0);
-                btnElim.setLayoutY(76.0);
-                btnElim.setPrefHeight(39.0);
-                btnElim.setPrefWidth(65.0);
-                btnElim.getStyleClass().add("btnEliminarCarrito1");
+                btnElim.setLayoutX(245.0);
+                btnElim.setLayoutY(80.0);
+                btnElim.setPrefHeight(28.0);
+                btnElim.setPrefWidth(75.0);
+                btnElim.getStyleClass().add("btnElimDin");
                 btnElim.setOnAction(e -> {
                     CarritoManager.eliminarItem(item.getProducto().getId());
                     cargarCarrito();
@@ -205,11 +197,9 @@ public class CarritoController implements Initializable {
 
                 if (anchorCarrito != null) {
                     anchorCarrito.getChildren().add(card);
-                } else {
-                    vboxCarrito.getChildren().add(card);
                 }
 
-                y += 130.0;
+                y += 125.0;
             }
         }
 
@@ -265,7 +255,7 @@ public class CarritoController implements Initializable {
 
     @FXML
     private void onNavCarrito(MouseEvent event) {
-    }
+        /* Ya estamos aquí */ }
 
     @FXML
     private void onNavPerfil(MouseEvent event) {

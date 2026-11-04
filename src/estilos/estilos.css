@@ -2526,3 +2526,57 @@ and open the template in the editor.
     -fx-cursor: hand;
     -fx-padding: 0;
 }
+
+.cardCarrito1 {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #DDDDDD;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+/* ================================================
+   ESTILOS DINÁMICOS PARA EL CARRITO
+   ================================================ */
+
+.cardCarritoDin {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #DDDDDD;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+/* Botones de + y - (Cantidad) */
+.btnCantDin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #000000;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #CCCCCC;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+    -fx-padding: 0;
+}
+
+.btnCantDin:hover {
+    -fx-background-color: #F0F0F0;
+}
+
+/* Botón Eliminar */
+.btnElimDin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 11px;
+    -fx-text-fill: #E30613;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E30613;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.btnElimDin:hover {
+    -fx-background-color: #FEEAEA;
+}

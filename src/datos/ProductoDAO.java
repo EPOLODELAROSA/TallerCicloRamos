@@ -62,5 +62,18 @@ public class ProductoDAO {
         ArchivoTexto.agregarLinea(ARCHIVO, producto.toArchivo());
     }
     
+        public static void actualizarStock(int idProducto, int nuevaCantidad) {
+        ArrayList<Producto> lista = listar();
+        ArrayList<String> lineas = new ArrayList<>();
+        
+        for (Producto p : lista) {
+            if (p.getId() == idProducto) {
+                p.setStock(p.getStock() - nuevaCantidad); // Restamos
+            }
+            lineas.add(p.toArchivo());
+        }
+        ArchivoTexto.escribir(ARCHIVO, lineas);
+    }
+    
     
 }

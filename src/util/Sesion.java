@@ -61,4 +61,14 @@ public class Sesion {
         textoBusqueda = "";
     }
 
+    private static int idCompraRealizada = 0;
+
+    public static int getIdCompraRealizada() {
+        return idCompraRealizada;
+    }
+
+    public static void setIdCompraRealizada(int id) {
+        idCompraRealizada = id;
+    }
+
 }
