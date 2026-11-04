@@ -71,4 +71,14 @@ public class Sesion {
         idCompraRealizada = id;
     }
 
+    private static int idPedidoDetalle = 0;
+
+    public static int getIdPedidoDetalle() {
+        return idPedidoDetalle;
+    }
+
+    public static void setIdPedidoDetalle(int id) {
+        idPedidoDetalle = id;
+    }
+
 }

@@ -2580,3 +2580,63 @@ and open the template in the editor.
 .btnElimDin:hover {
     -fx-background-color: #FEEAEA;
 }
+
+/* ================================================
+   ESTILOS DINÁMICOS PARA MIS COMPRAS
+   ================================================ */
+
+.cardPedidoDin {
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #DDDDDD;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+}
+
+.lblNumPedidoDin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 14px;
+    -fx-text-fill: #000000;
+}
+
+.lblInfoPedidoDin {
+    -fx-font-family: "Poppins";
+    -fx-font-size: 11px;
+    -fx-text-fill: #555555;
+}
+
+.lblTotalPedidoDin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 13px;
+    -fx-text-fill: #E30613;
+}
+
+/* Botones */
+.btnCancelarPedidoDin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 10px;
+    -fx-text-fill: #E30613;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E30613;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-cursor: hand;
+}
+
+.btnVerDetalleDin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 10px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #E30613;
+    -fx-background-radius: 6px;
+    -fx-cursor: hand;
+}
+
+/* Estados (reutilizamos los tuyos, pero por si acaso) */
+.estadoPendiente { -fx-background-color: #F5A623; -fx-text-fill: white; -fx-padding: 3 10 3 10; -fx-background-radius: 6px; -fx-font-family: "Poppins Bold"; -fx-font-size: 10px; }
+.estadoProceso { -fx-background-color: #1976D2; -fx-text-fill: white; -fx-padding: 3 10 3 10; -fx-background-radius: 6px; -fx-font-family: "Poppins Bold"; -fx-font-size: 10px; }
+.estadoEnviado { -fx-background-color: #8E44AD; -fx-text-fill: white; -fx-padding: 3 10 3 10; -fx-background-radius: 6px; -fx-font-family: "Poppins Bold"; -fx-font-size: 10px; }
+.estadoEntregado { -fx-background-color: #2E7D32; -fx-text-fill: white; -fx-padding: 3 10 3 10; -fx-background-radius: 6px; -fx-font-family: "Poppins Bold"; -fx-font-size: 10px; }
+.estadoCancelado { -fx-background-color: #757575; -fx-text-fill: white; -fx-padding: 3 10 3 10; -fx-background-radius: 6px; -fx-font-family: "Poppins Bold"; -fx-font-size: 10px; }
+.estadoRechazado { -fx-background-color: #C62828; -fx-text-fill: white; -fx-padding: 3 10 3 10; -fx-background-radius: 6px; -fx-font-family: "Poppins Bold"; -fx-font-size: 10px; }

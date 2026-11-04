@@ -28,7 +28,6 @@ public class PerfilController implements Initializable {
     private Label lblTituloPerfil;
     @FXML
     private ImageView imgCarritoPer;
-
     @FXML
     private ImageView imgAvatarPerfil;
     @FXML
@@ -37,7 +36,6 @@ public class PerfilController implements Initializable {
     private Label lblCorreoPerfil;
     @FXML
     private Button btnEditarPerfil;
-
     @FXML
     private Label lblMiCuenta;
     @FXML
@@ -46,7 +44,6 @@ public class PerfilController implements Initializable {
     private Button btnListaDeseos;
     @FXML
     private Button btnMiCarrito;
-
     @FXML
     private Label lblInfoPersonal;
     @FXML
@@ -55,10 +52,8 @@ public class PerfilController implements Initializable {
     private Button btnDireccionEntrega;
     @FXML
     private Button btnCambiarContrasena;
-
     @FXML
     private Button btnCerrarSesion;
-
     @FXML
     private ImageView imgNavInicio;
     @FXML
@@ -76,6 +71,26 @@ public class PerfilController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+        if (util.Sesion.getUsuarioLogueado() != null) {
+            String nombre = util.Sesion.getUsuarioLogueado().getNombre();
+            String correo = util.Sesion.getUsuarioLogueado().getCorreo();
+            
+            lblNombrePerfil.setText(nombre);
+            lblCorreoPerfil.setText(correo);
+            
+            // Ajuste dinámico: Si el nombre es muy largo, reducimos la fuente
+            if (nombre.length() > 20) {
+                lblNombrePerfil.setStyle("-fx-font-size: 18px; -fx-font-family: 'Poppins Bold';");
+            } else if (nombre.length() > 15) {
+                lblNombrePerfil.setStyle("-fx-font-size: 22px; -fx-font-family: 'Poppins Bold';");
+            }
+            // Si es corto, se queda con el tamaño que tiene por defecto en el CSS (26px)
+            
+        } else {
+            lblNombrePerfil.setText("Usuario Invitado");
+            lblCorreoPerfil.setText("Inicia sesión para ver tu perfil");
+        }
     }    
     
     @FXML
