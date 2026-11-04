@@ -9,13 +9,12 @@ import data.ArchivoTexto;
 import java.util.ArrayList;
 import modelo.Usuario;
 
-
 /**
  *
  * @author efren
  */
 public class UsuarioDAO {
-    
+
     private static final String ARCHIVO = "usuarios.txt";
 
     // Guardar un usuario nuevo
@@ -48,7 +47,6 @@ public class UsuarioDAO {
         return lista;
     }
 
- 
     public static Usuario buscarPorCorreo(String correo) {
         for (Usuario u : listar()) {
             if (u.getCorreo().equalsIgnoreCase(correo)) {
@@ -57,5 +55,33 @@ public class UsuarioDAO {
         }
         return null;
     }
-    
+
+    public static void actualizar(Usuario usuario) {
+        ArrayList<Usuario> lista = listar();
+        ArrayList<String> nuevasLineas = new ArrayList<>();
+
+        for (Usuario u : lista) {
+            if (u.getCorreo().equals(usuario.getCorreo())) {
+                nuevasLineas.add(usuario.toArchivo());
+            } else {
+                nuevasLineas.add(u.toArchivo());
+            }
+        }
+        ArchivoTexto.escribir(ARCHIVO, nuevasLineas);
+    }
+
+    // Actualizar solo la contraseña de un usuario
+    public static void actualizarContrasena(String correo, String nuevaContrasena) {
+        ArrayList<Usuario> lista = listar();
+        ArrayList<String> nuevasLineas = new ArrayList<>();
+
+        for (Usuario u : lista) {
+            if (u.getCorreo().equals(correo)) {
+                u.setContrasena(nuevaContrasena);
+            }
+            nuevasLineas.add(u.toArchivo());
+        }
+        ArchivoTexto.escribir(ARCHIVO, nuevasLineas);
+    }
+
 }

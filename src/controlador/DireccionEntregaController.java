@@ -5,16 +5,20 @@
  */
 package controlador;
 
+import datos.UsuarioDAO;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import modelo.Usuario;
 
 /**
  * FXML Controller class
@@ -23,35 +27,20 @@ import javafx.scene.input.MouseEvent;
  */
 public class DireccionEntregaController implements Initializable {
 
-    // --- HEADER ---
     @FXML
     private ImageView imgFlechaAtrasDir;
     @FXML
     private Label lblTituloDireccion;
     @FXML
-    private Label lblDatosEntregaDir;
-
-    // --- CAMPOS DE TEXTO ---
-    @FXML
-    private Label lblDireccionTituloDir;
-    @FXML
     private TextField txtDireccionDir;
-    @FXML
-    private Label lblCiudadTituloDir;
     @FXML
     private TextField txtCiudadDir;
     @FXML
-    private Label lblReferenciaTituloDir;
-    @FXML
     private TextField txtReferenciaDir;
-
-    // --- BOTONES ---
     @FXML
     private Button btnGuardarDireccion;
     @FXML
     private Button btnCancelarDir;
-
-    // --- NAV INFERIOR ---
     @FXML
     private ImageView imgNavInicio;
     @FXML
@@ -62,40 +51,50 @@ public class DireccionEntregaController implements Initializable {
     private ImageView imgNavCarrito;
     @FXML
     private ImageView imgNavPerfil;
+    @FXML 
+    private AnchorPane rootPane;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Aquí irá la lógica para cargar la dirección actual del usuario
-        // cuando tengamos la persistencia lista.
+        // TODO
+        Usuario u = util.Sesion.getUsuarioLogueado();
+        if (u != null) {
+            txtDireccionDir.setText(u.getDireccion());
+            txtCiudadDir.setText(u.getCiudad());
+            txtReferenciaDir.setText(u.getReferencia());
+        }
     }
 
-    // ----- EVENTOS: HEADER -----
     @FXML
     private void onFlechaAtras(MouseEvent event) {
         util.Navegador.cambiar("Perfil", imgFlechaAtrasDir);
     }
 
-    // ----- EVENTOS: BOTONES -----
     @FXML
     private void onGuardarDireccion(ActionEvent event) {
         String direccion = txtDireccionDir.getText();
         String ciudad = txtCiudadDir.getText();
         String referencia = txtReferenciaDir.getText();
 
-        // Imprimimos en consola para probar que captura los datos
-        System.out.println("--- GUARDANDO DIRECCIÓN ---");
-        System.out.println("Dirección: " + direccion);
-        System.out.println("Ciudad: " + ciudad);
-        System.out.println("Referencia: " + referencia);
-        
-        // Cuando tengamos el modelo y la persistencia, aquí actualizaremos
-        // los datos del usuario logueado y guardaremos en el archivo .txt.
-        
-        // Por ahora, volvemos al perfil para que el flujo no se rompa
-        util.Navegador.cambiar("Perfil", btnGuardarDireccion);
+        if (direccion.isEmpty() || ciudad.isEmpty()) {
+            mostrarAlerta("Campos vacíos", "Por favor, ingresa al menos la dirección y la ciudad.", Alert.AlertType.WARNING);
+            return;
+        }
+
+        // 1. Actualizamos el objeto en la Sesión
+        Usuario u = util.Sesion.getUsuarioLogueado();
+        u.setDireccion(direccion);
+        u.setCiudad(ciudad);
+        u.setReferencia(referencia);
+
+        // 2. Guardamos en el archivo .txt
+        UsuarioDAO.actualizar(u);
+
+        mostrarAlerta("Éxito", "Dirección guardada correctamente.", Alert.AlertType.INFORMATION);
+        util.Navegador.cambiar("Perfil", rootPane); 
     }
 
     @FXML
@@ -103,6 +102,14 @@ public class DireccionEntregaController implements Initializable {
         util.Navegador.cambiar("Perfil", btnCancelarDir);
     }
 
+    private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
+        Alert alerta = new Alert(tipo);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
+    }
+    
     @FXML
     private void onNavInicio(MouseEvent event) {
         util.Navegador.cambiar("Inicio", imgNavInicio);

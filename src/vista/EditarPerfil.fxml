@@ -49,7 +49,7 @@
       </ImageView>
       <Separator layoutX="12.0" layoutY="742.0" prefHeight="4.0" prefWidth="369.0" />
       <TextField fx:id="txtNombreEditar" layoutX="49.0" layoutY="194.0" prefHeight="42.0" prefWidth="299.0" />
-      <TextField fx:id="txtCorreoEditar" layoutX="49.0" layoutY="286.0" prefHeight="42.0" prefWidth="299.0" />
+      <TextField fx:id="txtCorreoEditar" editable="false" layoutX="49.0" layoutY="286.0" prefHeight="42.0" prefWidth="299.0" />
       <TextField fx:id="txtTelefonoEditar" layoutX="49.0" layoutY="373.0" prefHeight="42.0" prefWidth="299.0" />
    </children>
 </AnchorPane>

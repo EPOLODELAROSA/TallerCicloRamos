@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import datos.UsuarioDAO;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -16,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import modelo.Usuario;
 
 /**
  * FXML Controller class
@@ -24,27 +26,20 @@ import javafx.scene.input.MouseEvent;
  */
 public class CambiarContrasenaController implements Initializable {
 
-    // --- HEADER ---
     @FXML
     private ImageView imgFlechaAtrasPass;
     @FXML
     private Label lblTituloCambiarPass;
-
-    // --- CAMPOS ---
     @FXML
     private PasswordField txtPassActual;
     @FXML
     private PasswordField txtPassNueva;
     @FXML
     private PasswordField txtPassConfirmar;
-
-    // --- BOTONES ---
     @FXML
     private Button btnGuardarPass;
     @FXML
     private Button btnCancelarPass;
-
-    // --- NAV INFERIOR ---
     @FXML
     private ImageView imgNavInicio;
     @FXML
@@ -61,41 +56,51 @@ public class CambiarContrasenaController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Lógica futura para cargar datos si es necesario
+        // TODO
     }
 
-    // ----- EVENTOS: HEADER -----
     @FXML
     private void onFlechaAtras(MouseEvent event) {
         util.Navegador.cambiar("Perfil", imgFlechaAtrasPass);
     }
 
-    // ----- EVENTOS: BOTONES -----
     @FXML
     private void onGuardarPass(ActionEvent event) {
         String actual = txtPassActual.getText();
         String nueva = txtPassNueva.getText();
         String confirmar = txtPassConfirmar.getText();
 
-        // Validaciones
+        // 1. Validaciones básicas
         if (actual.isEmpty() || nueva.isEmpty() || confirmar.isEmpty()) {
             mostrarAlerta("Campos vacíos", "Por favor, llene todos los campos.", Alert.AlertType.WARNING);
             return;
         }
 
+        // 2. Validar que la nueva y la confirmación coincidan
         if (!nueva.equals(confirmar)) {
             mostrarAlerta("Error", "La nueva contraseña y la confirmación no coinciden.", Alert.AlertType.ERROR);
             return;
         }
 
-        // Aquí iría la lógica de persistencia (validar la actual y guardar la nueva)
-        System.out.println("--- CONTRASEÑA ACTUALIZADA (Simulación) ---");
-        System.out.println("Pass Actual: " + actual);
-        System.out.println("Pass Nueva: " + nueva);
+        // 3. Validar que la contraseña actual sea correcta
+        Usuario u = util.Sesion.getUsuarioLogueado();
+        if (u == null) {
+            mostrarAlerta("Error", "No hay sesión activa.", Alert.AlertType.ERROR);
+            return;
+        }
 
-        mostrarAlerta("Éxito", "Contraseña actualizada correctamente (Simulación).", Alert.AlertType.INFORMATION);
-        
-        // Volver al perfil
+        if (!u.getContrasena().equals(actual)) {
+            mostrarAlerta("Error", "La contraseña actual es incorrecta.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        // 4. Guardar la nueva contraseña en el archivo
+        UsuarioDAO.actualizarContrasena(u.getCorreo(), nueva);
+
+        // 5. Actualizar el objeto en la sesión para que el cambio se refleje
+        u.setContrasena(nueva);
+
+        mostrarAlerta("Éxito", "Contraseña actualizada correctamente.", Alert.AlertType.INFORMATION);
         util.Navegador.cambiar("Perfil", btnGuardarPass);
     }
 
@@ -104,7 +109,6 @@ public class CambiarContrasenaController implements Initializable {
         util.Navegador.cambiar("Perfil", btnCancelarPass);
     }
 
-    // ----- MÉTODO AUXILIAR PARA ALERTAS -----
     private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
         Alert alerta = new Alert(tipo);
         alerta.setTitle(titulo);
@@ -113,7 +117,6 @@ public class CambiarContrasenaController implements Initializable {
         alerta.showAndWait();
     }
 
-    // ----- EVENTOS: NAV INFERIOR -----
     @FXML
     private void onNavInicio(MouseEvent event) {
         util.Navegador.cambiar("Inicio", imgNavInicio);
