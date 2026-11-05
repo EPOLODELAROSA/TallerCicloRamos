@@ -128,7 +128,7 @@ public class CategoriasController implements Initializable {
 
     @FXML
     private void onNavCategorias(MouseEvent event) {
-        /* Ya estamos aquí */ }
+    }
 
     @FXML
     private void onNavDeseos(MouseEvent event) {

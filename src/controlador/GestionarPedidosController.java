@@ -87,7 +87,6 @@ public class GestionarPedidosController implements Initializable {
         cmbOrdenPed.getItems().addAll("Más recientes", "Más antiguos");
         cmbOrdenPed.getSelectionModel().selectFirst();
 
-        // Listener para el filtro
         cmbFiltroEstadoPed.valueProperty().addListener((obs, oldVal, newVal) -> aplicarFiltros());
 
         cargarPedidos();
@@ -232,7 +231,7 @@ public class GestionarPedidosController implements Initializable {
             String nuevoEstado = resultado.get();
             CompraDAO.actualizarEstado(idCompra, nuevoEstado);
             mostrarAlerta("Éxito", "Pedido actualizado a: " + nuevoEstado, Alert.AlertType.INFORMATION);
-            cargarPedidos(); // Recargar la lista para actualizar contadores
+            cargarPedidos();
         }
     }
 
@@ -255,7 +254,7 @@ public class GestionarPedidosController implements Initializable {
 
     @FXML
     private void onAtenderCola(ActionEvent event) {
-        // Buscamos el pedido pendiente más antiguo (el de menor ID)
+
         Compra pedidoMasAntiguo = null;
         for (Compra c : todasLasCompras) {
             if (c.getEstado().equals("Pendiente")) {

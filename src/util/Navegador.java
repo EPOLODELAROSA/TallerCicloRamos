@@ -18,13 +18,12 @@ import javafx.stage.Stage;
  * @author efren
  */
 public class Navegador {
-    
+
     public static void cambiar(String nombreFXML, Node origen) {
         try {
-            
+
             URL rutaFXML = Navegador.class.getResource("/vista/" + nombreFXML + ".fxml");
 
-           
             if (rutaFXML == null) {
                 System.err.println("No se encontró el FXML: /vista/" + nombreFXML + ".fxml");
                 return;
@@ -44,5 +43,5 @@ public class Navegador {
             e.printStackTrace();
         }
     }
-    
+
 }

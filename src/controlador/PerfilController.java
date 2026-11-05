@@ -21,7 +21,7 @@ import javafx.scene.input.MouseEvent;
  * @author efren
  */
 public class PerfilController implements Initializable {
-    
+
     @FXML
     private ImageView imgFlechaAtrasPer;
     @FXML
@@ -71,28 +71,26 @@ public class PerfilController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
+
         if (util.Sesion.getUsuarioLogueado() != null) {
             String nombre = util.Sesion.getUsuarioLogueado().getNombre();
             String correo = util.Sesion.getUsuarioLogueado().getCorreo();
-            
+
             lblNombrePerfil.setText(nombre);
             lblCorreoPerfil.setText(correo);
-            
-            // Ajuste dinámico: Si el nombre es muy largo, reducimos la fuente
+
             if (nombre.length() > 20) {
                 lblNombrePerfil.setStyle("-fx-font-size: 18px; -fx-font-family: 'Poppins Bold';");
             } else if (nombre.length() > 15) {
                 lblNombrePerfil.setStyle("-fx-font-size: 22px; -fx-font-family: 'Poppins Bold';");
             }
-            // Si es corto, se queda con el tamaño que tiene por defecto en el CSS (26px)
-            
+
         } else {
             lblNombrePerfil.setText("Usuario Invitado");
             lblCorreoPerfil.setText("Inicia sesión para ver tu perfil");
         }
-    }    
-    
+    }
+
     @FXML
     private void onFlechaAtras(MouseEvent event) {
         util.Navegador.cambiar("Inicio", imgFlechaAtrasPer);
@@ -103,22 +101,14 @@ public class PerfilController implements Initializable {
         util.Navegador.cambiar("Carrito", imgCarritoPer);
     }
 
-    // ----- EVENTOS: EDITAR PERFIL -----
-
     @FXML
     private void onEditarPerfil(ActionEvent event) {
         util.Navegador.cambiar("EditarPerfil", btnEditarPerfil);
-        // Cuando exista EditarPerfil.fxml:
-        // util.Navegador.cambiar("EditarPerfil", btnEditarPerfil);
     }
-
-    // ----- EVENTOS: MI CUENTA -----
 
     @FXML
     private void onMisCompras(ActionEvent event) {
         util.Navegador.cambiar("MisCompras", btnMisCompras);
-        // Cuando exista MisCompras.fxml:
-        // util.Navegador.cambiar("MisCompras", btnMisCompras);
     }
 
     @FXML
@@ -131,11 +121,9 @@ public class PerfilController implements Initializable {
         util.Navegador.cambiar("Carrito", btnMiCarrito);
     }
 
-    // ----- EVENTOS: INFO PERSONAL -----
-
     @FXML
     private void onMisDatos(ActionEvent event) {
-         util.Navegador.cambiar("EditarPerfil", btnMisDatos);
+        util.Navegador.cambiar("EditarPerfil", btnMisDatos);
     }
 
     @FXML
@@ -148,17 +136,12 @@ public class PerfilController implements Initializable {
         util.Navegador.cambiar("CambiarContrasena", btnCambiarContrasena);
     }
 
-    // ----- EVENTOS: CERRAR SESION -----
-
-   
     @FXML
     private void onCerrarSesion(ActionEvent event) {
-        util.CarritoManager.vaciar(); 
-        util.Sesion.cerrarSesion(); 
+        util.CarritoManager.vaciar();
+        util.Sesion.cerrarSesion();
         util.Navegador.cambiar("IniciarSesion", btnCerrarSesion);
     }
-
-    // ----- EVENTOS: NAV INFERIOR -----
 
     @FXML
     private void onNavInicio(MouseEvent event) {
@@ -182,7 +165,7 @@ public class PerfilController implements Initializable {
 
     @FXML
     private void onNavPerfil(MouseEvent event) {
-        System.out.println("Ya estamos en Perfil");
+
     }
-    
+
 }

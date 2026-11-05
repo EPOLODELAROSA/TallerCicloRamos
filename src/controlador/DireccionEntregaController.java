@@ -51,7 +51,7 @@ public class DireccionEntregaController implements Initializable {
     private ImageView imgNavCarrito;
     @FXML
     private ImageView imgNavPerfil;
-    @FXML 
+    @FXML
     private AnchorPane rootPane;
 
     /**
@@ -94,7 +94,7 @@ public class DireccionEntregaController implements Initializable {
         UsuarioDAO.actualizar(u);
 
         mostrarAlerta("Éxito", "Dirección guardada correctamente.", Alert.AlertType.INFORMATION);
-        util.Navegador.cambiar("Perfil", rootPane); 
+        util.Navegador.cambiar("Perfil", rootPane);
     }
 
     @FXML
@@ -109,7 +109,7 @@ public class DireccionEntregaController implements Initializable {
         alerta.setContentText(mensaje);
         alerta.showAndWait();
     }
-    
+
     @FXML
     private void onNavInicio(MouseEvent event) {
         util.Navegador.cambiar("Inicio", imgNavInicio);

@@ -24,7 +24,7 @@ import modelo.Usuario;
  * @author efren
  */
 public class IniciarSesionController implements Initializable {
-    
+
     @FXML
     private ImageView imgFlechaAtras;
 
@@ -33,7 +33,7 @@ public class IniciarSesionController implements Initializable {
 
     @FXML
     private PasswordField txtContrasena;
-    
+
     @FXML
     private TextField txtContrasenaVisible;
 
@@ -45,7 +45,7 @@ public class IniciarSesionController implements Initializable {
 
     @FXML
     private Button btnCrearCuenta;
-    
+
     private boolean contrasenaVisible = false;
 
     /**
@@ -55,18 +55,22 @@ public class IniciarSesionController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         txtContrasena.textProperty().addListener((obs, viejo, nuevo) -> {
-            if (!contrasenaVisible) txtContrasenaVisible.setText(nuevo);
+            if (!contrasenaVisible) {
+                txtContrasenaVisible.setText(nuevo);
+            }
         });
         txtContrasenaVisible.textProperty().addListener((obs, viejo, nuevo) -> {
-            if (contrasenaVisible) txtContrasena.setText(nuevo);
+            if (contrasenaVisible) {
+                txtContrasena.setText(nuevo);
+            }
         });
-    } 
-    
+    }
+
     @FXML
     private void onFlechaAtras(javafx.scene.input.MouseEvent event) {
         util.Navegador.cambiar("Bienvenida", imgFlechaAtras);
     }
-    
+
     @FXML
     private void onMostrar(ActionEvent event) {
         contrasenaVisible = !contrasenaVisible;
@@ -87,7 +91,7 @@ public class IniciarSesionController implements Initializable {
             btnMostrar.setText("MOSTRAR");
         }
     }
-    
+
     @FXML
     private void onIniciarSesion(ActionEvent event) {
         String usuario = txtCorreo.getText();
@@ -121,10 +125,10 @@ public class IniciarSesionController implements Initializable {
         alerta.setContentText(mensaje);
         alerta.showAndWait();
     }
-    
+
     @FXML
     private void onCrearCuenta(ActionEvent event) {
         util.Navegador.cambiar("CrearCuenta", btnCrearCuenta);
     }
-    
+
 }

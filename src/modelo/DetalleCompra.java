@@ -10,7 +10,7 @@ package modelo;
  * @author efren
  */
 public class DetalleCompra {
-    
+
     private int idCompra;
     private int idProducto;
     private int cantidad;
@@ -57,7 +57,6 @@ public class DetalleCompra {
         this.subtotal = subtotal;
     }
 
-    
     public DetalleCompra(int idCompra, int idProducto, int cantidad, double precioUnitario, double subtotal) {
         this.idCompra = idCompra;
         this.idProducto = idProducto;
@@ -69,6 +68,5 @@ public class DetalleCompra {
     public String toArchivo() {
         return idCompra + ";" + idProducto + ";" + cantidad + ";" + precioUnitario + ";" + subtotal;
     }
-    
-    
+
 }

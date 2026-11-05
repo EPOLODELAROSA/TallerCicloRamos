@@ -26,7 +26,7 @@
       <ComboBox fx:id="cmbFiltroCategoria" layoutX="28.0" layoutY="184.0" onAction="#onFiltroCategoria" prefHeight="45.0" prefWidth="337.0" promptText="Motos" />
       <ScrollPane fx:id="scrollCatalogo" layoutX="13.0" layoutY="241.0" prefHeight="487.0" prefWidth="364.0">
         <content>
-          <AnchorPane fx:id="anchorCatalogo" minHeight="0.0" minWidth="0.0" prefHeight="478.0" prefWidth="355.0" />
+          <AnchorPane fx:id="anchorCatalogo" minHeight="0.0" minWidth="0.0" prefHeight="900.0" prefWidth="355.0" />
         </content>
       </ScrollPane>
       <Separator layoutX="12.0" layoutY="742.0" prefHeight="4.0" prefWidth="369.0" />

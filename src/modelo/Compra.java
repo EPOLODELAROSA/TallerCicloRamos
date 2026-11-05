@@ -10,7 +10,7 @@ package modelo;
  * @author efren
  */
 public class Compra {
-    
+
     private int id;
     private String correoCliente;
     private String fecha;
@@ -93,11 +93,8 @@ public class Compra {
         this.total = total;
     }
 
-    
-    
-    
-    public Compra(String correoCliente, String fecha, String estado, String metodoPago, 
-                  String direccion, String ciudad, String referencia, double total) {
+    public Compra(String correoCliente, String fecha, String estado, String metodoPago,
+            String direccion, String ciudad, String referencia, double total) {
         this.correoCliente = correoCliente;
         this.fecha = fecha;
         this.estado = estado;
@@ -109,8 +106,8 @@ public class Compra {
     }
 
     public String toArchivo() {
-        return id + ";" + correoCliente + ";" + fecha + ";" + estado + ";" + metodoPago + ";" + 
-               direccion + ";" + ciudad + ";" + referencia + ";" + total;
+        return id + ";" + correoCliente + ";" + fecha + ";" + estado + ";" + metodoPago + ";"
+                + direccion + ";" + ciudad + ";" + referencia + ";" + total;
     }
-    
+
 }

@@ -13,13 +13,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 /**
  *
  * @author efren
  */
 public class ArchivoTexto {
-    
+
     private static final String RUTA_BASE = "data/";
 
     public static ArrayList<String> leer(String nombreArchivo) {
@@ -65,5 +64,5 @@ public class ArchivoTexto {
         lineas.add(linea);
         escribir(nombreArchivo, lineas);
     }
-    
+
 }

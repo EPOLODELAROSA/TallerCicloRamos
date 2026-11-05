@@ -207,7 +207,6 @@ public class CatalogoController implements Initializable {
             btnVer.setPrefWidth(54.0);
             btnVer.getStyleClass().add("btnVerDin");
             btnVer.setOnAction(e -> {
-                // Guardamos el ID del producto y navegamos al detalle
                 util.Sesion.setIdProductoVer(p.getId());
                 util.Navegador.cambiar("DetalleProducto", btnVer);
             });

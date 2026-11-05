@@ -38,30 +38,30 @@ public class GestionarProductosController implements Initializable {
 
     @FXML
     private ImageView imgFlechaAtrasGestProd;
-    
+
     @FXML
     private Label lblTituloGestionarProd;
 
     @FXML
     private TextField txtBuscarGestProd;
-    
+
     @FXML
     private Button btnBuscarGestProd;
-    
+
     @FXML
     private ComboBox<String> cmbFiltroGestProd;
 
     @FXML
     private ScrollPane scrollListaProductos;
-    
+
     @FXML
     private VBox vboxContenedorProductos;
 
     @FXML
     private Button btnRegistrarProdDesdeGest;
-    
+
     private ArrayList<Producto> listaOriginal;
-    
+
     /**
      * Initializes the controller class.
      */
@@ -69,7 +69,7 @@ public class GestionarProductosController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         cmbFiltroGestProd.getItems().addAll("Todos", "Motos", "Bicicletas", "Repuestos", "Accesorios");
         cmbFiltroGestProd.getSelectionModel().selectFirst();
-        
+
         // Cargamos todos los productos del archivo
         listaOriginal = ProductoDAO.listar();
         mostrarProductosEnPantalla(listaOriginal);
@@ -78,7 +78,7 @@ public class GestionarProductosController implements Initializable {
         cmbFiltroGestProd.valueProperty().addListener((obs, oldVal, newVal) -> {
             aplicarFiltros();
         });
-        
+
         // Listener para el buscador en tiempo real
         txtBuscarGestProd.textProperty().addListener((obs, oldVal, newVal) -> {
             aplicarFiltros();
@@ -114,7 +114,7 @@ public class GestionarProductosController implements Initializable {
 
         for (Producto p : lista) {
             String precioFormateado = "$ " + String.format("%,.0f", p.getPrecio());
-            crearTarjetaProducto(p.getId(), p.getNombre(), p.getCategoria(), 
+            crearTarjetaProducto(p.getId(), p.getNombre(), p.getCategoria(),
                     precioFormateado, p.getStock() + " unidades", p.getImagen());
         }
     }
@@ -136,14 +136,15 @@ public class GestionarProductosController implements Initializable {
             if (rutaImagen != null && !rutaImagen.isEmpty()) {
                 img.setImage(new Image(rutaImagen));
             }
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
 
         VBox infoBox = new VBox(3);
-        infoBox.setPrefWidth(150); 
+        infoBox.setPrefWidth(150);
 
         Label lblNombre = new Label(nombre);
         lblNombre.getStyleClass().add("lblNombreProdAdmin");
-        lblNombre.setWrapText(true); 
+        lblNombre.setWrapText(true);
 
         Label lblCat = new Label(categoria);
         lblCat.getStyleClass().add("lblCategoriaProdAdmin");
@@ -151,28 +152,28 @@ public class GestionarProductosController implements Initializable {
         Label lblPrecio = new Label(precio);
         lblPrecio.getStyleClass().add("lblPrecioProdAdmin");
 
-        HBox hboxStock = new HBox(5); 
+        HBox hboxStock = new HBox(5);
         Label lblStockTitulo = new Label("Stock:");
-        lblStockTitulo.setStyle("-fx-font-family: 'Poppins'; -fx-font-size: 11px; -fx-text-fill: #2E7D32;"); 
+        lblStockTitulo.setStyle("-fx-font-family: 'Poppins'; -fx-font-size: 11px; -fx-text-fill: #2E7D32;");
         Label lblStockValor = new Label(stock);
-        lblStockValor.setStyle("-fx-font-family: 'Poppins'; -fx-font-size: 11px; -fx-text-fill: #888888;"); 
+        lblStockValor.setStyle("-fx-font-family: 'Poppins'; -fx-font-size: 11px; -fx-text-fill: #888888;");
         hboxStock.getChildren().addAll(lblStockTitulo, lblStockValor);
-        
+
         infoBox.getChildren().addAll(lblNombre, lblCat, lblPrecio, hboxStock);
 
         VBox botonesBox = new VBox(5);
-        botonesBox.setAlignment(javafx.geometry.Pos.TOP_RIGHT); 
+        botonesBox.setAlignment(javafx.geometry.Pos.TOP_RIGHT);
         botonesBox.setPrefWidth(80);
 
         Button btnEliminar = new Button("ELIMINAR");
         btnEliminar.getStyleClass().add("btnEliminarProdAdmin");
-        btnEliminar.setPrefWidth(80); 
+        btnEliminar.setPrefWidth(80);
         btnEliminar.setOnAction(e -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Eliminar Producto");
             alert.setHeaderText(null);
             alert.setContentText("¿Seguro que deseas eliminar " + nombre + "?");
-            
+
             java.util.Optional<javafx.scene.control.ButtonType> res = alert.showAndWait();
             if (res.isPresent() && res.get() == javafx.scene.control.ButtonType.OK) {
                 ProductoDAO.eliminar(id);
@@ -184,9 +185,8 @@ public class GestionarProductosController implements Initializable {
 
         Button btnEditar = new Button("EDITAR");
         btnEditar.getStyleClass().add("btnEditarProdAdmin");
-        btnEditar.setPrefWidth(80); 
+        btnEditar.setPrefWidth(80);
         btnEditar.setOnAction(e -> {
-            // Guardamos el ID en una variable estática temporal para que EditarProducto sepa cuál cargar
             util.Sesion.setIdProductoEditar(id);
             util.Navegador.cambiar("EditarProducto", btnEditar);
         });

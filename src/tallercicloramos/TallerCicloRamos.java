@@ -16,23 +16,21 @@ import javafx.stage.Stage;
  * @author efren
  */
 public class TallerCicloRamos extends Application {
-    
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        
+
         Parent root = FXMLLoader.load(getClass().getResource("/vista/Bienvenida.fxml"));
 
         Scene scene = new Scene(root, 390, 844);
- 
+
         primaryStage.setTitle("Taller Ciclo Ramos");
         primaryStage.setScene(scene);
-        primaryStage.setResizable(false);  
-        primaryStage.centerOnScreen();     
+        primaryStage.setResizable(false);
+        primaryStage.centerOnScreen();
         primaryStage.show();
     }
 
-    
-    
     /**
      * @param args the command line arguments
      */
@@ -40,5 +38,4 @@ public class TallerCicloRamos extends Application {
         launch(args);
     }
 
-    
 }

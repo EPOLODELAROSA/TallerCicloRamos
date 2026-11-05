@@ -124,7 +124,7 @@ public class ListaDeseosController implements Initializable {
 
         // Stock
         Label lblStockT = new Label("Stock:");
-        lblStockT.setLayoutX(185.0); // Movido a la izquierda
+        lblStockT.setLayoutX(185.0); 
         lblStockT.setLayoutY(58.0);
         lblStockT.setStyle("-fx-font-family: 'Poppins'; -fx-font-size: 10px; -fx-text-fill: #2E7D32;");
 
@@ -191,7 +191,7 @@ public class ListaDeseosController implements Initializable {
 
     @FXML
     private void onNavDeseos(MouseEvent event) {
-        /* Ya estamos aquí */ }
+    }
 
     @FXML
     private void onNavCarrito(MouseEvent event) {

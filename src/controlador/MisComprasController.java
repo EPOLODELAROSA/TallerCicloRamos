@@ -83,12 +83,12 @@ public class MisComprasController implements Initializable {
         AnchorPane card = new AnchorPane();
         card.setPrefHeight(140.0);
         card.setPrefWidth(330.0);
-        card.getStyleClass().add("cardPedidoDin"); 
+        card.getStyleClass().add("cardPedidoDin");
 
         Label lblNum = new Label("Pedido: #" + String.format("%05d", c.getId()));
         lblNum.setLayoutX(15.0);
         lblNum.setLayoutY(10.0);
-        lblNum.getStyleClass().add("lblNumPedidoDin"); 
+        lblNum.getStyleClass().add("lblNumPedidoDin");
         card.getChildren().add(lblNum);
 
         Label lblEstado = new Label(c.getEstado());
@@ -120,13 +120,13 @@ public class MisComprasController implements Initializable {
         Label lblProds = new Label("Productos: " + detalles.size() + " ítems");
         lblProds.setLayoutX(15.0);
         lblProds.setLayoutY(60.0);
-        lblProds.getStyleClass().add("lblInfoPedidoDin"); 
+        lblProds.getStyleClass().add("lblInfoPedidoDin");
         card.getChildren().add(lblProds);
 
         Label lblTotal = new Label("Total: $ " + String.format("%,.0f", c.getTotal()));
         lblTotal.setLayoutX(15.0);
         lblTotal.setLayoutY(80.0);
-        lblTotal.getStyleClass().add("lblTotalPedidoDin"); 
+        lblTotal.getStyleClass().add("lblTotalPedidoDin");
         card.getChildren().add(lblTotal);
 
         if (c.getEstado().equals("Pendiente")) {
@@ -134,7 +134,7 @@ public class MisComprasController implements Initializable {
             btnCancelar.setLayoutX(15.0);
             btnCancelar.setLayoutY(105.0);
             btnCancelar.setPrefSize(120, 25);
-            btnCancelar.getStyleClass().add("btnCancelarPedidoDin"); 
+            btnCancelar.getStyleClass().add("btnCancelarPedidoDin");
             btnCancelar.setOnAction(e -> {
                 // 1. Confirmar con el usuario
                 Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
@@ -163,7 +163,7 @@ public class MisComprasController implements Initializable {
         btnDetalle.setLayoutX(200.0);
         btnDetalle.setLayoutY(105.0);
         btnDetalle.setPrefSize(115, 25);
-        btnDetalle.getStyleClass().add("btnVerDetalleDin"); // <--- CAMBIO
+        btnDetalle.getStyleClass().add("btnVerDetalleDin");
         btnDetalle.setOnAction(e -> {
             util.Sesion.setIdPedidoDetalle(c.getId());
             util.Navegador.cambiar("DetallePedido", btnDetalle);

@@ -22,7 +22,6 @@ import modelo.Producto;
 import util.CarritoManager;
 import datos.FavoritoDAO;
 
-
 /**
  * FXML Controller class
  *
@@ -157,7 +156,7 @@ public class DetalleProductoController implements Initializable {
     @FXML
     private void onAgregarCarrito(ActionEvent event) {
         if (productoActual != null) {
-            // Agregamos el producto la cantidad de veces seleccionada
+
             for (int i = 0; i < cantidad; i++) {
                 CarritoManager.agregarProducto(productoActual);
             }

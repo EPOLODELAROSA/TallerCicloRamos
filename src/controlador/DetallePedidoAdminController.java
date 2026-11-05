@@ -114,7 +114,6 @@ public class DetallePedidoAdminController implements Initializable {
 
         int idCompra = util.Sesion.getIdPedidoDetalle();
 
-        // Buscar la compra
         for (Compra c : CompraDAO.listarCompras()) {
             if (c.getId() == idCompra) {
                 compraActual = c;
@@ -127,7 +126,6 @@ public class DetallePedidoAdminController implements Initializable {
             return;
         }
 
-        // Cargar datos reales
         cargarDatosReales();
     }
 
@@ -228,7 +226,7 @@ public class DetallePedidoAdminController implements Initializable {
             String nuevoEstado = resultado.get();
             CompraDAO.actualizarEstado(compraActual.getId(), nuevoEstado);
             mostrarAlerta("Éxito", "Estado actualizado a: " + nuevoEstado, Alert.AlertType.INFORMATION);
-            util.Navegador.cambiar("DetallePedidoAdmin", btnActualizarEstado); // Recargar
+            util.Navegador.cambiar("DetallePedidoAdmin", btnActualizarEstado);
         }
     }
 

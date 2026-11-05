@@ -30,44 +30,43 @@ import modelo.Producto;
  * @author efren
  */
 public class RegistrarProductoController implements Initializable {
-    
+
     @FXML
     private ImageView imgFlechaAtrasReg;
-    
+
     @FXML
     private Label lblTituloRegistrarProd;
 
     @FXML
     private ImageView imgPreviewProducto;
-    
+
     @FXML
     private Label lblSinImagen;
-    
+
     @FXML
     private Button btnSeleccionarImagen;
 
     @FXML
     private TextField txtNombreProd;
-    
+
     @FXML
     private TextField txtPrecioProd;
-    
+
     @FXML
     private TextField txtStockProd;
-    
+
     @FXML
     private ComboBox<String> cmbCategoriaProd;
-    
+
     @FXML
     private TextArea txtDescripcionProd;
 
     @FXML
-    private Button btnRegistrarProductoAdmin; 
+    private Button btnRegistrarProductoAdmin;
 
     @FXML
     private Button btnCancelarRegProd;
 
-    // Variable para guardar la ruta de la imagen seleccionada
     private String rutaImagen = "";
 
     /**
@@ -88,7 +87,7 @@ public class RegistrarProductoController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Seleccionar Imagen del Producto");
         fileChooser.getExtensionFilters().addAll(
-            new FileChooser.ExtensionFilter("Archivos de Imagen", "*.png", "*.jpg", "*.jpeg")
+                new FileChooser.ExtensionFilter("Archivos de Imagen", "*.png", "*.jpg", "*.jpeg")
         );
 
         File archivo = fileChooser.showOpenDialog(btnSeleccionarImagen.getScene().getWindow());
@@ -123,7 +122,7 @@ public class RegistrarProductoController implements Initializable {
 
             mostrarAlerta("Éxito", "Producto registrado correctamente.", Alert.AlertType.INFORMATION);
             limpiarCampos();
-            
+
         } catch (NumberFormatException e) {
             mostrarAlerta("Error de formato", "El precio y el stock deben ser números válidos.", Alert.AlertType.ERROR);
         }

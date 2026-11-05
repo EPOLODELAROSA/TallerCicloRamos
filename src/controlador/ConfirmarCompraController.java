@@ -73,7 +73,7 @@ public class ConfirmarCompraController implements Initializable {
         ToggleGroup grupo = new ToggleGroup();
         rbContraEntrega.setToggleGroup(grupo);
         rbTransferencia.setToggleGroup(grupo);
-        rbContraEntrega.setSelected(true); // Opción por defecto
+        rbContraEntrega.setSelected(true);
 
         // 1. Cargar datos del usuario logueado
         if (util.Sesion.getUsuarioLogueado() != null) {
@@ -134,7 +134,7 @@ public class ConfirmarCompraController implements Initializable {
         String metodoPago = rbContraEntrega.isSelected() ? "Pago contra entrega" : "Transferencia bancaria";
 
         Compra compra = new Compra(
-                util.Sesion.getUsuarioLogueado().getCorreo(), // Correo del cliente
+                util.Sesion.getUsuarioLogueado().getCorreo(),
                 fecha,
                 "Pendiente",
                 metodoPago,

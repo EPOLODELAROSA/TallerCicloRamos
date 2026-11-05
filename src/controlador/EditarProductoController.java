@@ -33,37 +33,36 @@ public class EditarProductoController implements Initializable {
 
     @FXML
     private ImageView imgFlechaAtrasEdit;
-    
+
     @FXML
     private Label lblTituloEditarProd;
 
     @FXML
     private ImageView imgPreviewEditarProd;
-    
+
     @FXML
     private Button btnCambiarImagenEdit;
 
     @FXML
     private TextField txtNombreEdit;
-    
+
     @FXML
     private TextField txtPrecioEdit;
-    
+
     @FXML
     private TextField txtStockEdit;
-    
+
     @FXML
     private ComboBox<String> cmbCatEdit;
-    
+
     @FXML
     private TextArea txtDescEdit;
 
     @FXML
     private Button btnCancelarEditProd;
-    
+
     @FXML
     private Button btnGuardarEditProd;
-
 
     private String rutaImagenNueva = "";
     private int idProductoActual;
@@ -74,13 +73,13 @@ public class EditarProductoController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cmbCatEdit.getItems().addAll("Motos", "Bicicletas", "Repuestos", "Accesorios");
-        
+
         idProductoActual = util.Sesion.getIdProductoEditar();
         cargarDatosReales();
     }
 
     private void cargarDatosReales() {
-        // Buscamos el producto por su ID
+
         for (Producto p : ProductoDAO.listar()) {
             if (p.getId() == idProductoActual) {
                 txtNombreEdit.setText(p.getNombre());
@@ -88,12 +87,13 @@ public class EditarProductoController implements Initializable {
                 txtStockEdit.setText(String.valueOf(p.getStock()));
                 cmbCatEdit.setValue(p.getCategoria());
                 txtDescEdit.setText(p.getDescripcion());
-                
+
                 try {
                     if (p.getImagen() != null && !p.getImagen().isEmpty()) {
                         imgPreviewEditarProd.setImage(new Image(p.getImagen()));
                     }
-                } catch (Exception e) {}
+                } catch (Exception e) {
+                }
                 break;
             }
         }
@@ -133,8 +133,7 @@ public class EditarProductoController implements Initializable {
         try {
             double precio = Double.parseDouble(precioStr);
             int stock = Integer.parseInt(stockStr);
-            
-            // Si no cambió la imagen, mantenemos la que tenía
+
             String imagenFinal = rutaImagenNueva;
             if (imagenFinal.isEmpty()) {
                 for (Producto p : ProductoDAO.listar()) {
@@ -148,13 +147,12 @@ public class EditarProductoController implements Initializable {
             Producto pActualizado = new Producto(nombre, imagenFinal, precio, stock, categoria, descripcion);
             pActualizado.setId(idProductoActual);
 
-            // Eliminamos el viejo y guardamos el nuevo (simulando edición)
             ProductoDAO.eliminar(idProductoActual);
             ProductoDAO.guardarConId(pActualizado);
 
             mostrarAlerta("Éxito", "Producto actualizado correctamente.", Alert.AlertType.INFORMATION);
             util.Navegador.cambiar("GestionarProductos", btnGuardarEditProd);
-            
+
         } catch (NumberFormatException e) {
             mostrarAlerta("Error", "Precio y stock deben ser números.", Alert.AlertType.ERROR);
         }

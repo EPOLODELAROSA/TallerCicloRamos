@@ -78,7 +78,6 @@ public class CompraRealizadaController implements Initializable {
 
     @FXML
     private void onSeguirComprando(ActionEvent event) {
-        // Limpiamos el filtro y volvemos al catálogo
         util.Sesion.setFiltroCategoria("Todos");
         util.Navegador.cambiar("Catalogo", btnSeguirComprando);
     }

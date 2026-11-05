@@ -61,7 +61,6 @@ public class GestionarUsuariosController implements Initializable {
         todosLosUsuarios = UsuarioDAO.listar();
         mostrarUsuarios(todosLosUsuarios);
 
-        // Listener para buscar en tiempo real
         txtBuscarUsuario.textProperty().addListener((obs, oldVal, newVal) -> {
             filtrarUsuarios(newVal);
         });
@@ -100,9 +99,9 @@ public class GestionarUsuariosController implements Initializable {
     }
 
     private void crearTarjetaUsuario(Usuario usuario) {
-        HBox tarjeta = new HBox(10); // Reducimos el espaciado de 15 a 10
+        HBox tarjeta = new HBox(10);
         tarjeta.getStyleClass().add("cardUsuarioAdmin");
-        tarjeta.setPadding(new Insets(8)); // Menos padding
+        tarjeta.setPadding(new Insets(8));
         tarjeta.setPrefWidth(330);
         tarjeta.setMaxWidth(330);
         tarjeta.setAlignment(Pos.CENTER_LEFT);
@@ -112,12 +111,12 @@ public class GestionarUsuariosController implements Initializable {
             imgUsuario.setImage(new Image("img/user-icon.png"));
         } catch (Exception e) {
         }
-        imgUsuario.setFitHeight(35); // Un poco más pequeño
+        imgUsuario.setFitHeight(35);
         imgUsuario.setFitWidth(35);
         imgUsuario.setPreserveRatio(true);
 
         VBox infoBox = new VBox(2);
-        infoBox.setPrefWidth(180); // <--- ANCHO FIJO para la info (antes era libre)
+        infoBox.setPrefWidth(180);
 
         Label lblNombre = new Label(usuario.getNombre());
         lblNombre.getStyleClass().add("lblNombreUsrAdmin");
@@ -132,16 +131,13 @@ public class GestionarUsuariosController implements Initializable {
 
         infoBox.getChildren().addAll(lblNombre, lblCorreo, lblTelefono);
 
-        // ELIMINAMOS EL SPACER (Region) para que el botón tenga espacio
-        // Region spacer = new Region();
-        // HBox.setHgrow(spacer, Priority.ALWAYS);
         VBox botonesBox = new VBox();
         botonesBox.setAlignment(Pos.CENTER_RIGHT);
-        botonesBox.setPrefWidth(85); // <--- ANCHO FIJO para el botón
+        botonesBox.setPrefWidth(85);
 
         Button btnEliminar = new Button("ELIMINAR");
         btnEliminar.getStyleClass().add("btnEliminarUsrAdmin");
-        btnEliminar.setPrefWidth(80); // Ancho suficiente para que no se corte
+        btnEliminar.setPrefWidth(80);
         btnEliminar.setOnAction(e -> {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Eliminar Cliente");
@@ -159,7 +155,6 @@ public class GestionarUsuariosController implements Initializable {
 
         botonesBox.getChildren().add(btnEliminar);
 
-        // Ensamblamos SIN el spacer (quitamos la variable de la lista)
         tarjeta.getChildren().addAll(imgUsuario, infoBox, botonesBox);
         vboxContenedorUsuarios.getChildren().add(tarjeta);
     }

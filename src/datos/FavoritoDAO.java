@@ -13,14 +13,16 @@ import java.util.ArrayList;
  * @author efren
  */
 public class FavoritoDAO {
-    
+
     private static final String ARCHIVO = "favoritos.txt";
 
     // Guardar un favorito: correoUsuario;idProducto
     public static void agregar(String correo, int idProducto) {
         // Verificar si ya existe
-        if (esFavorito(correo, idProducto)) return;
-        
+        if (esFavorito(correo, idProducto)) {
+            return;
+        }
+
         String linea = correo + ";" + idProducto;
         ArchivoTexto.agregarLinea(ARCHIVO, linea);
     }
@@ -29,7 +31,7 @@ public class FavoritoDAO {
     public static void eliminar(String correo, int idProducto) {
         ArrayList<String> lineas = ArchivoTexto.leer(ARCHIVO);
         ArrayList<String> nuevas = new ArrayList<>();
-        
+
         for (String linea : lineas) {
             String[] partes = linea.split(";");
             if (partes.length >= 2) {
@@ -45,7 +47,7 @@ public class FavoritoDAO {
     public static ArrayList<Integer> listarIds(String correo) {
         ArrayList<Integer> ids = new ArrayList<>();
         ArrayList<String> lineas = ArchivoTexto.leer(ARCHIVO);
-        
+
         for (String linea : lineas) {
             String[] partes = linea.split(";");
             if (partes.length >= 2 && partes[0].equals(correo)) {
@@ -58,5 +60,5 @@ public class FavoritoDAO {
     public static boolean esFavorito(String correo, int idProducto) {
         return listarIds(correo).contains(idProducto);
     }
-    
+
 }

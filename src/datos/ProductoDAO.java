@@ -68,7 +68,7 @@ public class ProductoDAO {
 
         for (Producto p : lista) {
             if (p.getId() == idProducto) {
-                p.setStock(p.getStock() - nuevaCantidad); // Restamos
+                p.setStock(p.getStock() - nuevaCantidad);
             }
             lineas.add(p.toArchivo());
         }

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package util;
+
 import java.util.ArrayList;
 import modelo.ItemCarrito;
 import modelo.Producto;
@@ -13,10 +14,10 @@ import modelo.Producto;
  * @author efren
  */
 public class CarritoManager {
-    
+
     // Lista en memoria que guarda los productos del carrito
     private static ArrayList<ItemCarrito> items = new ArrayList<>();
-    
+
     // Costo de envío (puedes cambiarlo aquí)
     public static final double COSTO_ENVIO = 8000.0;
 
@@ -67,5 +68,5 @@ public class CarritoManager {
     public static boolean estaVacio() {
         return items.isEmpty();
     }
-    
+
 }

@@ -28,7 +28,6 @@ import modelo.Producto;
 import util.CarritoManager;
 import datos.FavoritoDAO;
 
-
 /**
  * FXML Controller class
  *
@@ -93,16 +92,14 @@ public class InicioController implements Initializable {
             lblSaludo.setText("Hola, Invitado");
         }
 
-        // Cargar los productos destacados (los 2 últimos)
         cargarProductosDestacados();
-    
+
     }
 
     private void cargarProductosDestacados() {
         vboxProductosDestacados.getChildren().clear();
         ArrayList<Producto> lista = ProductoDAO.listar();
 
-        // Si no hay productos, mostramos un mensaje
         if (lista.isEmpty()) {
             Label lblVacio = new Label("No hay productos disponibles.");
             lblVacio.setStyle("-fx-font-family: 'Poppins'; -fx-text-fill: #888888;");
@@ -110,7 +107,6 @@ public class InicioController implements Initializable {
             return;
         }
 
-        // Tomamos los 2 últimos productos de la lista (los más recientes)
         int inicio = Math.max(0, lista.size() - 2);
 
         for (int i = inicio; i < lista.size(); i++) {
@@ -120,17 +116,17 @@ public class InicioController implements Initializable {
     }
 
     private void crearTarjetaProductoDestacado(Producto p) {
-        // Creamos la tarjeta visual (similar al catálogo pero adaptada)
+
         AnchorPane card = new AnchorPane();
-        card.setPrefHeight(100.0); // <--- Reducimos el alto de 130 a 100
+        card.setPrefHeight(100.0);
         card.setPrefWidth(320.0);
-        card.setPadding(new Insets(5)); // <--- Menos padding
+        card.setPadding(new Insets(5));
         card.getStyleClass().add("cardProdDinamica");
 
         // Imagen
         ImageView img = new ImageView();
-        img.setFitHeight(65.0); // <--- Imagen más pequeña (era 80)
-        img.setFitWidth(75.0);  // <--- Imagen más pequeña (era 90)
+        img.setFitHeight(65.0);
+        img.setFitWidth(75.0);
         img.setLayoutX(5.0);
         img.setLayoutY(15.0);
         img.setPreserveRatio(true);
@@ -143,8 +139,8 @@ public class InicioController implements Initializable {
 
         // Nombre
         Label lblNom = new Label(p.getNombre());
-        lblNom.setLayoutX(90.0); // <--- Más a la izquierda
-        lblNom.setLayoutY(5.0);  // <--- Más arriba
+        lblNom.setLayoutX(90.0);
+        lblNom.setLayoutY(5.0);
         lblNom.getStyleClass().add("lblNombreProdDin");
         lblNom.setWrapText(true);
         lblNom.setMaxWidth(200);
@@ -163,7 +159,7 @@ public class InicioController implements Initializable {
 
         // Stock
         Label lblStockT = new Label("Stock:");
-        lblStockT.setLayoutX(175.0); 
+        lblStockT.setLayoutX(175.0);
         lblStockT.setLayoutY(45.0);
         lblStockT.setStyle("-fx-font-family: 'Poppins'; -fx-font-size: 10px; -fx-text-fill: #2E7D32;");
 
@@ -173,10 +169,9 @@ public class InicioController implements Initializable {
         lblStockV.setStyle("-fx-font-family: 'Poppins'; -fx-font-size: 10px; -fx-text-fill: #888888;");
 
         // Botones (Subimos la posición Y y los hacemos más pequeños)
-       
         Button btnDeseo = new Button("Deseo");
         btnDeseo.setLayoutX(90.0);
-        btnDeseo.setLayoutY(65.0); 
+        btnDeseo.setLayoutY(65.0);
         btnDeseo.setPrefSize(54, 25);
         btnDeseo.getStyleClass().add("btnDeseoDin");
         btnDeseo.setOnAction(e -> {
@@ -186,7 +181,7 @@ public class InicioController implements Initializable {
 
         Button btnCarrito = new Button("Carrito");
         btnCarrito.setLayoutX(150.0);
-        btnCarrito.setLayoutY(65.0); 
+        btnCarrito.setLayoutY(65.0);
         btnCarrito.setPrefSize(54, 25);
         btnCarrito.getStyleClass().add("btnCarritoDin");
         btnCarrito.setOnAction(e -> {
@@ -233,7 +228,6 @@ public class InicioController implements Initializable {
         util.Navegador.cambiar("Catalogo", btnVerCatalogo);
     }
 
-    // Los botones de categoría ahora guardan el filtro en la Sesión y navegan
     @FXML
     private void onCatMotos(ActionEvent event) {
         util.Sesion.setFiltroCategoria("Motos");
@@ -260,7 +254,7 @@ public class InicioController implements Initializable {
 
     @FXML
     private void onNavInicio(MouseEvent event) {
-        /* Ya estamos aquí */ }
+    }
 
     @FXML
     private void onNavCategorias(MouseEvent event) {
@@ -289,13 +283,13 @@ public class InicioController implements Initializable {
         alerta.setContentText(mensaje);
         alerta.showAndWait();
     }
-    
-        @FXML
+
+    @FXML
     private void onBuscarAction(ActionEvent event) {
 
         if (!txtBuscar.getText().isEmpty()) {
             util.Sesion.setFiltroCategoria("Todos");
-            util.Sesion.setTextoBusqueda(txtBuscar.getText()); 
+            util.Sesion.setTextoBusqueda(txtBuscar.getText());
             util.Navegador.cambiar("Catalogo", txtBuscar);
             txtBuscar.clear();
         }
