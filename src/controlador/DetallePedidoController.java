@@ -194,9 +194,22 @@ public class DetallePedidoController implements Initializable {
     @FXML
     private void onCancelarPedido(ActionEvent event) {
         if (compraActual != null && compraActual.getEstado().equals("Pendiente")) {
-            // Aquí iría la lógica para cambiar el estado a "Cancelado" y devolver stock
-            mostrarAlerta("Éxito", "Pedido cancelado (Simulación).", Alert.AlertType.INFORMATION);
-            // TODO: Actualizar en el archivo y recargar
+            Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+            confirm.setTitle("Cancelar Pedido");
+            confirm.setHeaderText(null);
+            confirm.setContentText("¿Estás seguro de cancelar este pedido?");
+            java.util.Optional<javafx.scene.control.ButtonType> res = confirm.showAndWait();
+
+            if (res.isPresent() && res.get() == javafx.scene.control.ButtonType.OK) {
+                // Cambiar estado
+                CompraDAO.actualizarEstado(compraActual.getId(), "Cancelado");
+                // Devolver stock
+                for (DetalleCompra d : CompraDAO.listarDetalles(compraActual.getId())) {
+                    ProductoDAO.devolverStock(d.getIdProducto(), d.getCantidad());
+                }
+                mostrarAlerta("Cancelado", "El pedido ha sido cancelado.", Alert.AlertType.INFORMATION);
+                util.Navegador.cambiar("MisCompras", btnCancelarPedido);
+            }
         }
     }
 

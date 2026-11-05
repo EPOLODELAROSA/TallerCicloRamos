@@ -15,7 +15,7 @@ import modelo.DetalleCompra;
  * @author efren
  */
 public class CompraDAO {
-    
+
     private static final String ARCHIVO_COMPRAS = "compras.txt";
     private static final String ARCHIVO_DETALLES = "detalles.txt";
 
@@ -32,8 +32,8 @@ public class CompraDAO {
             DetalleCompra detalleFinal = new DetalleCompra(nuevoId, d.getIdProducto(), d.getCantidad(), d.getPrecioUnitario(), d.getSubtotal());
             ArchivoTexto.agregarLinea(ARCHIVO_DETALLES, detalleFinal.toArchivo());
         }
-        
-        return nuevoId; 
+
+        return nuevoId;
     }
 
     public static ArrayList<Compra> listarCompras() {
@@ -56,10 +56,22 @@ public class CompraDAO {
         for (String linea : lineas) {
             String[] p = linea.split(";");
             if (p.length >= 5 && Integer.parseInt(p[0]) == idCompra) {
-                lista.add(new DetalleCompra(Integer.parseInt(p[0]), Integer.parseInt(p[1]), 
+                lista.add(new DetalleCompra(Integer.parseInt(p[0]), Integer.parseInt(p[1]),
                         Integer.parseInt(p[2]), Double.parseDouble(p[3]), Double.parseDouble(p[4])));
             }
         }
         return lista;
+    }
+
+    public static void actualizarEstado(int idCompra, String nuevoEstado) {
+        ArrayList<Compra> lista = listarCompras();
+        ArrayList<String> lineas = new ArrayList<>();
+        for (Compra c : lista) {
+            if (c.getId() == idCompra) {
+                c.setEstado(nuevoEstado);
+            }
+            lineas.add(c.toArchivo());
+        }
+        ArchivoTexto.escribir(ARCHIVO_COMPRAS, lineas);
     }
 }

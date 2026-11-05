@@ -15,6 +15,23 @@ public class Sesion {
 
     private static Usuario usuarioLogueado = null;
     private static String filtroCategoria = "Todos";
+    private static int idCompraRealizada = 0;
+    private static int idPedidoDetalle = 0;
+    private static int idProductoEditar = -1;
+    private static int idProductoVer = -1;
+    private static String textoBusqueda = "";
+
+    public static String getTextoBusqueda() {
+        return textoBusqueda;
+    }
+
+    public static void setTextoBusqueda(String texto) {
+        textoBusqueda = texto;
+    }
+
+    public static void limpiarBusqueda() {
+        textoBusqueda = "";
+    }
 
     public static Usuario getUsuarioLogueado() {
         return usuarioLogueado;
@@ -32,37 +49,6 @@ public class Sesion {
         filtroCategoria = filtro;
     }
 
-    public static void cerrarSesion() {
-        usuarioLogueado = null;
-        filtroCategoria = "Todos";
-    }
-
-    private static int idProductoVer = -1;
-
-    public static int getIdProductoVer() {
-        return idProductoVer;
-    }
-
-    public static void setIdProductoVer(int id) {
-        idProductoVer = id;
-    }
-
-    private static String textoBusqueda = "";
-
-    public static String getTextoBusqueda() {
-        return textoBusqueda;
-    }
-
-    public static void setTextoBusqueda(String texto) {
-        textoBusqueda = texto;
-    }
-
-    public static void limpiarBusqueda() {
-        textoBusqueda = "";
-    }
-
-    private static int idCompraRealizada = 0;
-
     public static int getIdCompraRealizada() {
         return idCompraRealizada;
     }
@@ -71,14 +57,40 @@ public class Sesion {
         idCompraRealizada = id;
     }
 
-    private static int idPedidoDetalle = 0;
-
     public static int getIdPedidoDetalle() {
         return idPedidoDetalle;
     }
 
     public static void setIdPedidoDetalle(int id) {
         idPedidoDetalle = id;
+    }
+
+    // Métodos para el producto que se va a EDITAR
+    public static int getIdProductoEditar() {
+        return idProductoEditar;
+    }
+
+    public static void setIdProductoEditar(int id) {
+        idProductoEditar = id;
+    }
+
+    // Métodos para el producto que se va a VER
+    public static int getIdProductoVer() {
+        return idProductoVer;
+    }
+
+    public static void setIdProductoVer(int id) {
+        idProductoVer = id;
+    }
+
+    public static void cerrarSesion() {
+        usuarioLogueado = null;
+        filtroCategoria = "Todos";
+        idCompraRealizada = 0;
+        idPedidoDetalle = 0;
+        idProductoEditar = -1;
+        idProductoVer = -1;
+        textoBusqueda = "";
     }
 
 }

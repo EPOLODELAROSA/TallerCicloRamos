@@ -14,7 +14,7 @@ import modelo.Producto;
  * @author efren
  */
 public class ProductoDAO {
- 
+
     private static final String ARCHIVO = "productos.txt";
 
     // Guardar un producto nuevo
@@ -22,7 +22,7 @@ public class ProductoDAO {
         // Generar un ID automático basado en la cantidad de productos
         int nuevoId = listar().size() + 1;
         producto.setId(nuevoId);
-        
+
         ArchivoTexto.agregarLinea(ARCHIVO, producto.toArchivo());
     }
 
@@ -34,8 +34,8 @@ public class ProductoDAO {
         for (String linea : lineas) {
             String[] partes = linea.split(";");
             if (partes.length >= 7) {
-                Producto p = new Producto(partes[1], partes[2], 
-                        Double.parseDouble(partes[3]), Integer.parseInt(partes[4]), 
+                Producto p = new Producto(partes[1], partes[2],
+                        Double.parseDouble(partes[3]), Integer.parseInt(partes[4]),
                         partes[5], partes[6]);
                 p.setId(Integer.parseInt(partes[0]));
                 lista.add(p);
@@ -48,7 +48,7 @@ public class ProductoDAO {
     public static void eliminar(int id) {
         ArrayList<Producto> lista = listar();
         ArrayList<String> nuevasLineas = new ArrayList<>();
-        
+
         for (Producto p : lista) {
             if (p.getId() != id) {
                 nuevasLineas.add(p.toArchivo());
@@ -56,16 +56,16 @@ public class ProductoDAO {
         }
         ArchivoTexto.escribir(ARCHIVO, nuevasLineas);
     }
-    
+
     // Guardar un producto manteniendo su ID (para edición)
     public static void guardarConId(Producto producto) {
         ArchivoTexto.agregarLinea(ARCHIVO, producto.toArchivo());
     }
-    
-        public static void actualizarStock(int idProducto, int nuevaCantidad) {
+
+    public static void actualizarStock(int idProducto, int nuevaCantidad) {
         ArrayList<Producto> lista = listar();
         ArrayList<String> lineas = new ArrayList<>();
-        
+
         for (Producto p : lista) {
             if (p.getId() == idProducto) {
                 p.setStock(p.getStock() - nuevaCantidad); // Restamos
@@ -74,6 +74,17 @@ public class ProductoDAO {
         }
         ArchivoTexto.escribir(ARCHIVO, lineas);
     }
-    
-    
+
+    public static void devolverStock(int idProducto, int cantidad) {
+        ArrayList<Producto> lista = listar();
+        ArrayList<String> lineas = new ArrayList<>();
+        for (Producto p : lista) {
+            if (p.getId() == idProducto) {
+                p.setStock(p.getStock() + cantidad);
+            }
+            lineas.add(p.toArchivo());
+        }
+        ArchivoTexto.escribir(ARCHIVO, lineas);
+    }
+
 }

@@ -6,6 +6,7 @@
 package controlador;
 
 import datos.CompraDAO;
+import datos.ProductoDAO;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -13,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -81,12 +83,12 @@ public class MisComprasController implements Initializable {
         AnchorPane card = new AnchorPane();
         card.setPrefHeight(140.0);
         card.setPrefWidth(330.0);
-        card.getStyleClass().add("cardPedidoDin"); // <--- CAMBIO
+        card.getStyleClass().add("cardPedidoDin"); 
 
         Label lblNum = new Label("Pedido: #" + String.format("%05d", c.getId()));
         lblNum.setLayoutX(15.0);
         lblNum.setLayoutY(10.0);
-        lblNum.getStyleClass().add("lblNumPedidoDin"); // <--- CAMBIO
+        lblNum.getStyleClass().add("lblNumPedidoDin"); 
         card.getChildren().add(lblNum);
 
         Label lblEstado = new Label(c.getEstado());
@@ -111,20 +113,20 @@ public class MisComprasController implements Initializable {
         Label lblFecha = new Label("Fecha: " + c.getFecha());
         lblFecha.setLayoutX(15.0);
         lblFecha.setLayoutY(40.0);
-        lblFecha.getStyleClass().add("lblInfoPedidoDin"); // <--- CAMBIO
+        lblFecha.getStyleClass().add("lblInfoPedidoDin");
         card.getChildren().add(lblFecha);
 
         ArrayList<DetalleCompra> detalles = CompraDAO.listarDetalles(c.getId());
         Label lblProds = new Label("Productos: " + detalles.size() + " ítems");
         lblProds.setLayoutX(15.0);
         lblProds.setLayoutY(60.0);
-        lblProds.getStyleClass().add("lblInfoPedidoDin"); // <--- CAMBIO
+        lblProds.getStyleClass().add("lblInfoPedidoDin"); 
         card.getChildren().add(lblProds);
 
         Label lblTotal = new Label("Total: $ " + String.format("%,.0f", c.getTotal()));
         lblTotal.setLayoutX(15.0);
         lblTotal.setLayoutY(80.0);
-        lblTotal.getStyleClass().add("lblTotalPedidoDin"); // <--- CAMBIO
+        lblTotal.getStyleClass().add("lblTotalPedidoDin"); 
         card.getChildren().add(lblTotal);
 
         if (c.getEstado().equals("Pendiente")) {
@@ -132,9 +134,27 @@ public class MisComprasController implements Initializable {
             btnCancelar.setLayoutX(15.0);
             btnCancelar.setLayoutY(105.0);
             btnCancelar.setPrefSize(120, 25);
-            btnCancelar.getStyleClass().add("btnCancelarPedidoDin"); // <--- CAMBIO
+            btnCancelar.getStyleClass().add("btnCancelarPedidoDin"); 
             btnCancelar.setOnAction(e -> {
-                System.out.println("Cancelar pedido #" + c.getId());
+                // 1. Confirmar con el usuario
+                Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+                confirm.setTitle("Cancelar Pedido");
+                confirm.setHeaderText(null);
+                confirm.setContentText("¿Estás seguro de cancelar el pedido #" + c.getId() + "?");
+                java.util.Optional<javafx.scene.control.ButtonType> res = confirm.showAndWait();
+
+                if (res.isPresent() && res.get() == javafx.scene.control.ButtonType.OK) {
+                    // 2. Cambiar estado a Cancelado en el archivo .txt
+                    CompraDAO.actualizarEstado(c.getId(), "Cancelado");
+
+                    // 3. Devolver el stock de los productos
+                    for (DetalleCompra d : CompraDAO.listarDetalles(c.getId())) {
+                        ProductoDAO.devolverStock(d.getIdProducto(), d.getCantidad());
+                    }
+
+                    // 4. Recargar la pantalla
+                    cargarPedidos();
+                }
             });
             card.getChildren().add(btnCancelar);
         }
