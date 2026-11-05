@@ -20,6 +20,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import modelo.Producto;
 import util.CarritoManager;
+import datos.FavoritoDAO;
+
 
 /**
  * FXML Controller class
@@ -146,7 +148,10 @@ public class DetalleProductoController implements Initializable {
 
     @FXML
     private void onAgregarDeseos(ActionEvent event) {
-        mostrarAlerta("Favoritos", productoActual.getNombre() + " agregado a tu lista de deseos (Simulación).", Alert.AlertType.INFORMATION);
+        if (productoActual != null) {
+            datos.FavoritoDAO.agregar(util.Sesion.getUsuarioLogueado().getCorreo(), productoActual.getId());
+            mostrarAlerta("Favoritos", productoActual.getNombre() + " agregado a tu lista de deseos.", Alert.AlertType.INFORMATION);
+        }
     }
 
     @FXML

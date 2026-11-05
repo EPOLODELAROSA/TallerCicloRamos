@@ -24,6 +24,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import modelo.Producto;
 import util.CarritoManager;
+import datos.FavoritoDAO;
 
 /**
  * FXML Controller class
@@ -184,6 +185,7 @@ public class CatalogoController implements Initializable {
             btnDeseo.setPrefWidth(54.0);
             btnDeseo.getStyleClass().add("btnDeseoDin");
             btnDeseo.setOnAction(e -> {
+                datos.FavoritoDAO.agregar(util.Sesion.getUsuarioLogueado().getCorreo(), p.getId());
                 mostrarAlerta("Favoritos", p.getNombre() + " agregado a deseos.", Alert.AlertType.INFORMATION);
             });
 

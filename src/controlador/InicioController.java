@@ -26,6 +26,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import modelo.Producto;
 import util.CarritoManager;
+import datos.FavoritoDAO;
+
 
 /**
  * FXML Controller class
@@ -171,12 +173,16 @@ public class InicioController implements Initializable {
         lblStockV.setStyle("-fx-font-family: 'Poppins'; -fx-font-size: 10px; -fx-text-fill: #888888;");
 
         // Botones (Subimos la posición Y y los hacemos más pequeños)
+       
         Button btnDeseo = new Button("Deseo");
         btnDeseo.setLayoutX(90.0);
-        btnDeseo.setLayoutY(65.0);
+        btnDeseo.setLayoutY(65.0); 
         btnDeseo.setPrefSize(54, 25);
         btnDeseo.getStyleClass().add("btnDeseoDin");
-        btnDeseo.setOnAction(e -> mostrarAlerta("Favoritos", p.getNombre() + " agregado.", Alert.AlertType.INFORMATION));
+        btnDeseo.setOnAction(e -> {
+            datos.FavoritoDAO.agregar(util.Sesion.getUsuarioLogueado().getCorreo(), p.getId());
+            mostrarAlerta("Favoritos", p.getNombre() + " agregado a tu lista de deseos.", Alert.AlertType.INFORMATION);
+        });
 
         Button btnCarrito = new Button("Carrito");
         btnCarrito.setLayoutX(150.0);

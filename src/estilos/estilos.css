@@ -2640,3 +2640,14 @@ and open the template in the editor.
 .estadoEntregado { -fx-background-color: #2E7D32; -fx-text-fill: white; -fx-padding: 3 10 3 10; -fx-background-radius: 6px; -fx-font-family: "Poppins Bold"; -fx-font-size: 10px; }
 .estadoCancelado { -fx-background-color: #757575; -fx-text-fill: white; -fx-padding: 3 10 3 10; -fx-background-radius: 6px; -fx-font-family: "Poppins Bold"; -fx-font-size: 10px; }
 .estadoRechazado { -fx-background-color: #C62828; -fx-text-fill: white; -fx-padding: 3 10 3 10; -fx-background-radius: 6px; -fx-font-family: "Poppins Bold"; -fx-font-size: 10px; }
+
+
+#scrollDeseos {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+}
+
+#scrollDeseos > .viewport {
+    -fx-background-color: transparent;
+}
