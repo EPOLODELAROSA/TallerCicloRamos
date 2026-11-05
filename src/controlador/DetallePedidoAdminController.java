@@ -5,19 +5,27 @@
  */
 package controlador;
 
+import datos.CompraDAO;
+import datos.ProductoDAO;
+import datos.UsuarioDAO;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.ChoiceDialog;
+import modelo.Compra;
+import modelo.DetalleCompra;
+import modelo.Producto;
+import modelo.Usuario;
 
 /**
  * FXML Controller class
@@ -26,13 +34,10 @@ import javafx.scene.control.ChoiceDialog;
  */
 public class DetallePedidoAdminController implements Initializable {
 
-    // --- HEADER ---
     @FXML
     private ImageView imgFlechaAtrasDetAdmin;
     @FXML
     private Label lblTituloDetalleAdmin;
-
-    // --- INFO PEDIDO ---
     @FXML
     private Label lblPedidoTituloAdmin;
     @FXML
@@ -43,8 +48,6 @@ public class DetallePedidoAdminController implements Initializable {
     private Label lblFechaTituloAdmin;
     @FXML
     private Label lblFechaValorAdmin;
-
-    // --- DATOS CLIENTE ---
     @FXML
     private Label lblDatosClienteTitulo;
     @FXML
@@ -59,16 +62,12 @@ public class DetallePedidoAdminController implements Initializable {
     private Label lblClienteTelTitulo;
     @FXML
     private Label lblClienteTelValor;
-
-    // --- PRODUCTOS (DINÁMICO) ---
     @FXML
     private Label lblProductosTituloAdmin;
     @FXML
     private ScrollPane scrollProductosAdmin;
     @FXML
     private VBox vboxListaProductosAdmin;
-
-    // --- TOTALES ---
     @FXML
     private Label lblSubtotalTituloAdmin;
     @FXML
@@ -81,8 +80,6 @@ public class DetallePedidoAdminController implements Initializable {
     private Label lblTotalTituloAdmin;
     @FXML
     private Label lblTotalValorAdmin;
-
-    // --- ENTREGA Y PAGO ---
     @FXML
     private Label lblEntregaTituloAdmin;
     @FXML
@@ -101,158 +98,173 @@ public class DetallePedidoAdminController implements Initializable {
     private Label lblMetodoTituloAdmin;
     @FXML
     private Label lblMetodoValorAdmin;
-
-    // --- BOTONES ---
     @FXML
     private Button btnActualizarEstado;
     @FXML
     private Button btnRechazarPedido;
+
+    private Compra compraActual;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Simulamos la carga de datos de un pedido
-        cargarDatosSimulados();
+        //TODO
+
+        int idCompra = util.Sesion.getIdPedidoDetalle();
+
+        // Buscar la compra
+        for (Compra c : CompraDAO.listarCompras()) {
+            if (c.getId() == idCompra) {
+                compraActual = c;
+                break;
+            }
+        }
+
+        if (compraActual == null) {
+            mostrarAlerta("Error", "Pedido no encontrado.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        // Cargar datos reales
+        cargarDatosReales();
     }
 
-    private void cargarDatosSimulados() {
-        // 1. Datos básicos del pedido
-        lblPedidoValorAdmin.setText("#00001");
-        lblEstadoAdmin.setText("Pendiente");
-        lblEstadoAdmin.getStyleClass().clear(); // Limpiamos por si tenía otra clase
-        lblEstadoAdmin.getStyleClass().add("estadoPendiente");
-        lblFechaValorAdmin.setText("28/09/2026");
+    private void cargarDatosReales() {
+        // 1. Datos generales
+        lblPedidoValorAdmin.setText("#" + String.format("%05d", compraActual.getId()));
+        lblEstadoAdmin.setText(compraActual.getEstado());
+        lblFechaValorAdmin.setText(compraActual.getFecha());
+
+        // Actualizar clase CSS del estado
+        lblEstadoAdmin.getStyleClass().clear();
+        if (compraActual.getEstado().equals("Pendiente")) {
+            lblEstadoAdmin.getStyleClass().add("estadoPendiente");
+        } else if (compraActual.getEstado().equals("En proceso")) {
+            lblEstadoAdmin.getStyleClass().add("estadoProceso");
+        } else if (compraActual.getEstado().equals("Enviado")) {
+            lblEstadoAdmin.getStyleClass().add("estadoEnviado");
+        } else if (compraActual.getEstado().equals("Entregado")) {
+            lblEstadoAdmin.getStyleClass().add("estadoEntregado");
+        } else if (compraActual.getEstado().equals("Cancelado")) {
+            lblEstadoAdmin.getStyleClass().add("estadoCancelado");
+        } else {
+            lblEstadoAdmin.getStyleClass().add("estadoRechazado");
+        }
 
         // 2. Datos del cliente
-        lblClienteNombreValor.setText("Juan Pérez");
-        lblClienteEmailValor.setText("juanperez08@gmail.com");
-        lblClienteTelValor.setText("300 691 5640");
+        Usuario u = UsuarioDAO.buscarPorCorreo(compraActual.getCorreoCliente());
+        if (u != null) {
+            lblClienteNombreValor.setText(u.getNombre());
+            lblClienteEmailValor.setText(u.getCorreo());
+            lblClienteTelValor.setText(u.getTelefono());
+        } else {
+            lblClienteNombreValor.setText("Cliente no registrado");
+            lblClienteEmailValor.setText(compraActual.getCorreoCliente());
+            lblClienteTelValor.setText("-");
+        }
 
-        // 3. Productos (LIMPIAMOS EL VBOX Y AGREGAMOS VARIOS)
+        // 3. Productos dinámicos
         vboxListaProductosAdmin.getChildren().clear();
-        
-        // Agregamos 3 productos de ejemplo para probar el ScrollPane
-        agregarProductoAlDetalle("1 x Pastillas de Freno Pulsar 200 Ns", "Precio: $23.000 Subtotal: $ 23.000");
-        agregarProductoAlDetalle("2 x Kit de Arrastre NS 200", "Precio: $204.800 Subtotal: $ 409.600");
-        agregarProductoAlDetalle("1 x Aceite Celerity 20W50", "Precio: $32.000 Subtotal: $ 32.000");
+        ArrayList<DetalleCompra> detalles = CompraDAO.listarDetalles(compraActual.getId());
+        double subtotalReal = 0;
+
+        for (DetalleCompra d : detalles) {
+            // Nombre del producto
+            String nombreProd = "Producto ID: " + d.getIdProducto();
+            for (Producto p : ProductoDAO.listar()) {
+                if (p.getId() == d.getIdProducto()) {
+                    nombreProd = p.getNombre();
+                    break;
+                }
+            }
+
+            Label lblProd = new Label(d.getCantidad() + " x " + nombreProd);
+            lblProd.getStyleClass().add("lblProductoDetalle");
+
+            Label lblPrecio = new Label("Precio: $" + String.format("%,.0f", d.getPrecioUnitario())
+                    + "  Subtotal: $" + String.format("%,.0f", d.getSubtotal()));
+            lblPrecio.getStyleClass().add("lblPrecioProductoDetalle");
+
+            vboxListaProductosAdmin.getChildren().addAll(lblProd, lblPrecio);
+            subtotalReal += d.getSubtotal();
+        }
 
         // 4. Totales
-        lblSubtotalValorAdmin.setText("$ 464.600");
-        lblEnvioValorAdmin.setText("$ 8.000");
-        lblTotalValorAdmin.setText("$ 472.600");
+        lblSubtotalValorAdmin.setText("$ " + String.format("%,.0f", subtotalReal));
+        lblEnvioValorAdmin.setText("$ " + String.format("%,.0f", 8000.0));
+        lblTotalValorAdmin.setText("$ " + String.format("%,.0f", compraActual.getTotal()));
 
-        // 5. Entrega y Pago
-        lblDireccionValorAdmin.setText("Manzana 170 lote 12");
-        lblCiudadValorAdmin.setText("Montería");
-        lblReferenciaValorAdmin.setText("Casa azul con rejas negras");
-        lblMetodoValorAdmin.setText("Pago contra entrega");
+        // 5. Entrega
+        lblDireccionValorAdmin.setText(compraActual.getDireccion());
+        lblCiudadValorAdmin.setText(compraActual.getCiudad());
+        lblReferenciaValorAdmin.setText(compraActual.getReferencia());
+        lblMetodoValorAdmin.setText(compraActual.getMetodoPago());
     }
 
-    // Método auxiliar para inyectar los productos en el VBox
-    private void agregarProductoAlDetalle(String textoProducto, String textoPrecio) {
-        Label lblProd = new Label(textoProducto);
-        lblProd.getStyleClass().add("lblProductoDetalle");
-        
-        Label lblPrecio = new Label(textoPrecio);
-        lblPrecio.getStyleClass().add("lblPrecioProductoDetalle");
-        
-        // Los agregamos al VBox. Puedes agregar un pequeño espaciado (setSpacing) al VBox en SceneBuilder
-        vboxListaProductosAdmin.getChildren().addAll(lblProd, lblPrecio);
-        
-        // Opcional: Un pequeño separador visual entre productos
-        // vboxListaProductosAdmin.getChildren().add(new Separator());
-    }
-
-    // ----- EVENTOS: HEADER -----
     @FXML
     private void onFlechaAtras(MouseEvent event) {
         util.Navegador.cambiar("GestionarPedidos", imgFlechaAtrasDetAdmin);
     }
 
-    // ----- EVENTOS: BOTONES -----
     @FXML
     private void onActualizarEstado(ActionEvent event) {
-        String estadoActual = lblEstadoAdmin.getText();
+        String estadoActual = compraActual.getEstado();
 
-        // Regla de negocio: No se puede actualizar un pedido entregado, cancelado o rechazado.
         if (estadoActual.equals("Entregado") || estadoActual.equals("Cancelado") || estadoActual.equals("Rechazado")) {
             mostrarAlerta("Acción no permitida", "No se puede cambiar el estado de un pedido " + estadoActual, Alert.AlertType.WARNING);
             return;
         }
 
-        // Creamos un diálogo para elegir el nuevo estado
         ChoiceDialog<String> dialog = new ChoiceDialog<>("En proceso", "En proceso", "Enviado", "Entregado");
         dialog.setTitle("Actualizar Estado");
-        dialog.setHeaderText("Pedido " + lblPedidoValorAdmin.getText());
+        dialog.setHeaderText("Pedido #" + String.format("%05d", compraActual.getId()));
         dialog.setContentText("Selecciona el nuevo estado:");
 
-        // Mostramos el diálogo y esperamos la respuesta
         java.util.Optional<String> resultado = dialog.showAndWait();
-        
+
         if (resultado.isPresent()) {
             String nuevoEstado = resultado.get();
-            
-            // Aquí, cuando tengamos persistencia, guardaremos el cambio en el .txt
-            System.out.println("--- ACTUALIZANDO ESTADO ---");
-            System.out.println("Pedido: " + lblPedidoValorAdmin.getText());
-            System.out.println("Nuevo estado: " + nuevoEstado);
-
-            // Actualizamos visualmente el Label del estado
-            lblEstadoAdmin.setText(nuevoEstado);
-            lblEstadoAdmin.getStyleClass().clear();
-            
-            // Le ponemos el color correspondiente (usando tus clases de CSS)
-            if (nuevoEstado.equals("En proceso")) {
-                lblEstadoAdmin.getStyleClass().add("estadoProceso");
-            } else if (nuevoEstado.equals("Enviado")) {
-                lblEstadoAdmin.getStyleClass().add("estadoEnviado");
-            } else if (nuevoEstado.equals("Entregado")) {
-                lblEstadoAdmin.getStyleClass().add("estadoEntregado");
-            }
-
-            mostrarAlerta("Éxito", "Estado actualizado a: " + nuevoEstado + " (Simulación)", Alert.AlertType.INFORMATION);
+            CompraDAO.actualizarEstado(compraActual.getId(), nuevoEstado);
+            mostrarAlerta("Éxito", "Estado actualizado a: " + nuevoEstado, Alert.AlertType.INFORMATION);
+            util.Navegador.cambiar("DetallePedidoAdmin", btnActualizarEstado); // Recargar
         }
     }
 
     @FXML
     private void onRechazarPedido(ActionEvent event) {
-        String estadoActual = lblEstadoAdmin.getText();
+        String estadoActual = compraActual.getEstado();
 
-        // Regla de negocio: Solo se puede rechazar si está Pendiente o En proceso
         if (!estadoActual.equals("Pendiente") && !estadoActual.equals("En proceso")) {
             mostrarAlerta("Acción no permitida", "Solo se pueden rechazar pedidos Pendientes o En Proceso.", Alert.AlertType.WARNING);
             return;
         }
 
-        // Diálogo para elegir el motivo del rechazo
-        ChoiceDialog<String> dialog = new ChoiceDialog<>("Producto agotado", 
+        ChoiceDialog<String> dialog = new ChoiceDialog<>("Producto agotado",
                 "Producto agotado", "Error de inventario", "Problema con el pedido", "Otro");
         dialog.setTitle("Rechazar Pedido");
-        dialog.setHeaderText("Rechazando pedido " + lblPedidoValorAdmin.getText());
+        dialog.setHeaderText("Rechazando pedido #" + String.format("%05d", compraActual.getId()));
         dialog.setContentText("Selecciona el motivo del rechazo:");
 
         java.util.Optional<String> resultado = dialog.showAndWait();
-        
+
         if (resultado.isPresent()) {
             String motivo = resultado.get();
-            
-            // Simulamos el guardado del motivo y el cambio de estado
-            System.out.println("--- RECHAZANDO PEDIDO ---");
-            System.out.println("Pedido: " + lblPedidoValorAdmin.getText());
-            System.out.println("Motivo: " + motivo);
 
-            // Actualizamos visualmente
-            lblEstadoAdmin.setText("Rechazado");
-            lblEstadoAdmin.getStyleClass().clear();
-            lblEstadoAdmin.getStyleClass().add("estadoRechazado");
+            // 1. Cambiamos el estado a Rechazado
+            CompraDAO.actualizarEstado(compraActual.getId(), "Rechazado");
 
-            mostrarAlerta("Pedido Rechazado", "El pedido ha sido rechazado por: " + motivo + " (Simulación)", Alert.AlertType.INFORMATION);
+            // 2. Devolvemos el stock de cada producto
+            for (DetalleCompra d : CompraDAO.listarDetalles(compraActual.getId())) {
+                ProductoDAO.devolverStock(d.getIdProducto(), d.getCantidad());
+            }
+
+            mostrarAlerta("Pedido Rechazado", "El pedido ha sido rechazado por: " + motivo + ".\nEl stock ha sido devuelto.", Alert.AlertType.INFORMATION);
+            util.Navegador.cambiar("GestionarPedidos", btnRechazarPedido);
         }
     }
 
-    // ----- MÉTODOS AUXILIARES -----
     private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
         Alert alerta = new Alert(tipo);
         alerta.setTitle(titulo);

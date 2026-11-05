@@ -2651,3 +2651,15 @@ and open the template in the editor.
 #scrollDeseos > .viewport {
     -fx-background-color: transparent;
 }
+
+.btnEliminarUsrAdmin {
+    -fx-font-family: "Poppins Bold";
+    -fx-font-size: 9px; /* <--- Reducido de 11px a 9px */
+    -fx-text-fill: #E30613;
+    -fx-background-color: #FFFFFF;
+    -fx-border-color: #E30613;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-cursor: hand;
+}

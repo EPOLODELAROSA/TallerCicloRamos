@@ -5,7 +5,11 @@
  */
 package controlador;
 
+import datos.CompraDAO;
+import datos.ProductoDAO;
+import datos.UsuarioDAO;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -23,7 +28,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.ChoiceDialog;
+import modelo.Compra;
+import modelo.DetalleCompra;
+import modelo.Usuario;
 
 /**
  * FXML Controller class
@@ -32,13 +39,10 @@ import javafx.scene.control.ChoiceDialog;
  */
 public class GestionarPedidosController implements Initializable {
 
-    // --- HEADER ---
     @FXML
     private ImageView imgFlechaAtrasGestPed;
     @FXML
     private Label lblTituloGestionarPedidos;
-
-    // --- FILTROS ---
     @FXML
     private TextField txtBuscarPedido;
     @FXML
@@ -47,107 +51,125 @@ public class GestionarPedidosController implements Initializable {
     private ComboBox<String> cmbFiltroEstadoPed;
     @FXML
     private ComboBox<String> cmbOrdenPed;
-
-    // --- RESÚMENES ---
     @FXML
     private Label lblTextoTotalPedidos;
     @FXML
-    private Label lblTextoPendientes;
-    @FXML
     private Label lblNumPendientes;
-    @FXML
-    private Label lblTextoEnProceso;
     @FXML
     private Label lblNumEnProceso;
     @FXML
-    private Label lblTextoEnviados;
-    @FXML
     private Label lblNumEnviados;
-    @FXML
-    private Label lblTextoEntregados;
     @FXML
     private Label lblNumEntregados;
     @FXML
-    private Label lblTextoCancelados;
-    @FXML
     private Label lblNumCancelados;
     @FXML
-    private Label lblTextoRechazados;
-    @FXML
     private Label lblNumRechazados;
-
-    // --- BOTÓN COLA ---
     @FXML
     private Button btnAtenderCola;
-
-    // --- LISTA ---
     @FXML
     private ScrollPane scrollListaPedidos;
     @FXML
     private VBox vboxContenedorPedidos;
+
+    private ArrayList<Compra> todasLasCompras;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Llenar los ComboBox
+        // TODO
+
         cmbFiltroEstadoPed.getItems().addAll("Todos", "Pendiente", "En proceso", "Enviado", "Entregado", "Cancelado", "Rechazado");
         cmbFiltroEstadoPed.getSelectionModel().selectFirst();
-        
+
         cmbOrdenPed.getItems().addAll("Más recientes", "Más antiguos");
         cmbOrdenPed.getSelectionModel().selectFirst();
 
-        // Cargar datos simulados
-        cargarDatosSimulados();
+        // Listener para el filtro
+        cmbFiltroEstadoPed.valueProperty().addListener((obs, oldVal, newVal) -> aplicarFiltros());
+
+        cargarPedidos();
     }
 
-    // ----- LÓGICA DE DATOS (SIMULADA POR AHORA) -----
-    private void cargarDatosSimulados() {
+    private void cargarPedidos() {
+        todasLasCompras = CompraDAO.listarCompras();
+        actualizarContadores();
+        aplicarFiltros();
+    }
+
+    private void actualizarContadores() {
+        int pendientes = 0, enProceso = 0, enviados = 0, entregados = 0, cancelados = 0, rechazados = 0;
+
+        for (Compra c : todasLasCompras) {
+            switch (c.getEstado()) {
+                case "Pendiente":
+                    pendientes++;
+                    break;
+                case "En proceso":
+                    enProceso++;
+                    break;
+                case "Enviado":
+                    enviados++;
+                    break;
+                case "Entregado":
+                    entregados++;
+                    break;
+                case "Cancelado":
+                    cancelados++;
+                    break;
+                case "Rechazado":
+                    rechazados++;
+                    break;
+            }
+        }
+
+        lblTextoTotalPedidos.setText(todasLasCompras.size() + " pedidos registrados");
+        lblNumPendientes.setText(String.valueOf(pendientes));
+        lblNumEnProceso.setText(String.valueOf(enProceso));
+        lblNumEnviados.setText(String.valueOf(enviados));
+        lblNumEntregados.setText(String.valueOf(entregados));
+        lblNumCancelados.setText(String.valueOf(cancelados));
+        lblNumRechazados.setText(String.valueOf(rechazados));
+    }
+
+    private void aplicarFiltros() {
+        String filtro = cmbFiltroEstadoPed.getValue();
         vboxContenedorPedidos.getChildren().clear();
 
-        // Actualizamos los resúmenes (números)
-        lblTextoTotalPedidos.setText("2 pedidos registrados");
-        lblNumPendientes.setText("2");
-        lblNumEnProceso.setText("0");
-        lblNumEnviados.setText("0");
-        lblNumEntregados.setText("0");
-        lblNumCancelados.setText("0");
-        lblNumRechazados.setText("0");
-
-        // Creamos 2 tarjetas de ejemplo
-        crearTarjetaPedido("#00001", "Juan Pérez", "26/08/2026", "1 Productos", "$ 212.000", "Pendiente");
-        crearTarjetaPedido("#00002", "María López", "27/08/2026", "3 Productos", "$ 450.000", "Pendiente");
+        for (Compra c : todasLasCompras) {
+            if (filtro == null || filtro.equals("Todos") || c.getEstado().equals(filtro)) {
+                crearTarjetaPedido(c);
+            }
+        }
     }
 
-    // ----- MÉTODO AUXILIAR: CREAR TARJETA DE PEDIDO -----
-    private void crearTarjetaPedido(String numPedido, String cliente, String fecha, String productos, String total, String estado) {
-        // 1. Contenedor principal
+    private void crearTarjetaPedido(Compra c) {
         VBox tarjeta = new VBox(5);
         tarjeta.getStyleClass().add("cardPedidoAdmin");
         tarjeta.setPadding(new Insets(10));
         tarjeta.setPrefWidth(330);
         tarjeta.setMaxWidth(330);
 
-        // 2. Fila superior: Número de pedido y Estado
+        // Fila Superior
         HBox filaSuperior = new HBox();
-        Label lblNum = new Label("Pedido: " + numPedido);
+        Label lblNum = new Label("Pedido: #" + String.format("%05d", c.getId()));
         lblNum.getStyleClass().add("lblPedidoNumAdmin");
-        
+
         Region spacerTop = new Region();
         HBox.setHgrow(spacerTop, Priority.ALWAYS);
 
-        Label lblEstado = new Label(estado);
-        // Asignamos la clase de estilo según el estado (usando las que ya tienes en tu CSS)
-        if (estado.equals("Pendiente")) {
+        Label lblEstado = new Label(c.getEstado());
+        if (c.getEstado().equals("Pendiente")) {
             lblEstado.getStyleClass().add("estadoPendiente");
-        } else if (estado.equals("En proceso")) {
+        } else if (c.getEstado().equals("En proceso")) {
             lblEstado.getStyleClass().add("estadoProceso");
-        } else if (estado.equals("Enviado")) {
+        } else if (c.getEstado().equals("Enviado")) {
             lblEstado.getStyleClass().add("estadoEnviado");
-        } else if (estado.equals("Entregado")) {
+        } else if (c.getEstado().equals("Entregado")) {
             lblEstado.getStyleClass().add("estadoEntregado");
-        } else if (estado.equals("Cancelado")) {
+        } else if (c.getEstado().equals("Cancelado")) {
             lblEstado.getStyleClass().add("estadoCancelado");
         } else {
             lblEstado.getStyleClass().add("estadoRechazado");
@@ -155,77 +177,45 @@ public class GestionarPedidosController implements Initializable {
 
         filaSuperior.getChildren().addAll(lblNum, spacerTop, lblEstado);
 
-        // 3. Información del cliente y fecha
-        Label lblInfo1 = new Label("Cliente: " + cliente);
-        lblInfo1.getStyleClass().add("lblPedidoInfoAdmin");
-        Label lblInfo2 = new Label("Fecha: " + fecha);
-        lblInfo2.getStyleClass().add("lblPedidoInfoAdmin");
-        Label lblInfo3 = new Label("Productos: " + productos);
-        lblInfo3.getStyleClass().add("lblPedidoInfoAdmin");
+        // Info
+        Label lblCliente = new Label("Cliente: " + c.getCorreoCliente());
+        lblCliente.getStyleClass().add("lblPedidoInfoAdmin");
 
-        // 4. Total
-        Label lblTotal = new Label("Total: " + total);
+        Label lblFecha = new Label("Fecha: " + c.getFecha());
+        lblFecha.getStyleClass().add("lblPedidoInfoAdmin");
+
+        ArrayList<DetalleCompra> detalles = CompraDAO.listarDetalles(c.getId());
+        Label lblProds = new Label("Productos: " + detalles.size() + " ítems");
+        lblProds.getStyleClass().add("lblPedidoInfoAdmin");
+
+        Label lblTotal = new Label("Total: $ " + String.format("%,.0f", c.getTotal()));
         lblTotal.getStyleClass().add("lblPedidoTotalAdmin");
 
-        // 5. Botones (Ver Detalle, Actualizar Estado)
+        // Botones
         HBox filaBotones = new HBox(10);
-        
+
         Button btnVer = new Button("VER DETALLE");
         btnVer.getStyleClass().add("btnVerDetalleAdmin");
         btnVer.setOnAction(e -> {
+            util.Sesion.setIdPedidoDetalle(c.getId());
             util.Navegador.cambiar("DetallePedidoAdmin", btnVer);
         });
 
         Button btnActualizar = new Button("ACTUALIZAR ESTADO");
         btnActualizar.getStyleClass().add("btnActualizarEstadoAdmin");
         btnActualizar.setOnAction(e -> {
-            // Llamamos a un nuevo método que se encargará del diálogo
-            mostrarDialogoCambiarEstado(lblEstado, numPedido);
+            mostrarDialogoCambiarEstado(c.getId(), lblEstado);
         });
 
         filaBotones.getChildren().addAll(btnVer, btnActualizar);
 
-        // 6. Ensamblar
-        tarjeta.getChildren().addAll(filaSuperior, lblInfo1, lblInfo2, lblInfo3, lblTotal, filaBotones);
-        
-        // 7. Agregar al VBox principal
+        tarjeta.getChildren().addAll(filaSuperior, lblCliente, lblFecha, lblProds, lblTotal, filaBotones);
         vboxContenedorPedidos.getChildren().add(tarjeta);
     }
 
-    // ----- EVENTOS: HEADER -----
-    @FXML
-    private void onFlechaAtras(MouseEvent event) {
-        util.Navegador.cambiar("PanelAdministrador", imgFlechaAtrasGestPed);
-    }
-
-    // ----- EVENTOS: FILTROS Y COLA -----
-    @FXML
-    private void onBuscar(ActionEvent event) {
-        System.out.println("Buscando: " + txtBuscarPedido.getText());
-    }
-
-    @FXML
-    private void onAtenderCola(ActionEvent event) {
-        // Simulación de atender el pedido más antiguo
-        mostrarAlerta("Cola de Pedidos", "El pedido pendiente más antiguo (#00001) ha pasado a 'En proceso'. (Simulación)", Alert.AlertType.INFORMATION);
-        
-        // En la vida real, aquí actualizaríamos el estado en el modelo y volveríamos a cargar la lista.
-    }
-
-    // ----- MÉTODOS AUXILIARES -----
-    private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
-        Alert alerta = new Alert(tipo);
-        alerta.setTitle(titulo);
-        alerta.setHeaderText(null);
-        alerta.setContentText(mensaje);
-        alerta.showAndWait();
-    }
-    
-        // ----- MÉTODO PARA ACTUALIZAR ESTADO DESDE LA LISTA -----
-    private void mostrarDialogoCambiarEstado(Label lblEstadoVisual, String numPedido) {
+    private void mostrarDialogoCambiarEstado(int idCompra, Label lblEstadoVisual) {
         String estadoActual = lblEstadoVisual.getText();
 
-        // Validación: No actualizar si ya está entregado/cancelado/rechazado
         if (estadoActual.equals("Entregado") || estadoActual.equals("Cancelado") || estadoActual.equals("Rechazado")) {
             mostrarAlerta("Acción no permitida", "No se puede cambiar el estado de un pedido " + estadoActual, Alert.AlertType.WARNING);
             return;
@@ -233,31 +223,62 @@ public class GestionarPedidosController implements Initializable {
 
         ChoiceDialog<String> dialog = new ChoiceDialog<>("En proceso", "En proceso", "Enviado", "Entregado");
         dialog.setTitle("Actualizar Estado");
-        dialog.setHeaderText("Pedido " + numPedido);
+        dialog.setHeaderText("Pedido #" + String.format("%05d", idCompra));
         dialog.setContentText("Selecciona el nuevo estado:");
 
         java.util.Optional<String> resultado = dialog.showAndWait();
-        
+
         if (resultado.isPresent()) {
             String nuevoEstado = resultado.get();
-            
-            // Actualizamos el Label visualmente
-            lblEstadoVisual.setText(nuevoEstado);
-            lblEstadoVisual.getStyleClass().clear();
-            
-            // Le aplicamos el estilo correcto
-            if (nuevoEstado.equals("En proceso")) {
-                lblEstadoVisual.getStyleClass().add("estadoProceso");
-            } else if (nuevoEstado.equals("Enviado")) {
-                lblEstadoVisual.getStyleClass().add("estadoEnviado");
-            } else if (nuevoEstado.equals("Entregado")) {
-                lblEstadoVisual.getStyleClass().add("estadoEntregado");
-            }
-
-            mostrarAlerta("Éxito", "Pedido " + numPedido + " actualizado a: " + nuevoEstado + " (Simulación)", Alert.AlertType.INFORMATION);
-            
-            // Aquí llamaríamos a cargarDatosSimulados() o al método de recarga real 
-            // para que los contadores de arriba se actualicen.
+            CompraDAO.actualizarEstado(idCompra, nuevoEstado);
+            mostrarAlerta("Éxito", "Pedido actualizado a: " + nuevoEstado, Alert.AlertType.INFORMATION);
+            cargarPedidos(); // Recargar la lista para actualizar contadores
         }
+    }
+
+    @FXML
+    private void onFlechaAtras(MouseEvent event) {
+        util.Navegador.cambiar("PanelAdministrador", imgFlechaAtrasGestPed);
+    }
+
+    @FXML
+    private void onBuscar(ActionEvent event) {
+        String busqueda = txtBuscarPedido.getText().toLowerCase();
+        vboxContenedorPedidos.getChildren().clear();
+
+        for (Compra c : todasLasCompras) {
+            if (String.valueOf(c.getId()).contains(busqueda) || c.getCorreoCliente().toLowerCase().contains(busqueda)) {
+                crearTarjetaPedido(c);
+            }
+        }
+    }
+
+    @FXML
+    private void onAtenderCola(ActionEvent event) {
+        // Buscamos el pedido pendiente más antiguo (el de menor ID)
+        Compra pedidoMasAntiguo = null;
+        for (Compra c : todasLasCompras) {
+            if (c.getEstado().equals("Pendiente")) {
+                if (pedidoMasAntiguo == null || c.getId() < pedidoMasAntiguo.getId()) {
+                    pedidoMasAntiguo = c;
+                }
+            }
+        }
+
+        if (pedidoMasAntiguo != null) {
+            CompraDAO.actualizarEstado(pedidoMasAntiguo.getId(), "En proceso");
+            mostrarAlerta("Cola atendida", "Pedido #" + String.format("%05d", pedidoMasAntiguo.getId()) + " pasado a 'En proceso'.", Alert.AlertType.INFORMATION);
+            cargarPedidos();
+        } else {
+            mostrarAlerta("Sin pendientes", "No hay pedidos pendientes en la cola.", Alert.AlertType.INFORMATION);
+        }
+    }
+
+    private void mostrarAlerta(String titulo, String mensaje, Alert.AlertType tipo) {
+        Alert alerta = new Alert(tipo);
+        alerta.setTitle(titulo);
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
     }
 }

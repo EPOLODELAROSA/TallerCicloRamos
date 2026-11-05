@@ -5,13 +5,18 @@
  */
 package controlador;
 
+import datos.CompraDAO;
+import datos.ProductoDAO;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import modelo.Compra;
+import modelo.Producto;
 
 /**
  * FXML Controller class
@@ -20,23 +25,18 @@ import javafx.scene.control.Label;
  */
 public class PanelAdministradorController implements Initializable {
 
-    // --- TEXTOS Y SALUDOS ---
     @FXML
     private Label lblTituloPanelAdmin;
     @FXML
     private Label lblSaludoAdmin;
-
-    // --- RESUMEN ---
     @FXML
-    private Label lblValorProductos; // Recuadro 1
+    private Label lblValorProductos;
     @FXML
-    private Label lblValorPedidos;   // Recuadro 2
+    private Label lblValorPedidos;
     @FXML
-    private Label lblValorStockBajo; // Recuadro 3
+    private Label lblValorStockBajo;
     @FXML
-    private Label lblValorProductos2; // El número de la cola (el que acabas de crear)
-
-    // --- BOTONES ---
+    private Label lblValorProductos2;
     @FXML
     private Button btnGestionarProducto;
     @FXML
@@ -53,15 +53,39 @@ public class PanelAdministradorController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Aquí, en el futuro, llamaremos a un método para cargar los datos reales.
-        // Por ahora, dejamos los números que pusiste en el FXML o los ponemos en 0.
-        lblValorProductos.setText("0");
-        lblValorPedidos.setText("0");
-        lblValorStockBajo.setText("0");
-        lblValorProductos2.setText("0"); 
+        //TODO
+
+        cargarResumenReal();
     }
 
- 
+    private void cargarResumenReal() {
+        // 1. Contar productos y stock bajo
+        ArrayList<Producto> listaProductos = ProductoDAO.listar();
+        int totalProductos = listaProductos.size();
+        int stockBajo = 0;
+
+        for (Producto p : listaProductos) {
+            if (p.getStock() <= 5) {
+                stockBajo++;
+            }
+        }
+        lblValorProductos.setText(String.valueOf(totalProductos));
+        lblValorStockBajo.setText(String.valueOf(stockBajo));
+
+        // 2. Contar pedidos totales y pendientes (cola)
+        ArrayList<Compra> listaCompras = CompraDAO.listarCompras();
+        int totalPedidos = listaCompras.size();
+        int pedidosPendientes = 0;
+
+        for (Compra c : listaCompras) {
+            if (c.getEstado().equals("Pendiente")) {
+                pedidosPendientes++;
+            }
+        }
+
+        lblValorPedidos.setText(String.valueOf(totalPedidos));
+        lblValorProductos2.setText(String.valueOf(pedidosPendientes));
+    }
 
     @FXML
     private void onGestionarProducto(ActionEvent event) {
@@ -83,11 +107,8 @@ public class PanelAdministradorController implements Initializable {
         util.Navegador.cambiar("GestionarUsuarios", btnGestionarUsuarios);
     }
 
-    // ----- EVENTOS: CERRAR SESIÓN -----
-
     @FXML
     private void onCerrarSesionAdmin(ActionEvent event) {
-        // En el futuro: Sesion.cerrar();
         util.Navegador.cambiar("IniciarSesion", btnCerrarSesionAdmin);
     }
 }

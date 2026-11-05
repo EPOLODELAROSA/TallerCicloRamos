@@ -84,4 +84,17 @@ public class UsuarioDAO {
         ArchivoTexto.escribir(ARCHIVO, nuevasLineas);
     }
 
+    // Eliminar un usuario por su correo
+    public static void eliminar(String correo) {
+        ArrayList<Usuario> lista = listar();
+        ArrayList<String> nuevasLineas = new ArrayList<>();
+
+        for (Usuario u : lista) {
+            if (!u.getCorreo().equals(correo)) {
+                nuevasLineas.add(u.toArchivo());
+            }
+        }
+        ArchivoTexto.escribir(ARCHIVO, nuevasLineas);
+    }
+
 }
